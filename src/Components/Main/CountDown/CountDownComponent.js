@@ -3,7 +3,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 
-import { timerStart } from "../../../recoil/concentrate";
+import { timerStart, timePass } from "../../../recoil/concentrate";
 
 const CountDownBox = styled.div`
   display: flex;
@@ -16,7 +16,7 @@ const CountDownBox = styled.div`
   width: 500px;
 `;
 
-const SubjectTimer = styled.div`
+const RestTimer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -84,19 +84,16 @@ const Number = styled.p``;
 
 const CountDownComponent = () => {
   const [start, setStart] = useRecoilState(timerStart);
+  const [pass, setPass] = useRecoilState(timePass);
   const [pause, setPause] = useState(false);
-
-  const handlePause = () => {
-    setPause(!pause);
-  };
 
   return (
     <CountDownBox>
       <Timer>
-        <SubjectTimer>
-          <Name>전공1</Name>
+        <RestTimer>
+          <Name>쉬는시간</Name>
           <Number>00:00:00</Number>
-        </SubjectTimer>
+        </RestTimer>
         <ConcentrateTimer>
           <Name>집중시간</Name>
           <Number>00:00:00</Number>
@@ -104,13 +101,28 @@ const CountDownComponent = () => {
       </Timer>
       <TimerButton>
         {pause == false ? (
-          <Pause onClick={handlePause}>●</Pause>
+          <Pause
+            onClick={() => {
+              setPause(true);
+              setPass(false);
+            }}
+          >
+            ●
+          </Pause>
         ) : (
-          <Continue onClick={handlePause}>▶</Continue>
+          <Continue
+            onClick={() => {
+              setPause(false);
+              setPass(true);
+            }}
+          >
+            ▶
+          </Continue>
         )}
         <Stop
           onClick={() => {
-            setStart(!start);
+            setPass(false);
+            setStart(false);
           }}
         >
           ■

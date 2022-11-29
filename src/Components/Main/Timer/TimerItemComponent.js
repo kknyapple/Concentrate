@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 
-import { timerStart } from "../../../recoil/concentrate";
+import { timerStart, timePass } from "../../../recoil/concentrate";
 
 const Timer = styled.div`
   display: flex;
@@ -23,11 +23,13 @@ const TimerInfo = styled.p`
 
 const TimerItemComponent = () => {
   const [start, setStart] = useRecoilState(timerStart);
+  const [pass, setPass] = useRecoilState(timePass);
 
   return (
     <Timer
       onClick={() => {
-        setStart(!start);
+        setStart(true);
+        setPass(true);
       }}
     >
       <TimerInfo>공부</TimerInfo>

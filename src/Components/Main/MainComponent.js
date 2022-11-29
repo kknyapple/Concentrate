@@ -1,9 +1,10 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 
 import TimerComponent from "./Timer/TimerComponent";
-import { timerStart } from "../../recoil/concentrate";
+import { timerStart, timePass } from "../../recoil/concentrate";
 import CountDownComponent from "./CountDown/CountDownComponent";
 
 const Main = styled.main`
@@ -23,10 +24,32 @@ const StudyTime = styled.div`
 
 const MainComponent = () => {
   const start = useRecoilValue(timerStart);
+  const pass = useRecoilValue(timePass);
+  const [hour, setHour] = useState(0);
+  const [minute, setMinute] = useState(0);
+  const [second, setSecond] = useState(0);
+
+  useEffect(() => {
+    if (pass === true) setTimeout(() => setSecond(second + 1), 1000);
+
+    if (second > 59) {
+      setSecond(0);
+      setMinute(minute + 1);
+    }
+    if (minute > 59) {
+      setMinute(0);
+      setHour(hour + 1);
+    }
+  }, [start, pass, second]);
 
   return (
     <Main>
-      <StudyTime>00:00:00</StudyTime>
+      <StudyTime>
+        {`${String(hour).padStart(2, "0")}:${String(minute).padStart(
+          2,
+          "0"
+        )}:${String(second).padStart(2, "0")}`}
+      </StudyTime>
       {start === true ? <CountDownComponent /> : <TimerComponent />}
     </Main>
   );
