@@ -23,15 +23,18 @@ const ConcentrateTimeComponent = () => {
   const [second, setSecond] = useState(0);
 
   useEffect(() => {
-    if (pause === false) setTimeout(() => setSecond(second + 1), 1000);
+    if (pause === false) {
+      let timerId = setTimeout(() => setSecond(second + 1), 1000);
 
-    if (second > 59) {
-      setSecond(0);
-      setMinute(minute + 1);
-    }
-    if (minute > 59) {
-      setMinute(0);
-      setHour(hour + 1);
+      if (second > 59) {
+        setSecond(0);
+        setMinute(minute + 1);
+      }
+      if (minute > 59) {
+        setMinute(0);
+        setHour(hour + 1);
+      }
+      return () => clearTimeout(timerId);
     }
   }, [pause, second]);
 

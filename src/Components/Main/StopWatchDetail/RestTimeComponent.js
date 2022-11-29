@@ -23,15 +23,18 @@ const RestTimeComponent = () => {
   const [second, setSecond] = useState(0);
 
   useEffect(() => {
-    if (pause === true) setTimeout(() => setSecond(second + 1), 1000);
+    if (pause === true) {
+      let timerId = setTimeout(() => setSecond(second + 1), 1000);
+      if (second > 59) {
+        setSecond(0);
+        setMinute(minute + 1);
+      }
+      if (minute > 59) {
+        setMinute(0);
+        setHour(hour + 1);
+      }
 
-    if (second > 59) {
-      setSecond(0);
-      setMinute(minute + 1);
-    }
-    if (minute > 59) {
-      setMinute(0);
-      setHour(hour + 1);
+      return () => clearTimeout(timerId);
     }
   }, [pause, second]);
 

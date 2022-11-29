@@ -13,6 +13,7 @@ import {
 import StopWatchDetailComponent from "./StopWatchDetail/StopWatchDetailComponent";
 import StopWatchComponent from "./StopWatch/StopWatchComponent";
 import RecordComponent from "./RecordComponent";
+import { clear } from "@testing-library/user-event/dist/clear";
 
 const Main = styled.main`
   display: flex;
@@ -32,6 +33,7 @@ const StudyTime = styled.div`
 const MainComponent = () => {
   const start = useRecoilValue(stopWatchStart);
   const pass = useRecoilValue(studyTimePass);
+  //const timeoutId = useRecoilState(timeoutId);
 
   const [hour, setHour] = useRecoilState(studyHour);
   const [minute, setMinute] = useRecoilState(studyMinute);
@@ -39,16 +41,17 @@ const MainComponent = () => {
 
   useEffect(() => {
     if (start === true && pass === true) {
-      setTimeout(() => setSecond(second + 1), 1000);
-    }
+      let timerId = setTimeout(() => setSecond(second + 1), 1000);
 
-    if (second > 59) {
-      setSecond(0);
-      setMinute(minute + 1);
-    }
-    if (minute > 59) {
-      setMinute(0);
-      setHour(hour + 1);
+      if (second > 59) {
+        setSecond(0);
+        setMinute(minute + 1);
+      }
+      if (minute > 59) {
+        setMinute(0);
+        setHour(hour + 1);
+      }
+      return () => clearTimeout(timerId);
     }
   }, [start, pass, second]);
 
