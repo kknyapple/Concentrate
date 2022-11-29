@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import {
@@ -61,7 +60,6 @@ const StopWatchButtonComponent = () => {
   const hour = useRecoilValue(studyHour);
   const minute = useRecoilValue(studyMinute);
   const second = useRecoilValue(studySecond);
-  //const [pause, setPause] = useState(false);
 
   let data = [{ value: "00:05:55", day: "2022-11-28" }];
 

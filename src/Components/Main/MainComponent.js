@@ -37,10 +37,6 @@ const MainComponent = () => {
   const [minute, setMinute] = useRecoilState(studyMinute);
   const [second, setSecond] = useRecoilState(studySecond);
 
-  //const [hour, setHour] = useState(localStorage.getItem("hour") ?? 0);
-  //const [minute, setMinute] = useState(localStorage.getItem("minute") ?? 0);
-  //const [second, setSecond] = useState(localStorage.getItem("second") ?? 0);
-
   useEffect(() => {
     if (pass === true) setTimeout(() => setSecond(second + 1), 1000);
 
