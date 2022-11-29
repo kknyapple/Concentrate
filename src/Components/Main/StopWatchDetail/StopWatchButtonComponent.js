@@ -62,8 +62,8 @@ const StopWatchButtonComponent = () => {
   const second = useRecoilValue(studySecond);
 
   let data = [
-    { value: 3, day: "2022-11-27" },
-    { value: 6.5, day: "2022-11-28" },
+    { value: "3", day: "2022-11-27" },
+    { value: "6.5", day: "2022-11-28" },
   ];
 
   const dateObj = new Date();
@@ -72,7 +72,7 @@ const StopWatchButtonComponent = () => {
   const day = String(dateObj.getDate()).padStart(2, "0");
   let today = `${year}-${month}-${day}`;
 
-  let time = (hour + minute / 60 + second / 3600).toFixed(3);
+  let time = Number(hour + minute / 60 + second / 3600).toFixed(3);
 
   return (
     <StopWatchButtonBox>
