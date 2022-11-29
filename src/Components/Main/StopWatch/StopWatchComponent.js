@@ -8,7 +8,8 @@ const StopWatchBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 20px;
+  margin-bottom: 75px;
+  margin-top: 10px;
   background-color: #6b728e;
   border-radius: 8px;
   height: 80px;

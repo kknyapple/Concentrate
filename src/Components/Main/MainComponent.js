@@ -6,13 +6,13 @@ import { useRecoilValue, useRecoilState } from "recoil";
 import {
   stopWatchStart,
   studyTimePass,
-  totalStudyTime,
   studyHour,
   studyMinute,
   studySecond,
 } from "../../recoil/concentrate";
 import StopWatchDetailComponent from "./StopWatchDetail/StopWatchDetailComponent";
 import StopWatchComponent from "./StopWatch/StopWatchComponent";
+import RecordComponent from "./RecordComponent";
 
 const Main = styled.main`
   display: flex;
@@ -38,9 +38,9 @@ const MainComponent = () => {
   const [second, setSecond] = useRecoilState(studySecond);
 
   useEffect(() => {
-    if (pass === true) setTimeout(() => setSecond(second + 1), 1000);
-
-    console.log("hello");
+    if (start === true && pass === true) {
+      setTimeout(() => setSecond(second + 1), 1000);
+    }
 
     if (second > 59) {
       setSecond(0);
@@ -50,7 +50,7 @@ const MainComponent = () => {
       setMinute(0);
       setHour(hour + 1);
     }
-  }, [start, pass, second, minute, hour]);
+  }, [start, pass, second]);
 
   return (
     <Main>
@@ -61,6 +61,7 @@ const MainComponent = () => {
         )}:${String(second).padStart(2, "0")}`}
       </StudyTime>
       {start === true ? <StopWatchDetailComponent /> : <StopWatchComponent />}
+      <RecordComponent />
     </Main>
   );
 };
