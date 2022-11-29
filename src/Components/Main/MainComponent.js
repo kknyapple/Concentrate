@@ -1,9 +1,16 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useRecoilState } from "recoil";
 
-import { stopWatchStart, studyTimePass } from "../../recoil/concentrate";
+import {
+  stopWatchStart,
+  studyTimePass,
+  totalStudyTime,
+  studyHour,
+  studyMinute,
+  studySecond,
+} from "../../recoil/concentrate";
 import StopWatchDetailComponent from "./StopWatchDetail/StopWatchDetailComponent";
 import StopWatchComponent from "./StopWatch/StopWatchComponent";
 
@@ -25,12 +32,19 @@ const StudyTime = styled.div`
 const MainComponent = () => {
   const start = useRecoilValue(stopWatchStart);
   const pass = useRecoilValue(studyTimePass);
-  const [hour, setHour] = useState(0);
-  const [minute, setMinute] = useState(0);
-  const [second, setSecond] = useState(0);
+
+  const [hour, setHour] = useRecoilState(studyHour);
+  const [minute, setMinute] = useRecoilState(studyMinute);
+  const [second, setSecond] = useRecoilState(studySecond);
+
+  //const [hour, setHour] = useState(localStorage.getItem("hour") ?? 0);
+  //const [minute, setMinute] = useState(localStorage.getItem("minute") ?? 0);
+  //const [second, setSecond] = useState(localStorage.getItem("second") ?? 0);
 
   useEffect(() => {
     if (pass === true) setTimeout(() => setSecond(second + 1), 1000);
+
+    console.log("hello");
 
     if (second > 59) {
       setSecond(0);
@@ -40,7 +54,7 @@ const MainComponent = () => {
       setMinute(0);
       setHour(hour + 1);
     }
-  }, [start, pass, second]);
+  }, [start, pass, second, minute, hour]);
 
   return (
     <Main>
