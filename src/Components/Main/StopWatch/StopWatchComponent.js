@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 
-import { stopWatchStart, timePass } from "../../../recoil/concentrate";
+import { stopWatchStart, studyTimePass } from "../../../recoil/concentrate";
 
 const StopWatchBox = styled.div`
   display: flex;
@@ -36,7 +36,7 @@ const StopWatchButton = styled.button`
 
 const StopWatchComponent = () => {
   const [start, setStart] = useRecoilState(stopWatchStart);
-  const [pass, setPass] = useRecoilState(timePass);
+  const [pass, setPass] = useRecoilState(studyTimePass);
 
   return (
     <StopWatchBox>

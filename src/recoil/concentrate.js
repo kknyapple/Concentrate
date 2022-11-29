@@ -5,7 +5,12 @@ export const stopWatchStart = atom({
   default: false,
 });
 
-export const timePass = atom({
-  key: "timePass",
+export const studyTimePass = atom({
+  key: "studyTimePass",
+  default: false,
+});
+
+export const pauseClicked = atom({
+  key: "pauseClicked",
   default: false,
 });

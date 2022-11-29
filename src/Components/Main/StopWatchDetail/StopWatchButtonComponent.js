@@ -3,7 +3,11 @@ import styled from "styled-components";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 
-import { stopWatchStart, timePass } from "../../../recoil/concentrate";
+import {
+  pauseClicked,
+  stopWatchStart,
+  studyTimePass,
+} from "../../../recoil/concentrate";
 
 const Pause = styled.button`
   border: 0;
@@ -49,8 +53,9 @@ const StopWatchButtonBox = styled.div`
 
 const StopWatchButtonComponent = () => {
   const [start, setStart] = useRecoilState(stopWatchStart);
-  const [pass, setPass] = useRecoilState(timePass);
-  const [pause, setPause] = useState(false);
+  const [pass, setPass] = useRecoilState(studyTimePass);
+  const [pause, setPause] = useRecoilState(pauseClicked);
+  //const [pause, setPause] = useState(false);
 
   return (
     <StopWatchButtonBox>

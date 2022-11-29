@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 
-import { stopWatchStart, timePass } from "../../recoil/concentrate";
+import { stopWatchStart, studyTimePass } from "../../recoil/concentrate";
 import StopWatchDetailComponent from "./StopWatchDetail/StopWatchDetailComponent";
 import StopWatchComponent from "./StopWatch/StopWatchComponent";
 
@@ -24,7 +24,7 @@ const StudyTime = styled.div`
 
 const MainComponent = () => {
   const start = useRecoilValue(stopWatchStart);
-  const pass = useRecoilValue(timePass);
+  const pass = useRecoilValue(studyTimePass);
   const [hour, setHour] = useState(0);
   const [minute, setMinute] = useState(0);
   const [second, setSecond] = useState(0);
