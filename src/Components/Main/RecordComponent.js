@@ -20,7 +20,7 @@ const RecordComponent = () => {
         from="2022-10-01"
         to="2022-12-31"
         emptyColor="#eeeeee"
-        colors={["#6B728E", "#50577A", "#474E68", "#404258"]}
+        colors={["#FFC3CA", "#FFA1CA", "#A72948", "#372948"]}
         margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
         yearSpacing={40}
         monthBorderColor="#ffffff"
