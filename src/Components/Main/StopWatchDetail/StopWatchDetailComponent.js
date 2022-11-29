@@ -5,7 +5,7 @@ import { useRecoilState } from "recoil";
 
 import { stopWatchStart, timePass } from "../../../recoil/concentrate";
 
-const CountDownBox = styled.div`
+const StopWatchBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -16,7 +16,7 @@ const CountDownBox = styled.div`
   width: 500px;
 `;
 
-const RestTimer = styled.div`
+const RestTime = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,7 +24,7 @@ const RestTimer = styled.div`
   padding-right: 40px;
 `;
 
-const ConcentrateTimer = styled.div`
+const ConcentrateTime = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -69,12 +69,12 @@ const Stop = styled.button`
   width: 50px;
 `;
 
-const Timer = styled.div`
+const StopWatch = styled.div`
   display: flex;
   padding-bottom: 15px;
 `;
 
-const TimerButton = styled.div`
+const StopWatchButtonBox = styled.div`
   display: flex;
   padding-top: 15px;
 `;
@@ -82,24 +82,24 @@ const TimerButton = styled.div`
 const Name = styled.p``;
 const Number = styled.p``;
 
-const CountDownComponent = () => {
+const StopWatchDetailComponent = () => {
   const [start, setStart] = useRecoilState(stopWatchStart);
   const [pass, setPass] = useRecoilState(timePass);
   const [pause, setPause] = useState(false);
 
   return (
-    <CountDownBox>
-      <Timer>
-        <RestTimer>
+    <StopWatchBox>
+      <StopWatch>
+        <RestTime>
           <Name>쉬는시간</Name>
           <Number>00:00:00</Number>
-        </RestTimer>
-        <ConcentrateTimer>
+        </RestTime>
+        <ConcentrateTime>
           <Name>집중시간</Name>
           <Number>00:00:00</Number>
-        </ConcentrateTimer>
-      </Timer>
-      <TimerButton>
+        </ConcentrateTime>
+      </StopWatch>
+      <StopWatchButtonBox>
         {pause == false ? (
           <Pause
             onClick={() => {
@@ -127,9 +127,9 @@ const CountDownComponent = () => {
         >
           ■
         </Stop>
-      </TimerButton>
-    </CountDownBox>
+      </StopWatchButtonBox>
+    </StopWatchBox>
   );
 };
 
-export default CountDownComponent;
+export default StopWatchDetailComponent;

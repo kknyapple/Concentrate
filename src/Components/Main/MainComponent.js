@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 
-import TimerComponent from "./Timer/TimerComponent";
-import { timerStart, timePass } from "../../recoil/concentrate";
-import CountDownComponent from "./CountDown/CountDownComponent";
+import { stopWatchStart, timePass } from "../../recoil/concentrate";
+import StopWatchDetailComponent from "./StopWatchDetail/StopWatchDetailComponent";
+import StopWatchComponent from "./StopWatch/StopWatchComponent";
 
 const Main = styled.main`
   display: flex;
@@ -23,7 +23,7 @@ const StudyTime = styled.div`
 `;
 
 const MainComponent = () => {
-  const start = useRecoilValue(timerStart);
+  const start = useRecoilValue(stopWatchStart);
   const pass = useRecoilValue(timePass);
   const [hour, setHour] = useState(0);
   const [minute, setMinute] = useState(0);
@@ -50,7 +50,7 @@ const MainComponent = () => {
           "0"
         )}:${String(second).padStart(2, "0")}`}
       </StudyTime>
-      {start === true ? <CountDownComponent /> : <TimerComponent />}
+      {start === true ? <StopWatchDetailComponent /> : <StopWatchComponent />}
     </Main>
   );
 };

@@ -1,7 +1,7 @@
 import { atom } from "recoil";
 
-export const timerStart = atom({
-  key: "timerStart",
+export const stopWatchStart = atom({
+  key: "stopWatchStart",
   default: false,
 });
 
