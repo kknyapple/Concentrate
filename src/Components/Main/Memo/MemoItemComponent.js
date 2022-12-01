@@ -1,6 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
+import { useRecoilValue, useRecoilState } from "recoil";
+
+import { studyMemo } from "../../../recoil/concentrate";
 
 const MemoItem = styled.p`
   display: flex;
@@ -18,10 +21,19 @@ const MemoItem = styled.p`
 
 const MemoItemComponent = (props) => {
   const { memo } = props;
+  const [memoList, setMemoList] = useRecoilState(studyMemo);
 
   return (
     <React.Fragment>
-      <MemoItem>🔥 {memo.title}</MemoItem>
+      <MemoItem
+        onClick={() => {
+          const cleanMemo = memoList.filter((item) => item.id !== memo.id);
+          localStorage.setItem("memo", JSON.stringify(cleanMemo));
+          setMemoList(cleanMemo);
+        }}
+      >
+        🔥 {memo.title}
+      </MemoItem>
     </React.Fragment>
   );
 };
