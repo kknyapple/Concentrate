@@ -6,7 +6,7 @@ const Header = styled.header`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 50px;
+  margin-top: 40px;
   color: whitesmoke;
   font-weight: 800;
   font-size: 30px;

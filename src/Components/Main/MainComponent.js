@@ -13,7 +13,7 @@ import {
 import StopWatchDetailComponent from "./StopWatchDetail/StopWatchDetailComponent";
 import StopWatchComponent from "./StopWatch/StopWatchComponent";
 import RecordComponent from "./RecordComponent";
-import { clear } from "@testing-library/user-event/dist/clear";
+import MemoComponent from "./Memo/MemoComponent";
 
 const Main = styled.main`
   display: flex;
@@ -63,6 +63,7 @@ const MainComponent = () => {
           "0"
         )}:${String(second).padStart(2, "0")}`}
       </StudyTime>
+      <MemoComponent />
       {start === true ? <StopWatchDetailComponent /> : <StopWatchComponent />}
       <RecordComponent />
     </Main>

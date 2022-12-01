@@ -34,3 +34,8 @@ export const studySecond = atom({
   key: "studySecond",
   default: Number(localStorage.getItem("second")) ?? 0,
 });
+
+export const studyMemo = atom({
+  key: "memo",
+  default: JSON.parse(localStorage.getItem("memo")) ?? [],
+});
