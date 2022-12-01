@@ -80,11 +80,13 @@ const MemoComponent = () => {
           />
           <MemoInputButton
             onClick={() => {
-              let copy = [...memoList];
-              copy.push(content);
-              localStorage.setItem("memo", JSON.stringify(copy));
-              setMemoList(copy);
-              setAdd(false);
+              if (content !== null) {
+                let copy = [...memoList];
+                copy.push(content);
+                localStorage.setItem("memo", JSON.stringify(copy));
+                setMemoList(copy);
+                setAdd(false);
+              }
             }}
           >
             입력
