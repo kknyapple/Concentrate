@@ -37,9 +37,5 @@ export const studySecond = atom({
 
 export const studyMemo = atom({
   key: "memo",
-  //default: localStorage.getItem("memo") ?? [],
-  default: [
-    { id: 0, title: "공업수학" },
-    { id: 1, title: "전자기학" },
-  ],
+  default: JSON.parse(localStorage.getItem("memo")) ?? [],
 });

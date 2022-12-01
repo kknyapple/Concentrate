@@ -61,7 +61,7 @@ const MemoComponent = () => {
             onClick={() => {
               let copy = [...memo];
               copy.push(content);
-              console.log(copy);
+              localStorage.setItem("memo", JSON.stringify(copy));
               setMemo(copy);
               setAdd(false);
             }}
