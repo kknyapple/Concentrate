@@ -40,29 +40,34 @@ const InputButton = styled.button`
 `;
 
 const MemoComponent = () => {
-  const [memo, setMemo] = useRecoilState(studyMemo);
+  const [memoList, setMemoList] = useRecoilState(studyMemo);
   const [content, setContent] = useState(null);
   const [add, setAdd] = useState(false);
 
+  let newID = function () {
+    return Math.random().toString(36).substr(2, 16);
+  };
+
   return (
     <MemoBox>
-      {memo &&
-        memo.map((memo) => {
+      {memoList &&
+        memoList.map((memo) => {
           return <MemoItemComponent key={memo.id} memo={memo} />;
         })}
       {add === true ? (
         <InputBox>
           <input
             onChange={(e) => {
-              setContent({ id: memo.length, title: e.target.value });
+              setContent({ id: newID(), title: e.target.value });
             }}
           />
           <InputButton
             onClick={() => {
-              let copy = [...memo];
+              let copy = [...memoList];
               copy.push(content);
               localStorage.setItem("memo", JSON.stringify(copy));
-              setMemo(copy);
+
+              setMemoList(copy);
               setAdd(false);
             }}
           >
