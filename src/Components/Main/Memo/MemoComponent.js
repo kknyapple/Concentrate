@@ -25,18 +25,35 @@ const AddMemoButton = styled.button`
   width: 25px;
 `;
 
-const InputBox = styled.div`
+const MemoInputBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const InputButton = styled.button`
+const MemoInput = styled.input`
+  height: 25px;
+  width: 80px;
+  border: 0;
+  border-radius: 8px;
+  outline: none;
+  padding-left: 10px;
+  background-color: whitesmoke;
+`;
+
+const MemoInputButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 8px;
+  font-size: 10px;
   height: 25px;
+  width: 25px;
+  border: 0;
+  outline: 0;
+  border-radius: 50%;
+  margin-left: 5px;
+  margin-right: 5px;
+  background-color: whitesmoke;
 `;
 
 const MemoComponent = () => {
@@ -55,25 +72,24 @@ const MemoComponent = () => {
           return <MemoItemComponent key={memo.id} memo={memo} />;
         })}
       {add === true ? (
-        <InputBox>
-          <input
+        <MemoInputBox>
+          <MemoInput
             onChange={(e) => {
               setContent({ id: newID(), title: e.target.value });
             }}
           />
-          <InputButton
+          <MemoInputButton
             onClick={() => {
               let copy = [...memoList];
               copy.push(content);
               localStorage.setItem("memo", JSON.stringify(copy));
-
               setMemoList(copy);
               setAdd(false);
             }}
           >
-            확인
-          </InputButton>
-        </InputBox>
+            입력
+          </MemoInputButton>
+        </MemoInputBox>
       ) : null}
       <AddMemoButton
         onClick={() => {
