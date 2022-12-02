@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import { useRecoilValue, useRecoilState } from "recoil";
 
@@ -54,6 +54,26 @@ const MainComponent = () => {
       return () => clearTimeout(timerId);
     }
   }, [start, pass, second]);
+
+  useEffect(() => {
+    let length = JSON.parse(localStorage.getItem("key")).length;
+    let lastStudy = JSON.parse(localStorage.getItem("key"))[length - 1].day;
+
+    const dateObj = new Date();
+    const year = dateObj.getFullYear();
+    const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+    const day = String(dateObj.getDate()).padStart(2, "0");
+    let today = `${year}-${month}-${day}`;
+
+    if (lastStudy !== today) {
+      setHour(0);
+      setMinute(0);
+      setSecond(0);
+      localStorage.setItem("hour", hour);
+      localStorage.setItem("minute", minute);
+      localStorage.setItem("second", second);
+    }
+  }, []);
 
   return (
     <Main>
