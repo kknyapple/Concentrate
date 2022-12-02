@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/Concentrate-StopWatch/static/js/main.fa25ee51.js",
+    "index.html": "/Concentrate-StopWatch/index.html",
+    "main.fa25ee51.js.map": "/Concentrate-StopWatch/static/js/main.fa25ee51.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.fa25ee51.js"
+  ]
+}
