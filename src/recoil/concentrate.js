@@ -39,3 +39,8 @@ export const studyMemo = atom({
   key: "memo",
   default: JSON.parse(localStorage.getItem("memo")) ?? [],
 });
+
+export const calendarData = atom({
+  key: "calendarData",
+  default: JSON.parse(localStorage.getItem("key")) ?? [],
+});

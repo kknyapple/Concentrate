@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import {
+  calendarData,
   pauseClicked,
   stopWatchStart,
   studyHour,
@@ -60,11 +61,12 @@ const StopWatchButtonComponent = () => {
   const hour = useRecoilValue(studyHour);
   const minute = useRecoilValue(studyMinute);
   const second = useRecoilValue(studySecond);
+  let [timeData, setTimeData] = useRecoilState(calendarData);
 
-  let data = [
-    { value: "3", day: "2022-11-27" },
-    { value: "6.5", day: "2022-11-28" },
-  ];
+  //let data = [
+  //  { value: "3", day: "2022-11-27" },
+  //  { value: "6.5", day: "2022-11-28" },
+  //];
 
   const dateObj = new Date();
   const year = dateObj.getFullYear();
@@ -100,8 +102,12 @@ const StopWatchButtonComponent = () => {
           setPass(false);
           setStart(false);
           setPause(false);
-          data.push({ value: time, day: today });
-          localStorage.setItem("key", JSON.stringify(data));
+
+          const cleanTimeData = timeData.filter((data) => data.day !== today);
+          let copy = [...cleanTimeData];
+          copy.push({ value: time, day: today });
+          setTimeData(copy);
+          localStorage.setItem("key", JSON.stringify(copy));
           localStorage.setItem("hour", hour);
           localStorage.setItem("minute", minute);
           localStorage.setItem("second", second);
