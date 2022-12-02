@@ -12,33 +12,34 @@ const RecordBox = styled.div`
 
 const RecordComponent = () => {
   let data = JSON.parse(localStorage.getItem("key"));
-  //console.log(data);
   return (
     <RecordBox>
-      <ResponsiveCalendar
-        data={data}
-        from="2022-10-01"
-        to="2022-12-31"
-        emptyColor="#eeeeee"
-        colors={["#FFC3CA", "#FFA1CA", "#A72948", "#372948"]}
-        margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
-        yearSpacing={40}
-        monthBorderColor="#ffffff"
-        dayBorderWidth={2}
-        dayBorderColor="#ffffff"
-        legends={[
-          {
-            anchor: "bottom-right",
-            direction: "row",
-            translateY: 36,
-            itemCount: 4,
-            itemWidth: 42,
-            itemHeight: 36,
-            itemsSpacing: 14,
-            itemDirection: "right-to-left",
-          },
-        ]}
-      />
+      {data && (
+        <ResponsiveCalendar
+          data={data}
+          from="2022-10-01"
+          to="2022-12-31"
+          emptyColor="#eeeeee"
+          colors={["#FFC3CA", "#FFA1CA", "#A72948", "#372948"]}
+          margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
+          yearSpacing={40}
+          monthBorderColor="#ffffff"
+          dayBorderWidth={2}
+          dayBorderColor="#ffffff"
+          legends={[
+            {
+              anchor: "bottom-right",
+              direction: "row",
+              translateY: 36,
+              itemCount: 4,
+              itemWidth: 42,
+              itemHeight: 36,
+              itemsSpacing: 14,
+              itemDirection: "right-to-left",
+            },
+          ]}
+        />
+      )}
     </RecordBox>
   );
 };
