@@ -9,6 +9,8 @@ import {
   studyHour,
   studyMinute,
   studySecond,
+  startTime,
+  pauseTime,
 } from "../../recoil/concentrate";
 import StopWatchDetailComponent from "./StopWatchDetail/StopWatchDetailComponent";
 import StopWatchComponent from "./StopWatch/StopWatchComponent";
@@ -39,18 +41,31 @@ const MainComponent = () => {
   const [minute, setMinute] = useRecoilState(studyMinute);
   const [second, setSecond] = useRecoilState(studySecond);
 
+  let currentStartTime = useRecoilValue(startTime);
+  let currentPauseTime = useRecoilValue(pauseTime);
+
   useEffect(() => {
     if (start === true && pass === true) {
-      let timerId = setTimeout(() => setSecond(second + 1), 1000);
+      //let timerId = setTimeout(() => setSecond(second + 1), 1000);
+      let timerId = setTimeout(() => {
+        const now = new Date(Date.now() - currentStartTime);
+        console.log(now.getUTCHours());
+        console.log(now.getUTCMinutes());
+        console.log(now.getUTCSeconds());
 
-      if (second > 59) {
+        setSecond(now.getUTCSeconds());
+        setMinute(now.getUTCMinutes());
+        setHour(now.getUTCHours());
+      }, 1000);
+      /*if (second > 59) {
         setSecond(0);
         setMinute(minute + 1);
       }
       if (minute > 59) {
         setMinute(0);
         setHour(hour + 1);
-      }
+      }*/
+
       return () => clearTimeout(timerId);
     }
   }, [start, pass, second]);

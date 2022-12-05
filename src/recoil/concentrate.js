@@ -44,3 +44,18 @@ export const calendarData = atom({
   key: "calendarData",
   default: JSON.parse(localStorage.getItem("key")) ?? [],
 });
+
+export const startTime = atom({
+  key: "startTime",
+  default: null,
+});
+
+export const pauseTime = atom({
+  key: "pauseTime",
+  default: null,
+});
+
+export const stopTime = atom({
+  key: "stopTime",
+  default: null,
+});

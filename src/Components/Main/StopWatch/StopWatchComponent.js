@@ -1,8 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
-import { stopWatchStart, studyTimePass } from "../../../recoil/concentrate";
+import {
+  startTime,
+  stopWatchStart,
+  studyTimePass,
+  pauseTime,
+} from "../../../recoil/concentrate";
 
 const StopWatchBox = styled.div`
   display: flex;
@@ -39,6 +44,9 @@ const StopWatchComponent = () => {
   const [start, setStart] = useRecoilState(stopWatchStart);
   const [pass, setPass] = useRecoilState(studyTimePass);
 
+  const [currentStartTime, setCurrentStartTime] = useRecoilState(startTime);
+  const [currentPauseTime, setCurrentPauseTime] = useRecoilState(pauseTime);
+
   return (
     <StopWatchBox>
       <StopWatchTitle>집중하기</StopWatchTitle>
@@ -46,6 +54,15 @@ const StopWatchComponent = () => {
         onClick={() => {
           setStart(true);
           setPass(true);
+          if (currentStartTime === null) {
+            setCurrentStartTime(Date.now());
+            console.log(currentStartTime);
+          } else {
+            setCurrentStartTime(
+              currentStartTime + Date.now() - currentPauseTime
+            );
+            //currentStartTime += Date.now() - currentPauseTime
+          }
         }}
       >
         시작

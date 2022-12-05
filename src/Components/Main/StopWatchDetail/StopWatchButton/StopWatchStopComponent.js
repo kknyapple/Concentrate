@@ -10,6 +10,8 @@ import {
   studyMinute,
   studySecond,
   studyTimePass,
+  startTime,
+  pauseTime,
 } from "../../../../recoil/concentrate";
 
 const Stop = styled.button`
@@ -42,6 +44,9 @@ const StopWatchStopComponent = () => {
 
   let time = Number(hour + minute / 60 + second / 3600).toFixed(3);
 
+  const [currentStartTime, setCurrentStartTime] = useRecoilState(startTime);
+  const [currentPauseTime, setCurrentPauseTime] = useRecoilState(pauseTime);
+
   const stopOnClickHandler = () => {
     setPass(false);
     setStart(false);
@@ -55,6 +60,11 @@ const StopWatchStopComponent = () => {
     localStorage.setItem("hour", hour);
     localStorage.setItem("minute", minute);
     localStorage.setItem("second", second);
+
+    setCurrentPauseTime(Date.now());
+
+    //setCurrentStartTime(null);
+    //setCurrentPauseTime(null);
   };
 
   return <Stop onClick={stopOnClickHandler}>■</Stop>;
