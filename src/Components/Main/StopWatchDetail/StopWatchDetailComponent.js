@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import RestTimeComponent from "./RestTimeComponent";
 import ConcentrateTimeComponent from "./ConcentrateTimeComponent";
-import StopWatchButtonComponent from "./StopWatchButtonComponent";
+import StopWatchButtonComponent from "./StopWatchButton/StopWatchButtonComponent";
 
 const StopWatchDetailBox = styled.div`
   display: flex;
