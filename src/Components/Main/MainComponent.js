@@ -41,12 +41,22 @@ const MainComponent = () => {
   const [minute, setMinute] = useRecoilState(studyMinute);
   const [second, setSecond] = useRecoilState(studySecond);
 
-  let currentStartTime = useRecoilValue(startTime);
+  const [currentStartTime, setCurrentStartTime] = useRecoilState(startTime);
   let currentPauseTime = useRecoilValue(pauseTime);
+
+  useEffect(() => {
+    setCurrentStartTime(
+      currentStartTime -
+        second * 1000 -
+        minute * 1000 * 60 -
+        hour * 1000 * 60 * 60
+    );
+  }, []);
 
   useEffect(() => {
     if (start === true && pass === true) {
       //let timerId = setTimeout(() => setSecond(second + 1), 1000);
+
       let timerId = setTimeout(() => {
         const now = new Date(Date.now() - currentStartTime);
         console.log(now.getUTCHours());
