@@ -12,6 +12,7 @@ import {
   studyTimePass,
   startTime,
   pauseTime,
+  todayDate,
 } from "../../../../recoil/concentrate";
 
 const Stop = styled.button`
@@ -36,16 +37,12 @@ const StopWatchStopComponent = () => {
   const second = useRecoilValue(studySecond);
   let [timeData, setTimeData] = useRecoilState(calendarData);
 
-  const dateObj = new Date();
-  const year = dateObj.getFullYear();
-  const month = String(dateObj.getMonth() + 1).padStart(2, "0");
-  const day = String(dateObj.getDate()).padStart(2, "0");
-  let today = `${year}-${month}-${day}`;
-
   let time = Number(hour + minute / 60 + second / 3600).toFixed(3);
 
   const [currentStartTime, setCurrentStartTime] = useRecoilState(startTime);
   const [currentPauseTime, setCurrentPauseTime] = useRecoilState(pauseTime);
+
+  const [today, setToday] = useRecoilState(todayDate);
 
   const stopOnClickHandler = () => {
     setPass(false);

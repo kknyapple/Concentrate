@@ -59,3 +59,8 @@ export const stopTime = atom({
   key: "stopTime",
   default: null,
 });
+
+export const todayDate = atom({
+  key: "todayDate",
+  default: null,
+});

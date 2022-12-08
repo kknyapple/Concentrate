@@ -11,6 +11,7 @@ import {
   studySecond,
   startTime,
   pauseTime,
+  todayDate,
 } from "../../recoil/concentrate";
 import StopWatchDetailComponent from "./StopWatchDetail/StopWatchDetailComponent";
 import StopWatchComponent from "./StopWatch/StopWatchComponent";
@@ -44,7 +45,22 @@ const MainComponent = () => {
   const [currentStartTime, setCurrentStartTime] = useRecoilState(startTime);
   const [currentPauseTime, setCurrentPauseTime] = useRecoilState(pauseTime);
 
-  useEffect(() => {}, []);
+  const [today, setToday] = useRecoilState(todayDate);
+
+  const getTodayDate = () => {
+    const dateObj = new Date();
+    const year = dateObj.getFullYear();
+    const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+    const day = String(dateObj.getDate()).padStart(2, "0");
+
+    let today = `${year}-${month}-${day}`;
+
+    setToday(today);
+  };
+
+  useEffect(() => {
+    getTodayDate();
+  });
 
   useEffect(() => {
     if (start === true && pass === true) {
@@ -60,14 +76,6 @@ const MainComponent = () => {
         setMinute(now.getUTCMinutes());
         setHour(now.getUTCHours());
       }, 1000);
-      /*if (second > 59) {
-        setSecond(0);
-        setMinute(minute + 1);
-      }
-      if (minute > 59) {
-        setMinute(0);
-        setHour(hour + 1);
-      }*/
 
       return () => clearTimeout(timerId);
     }
@@ -78,12 +86,6 @@ const MainComponent = () => {
       let length = JSON.parse(localStorage.getItem("key")).length;
       let lastStudy = JSON.parse(localStorage.getItem("key"))[length - 1].day;
 
-      const dateObj = new Date();
-      const year = dateObj.getFullYear();
-      const month = String(dateObj.getMonth() + 1).padStart(2, "0");
-      const day = String(dateObj.getDate()).padStart(2, "0");
-      let today = `${year}-${month}-${day}`;
-
       if (lastStudy === today) {
         setCurrentStartTime(
           currentStartTime -
@@ -91,6 +93,7 @@ const MainComponent = () => {
             minute * 1000 * 60 -
             hour * 1000 * 60 * 60
         );
+        console.log(today);
       } else {
         setHour(0);
         setMinute(0);
