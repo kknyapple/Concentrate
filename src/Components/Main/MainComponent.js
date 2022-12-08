@@ -52,30 +52,46 @@ const MainComponent = () => {
   let month = String(dateObj.getMonth() + 1).padStart(2, "0");
   let day = String(dateObj.getDate()).padStart(2, "0");
 
-  //let today = `${year}-${month}-${day}`;
+  const startTotalTime = () => {
+    const now = new Date(Date.now() - currentStartTime);
 
-  // console.log(today);
-
-  useEffect(() => {}, []);
+    setSecond(now.getUTCSeconds());
+    setMinute(now.getUTCMinutes());
+    setHour(now.getUTCHours());
+  };
 
   useEffect(() => {
     if (start === true && pass === true) {
-      //let timerId = setTimeout(() => setSecond(second + 1), 1000);
-
       let timerId = setTimeout(() => {
-        const now = new Date(Date.now() - currentStartTime);
-        console.log(now.getUTCHours());
-        console.log(now.getUTCMinutes());
-        console.log(now.getUTCSeconds());
-
-        setSecond(now.getUTCSeconds());
-        setMinute(now.getUTCMinutes());
-        setHour(now.getUTCHours());
+        startTotalTime();
       }, 1000);
 
       return () => clearTimeout(timerId);
     }
   }, [start, pass, second]);
+
+  const resetStudyTime = () => {
+    setHour(0);
+    setMinute(0);
+    setSecond(0);
+  };
+
+  const resetLocalTime = () => {
+    localStorage.setItem("hour", hour);
+    localStorage.setItem("minute", minute);
+    localStorage.setItem("second", second);
+  };
+
+  const resetCurrentTime = () => {
+    setCurrentStartTime(null);
+    setCurrentPauseTime(null);
+  };
+
+  const reset = () => {
+    resetStudyTime();
+    resetLocalTime();
+    resetCurrentTime();
+  };
 
   useEffect(() => {
     let length = JSON.parse(localStorage.getItem("key")).length;
@@ -85,25 +101,13 @@ const MainComponent = () => {
     setToday(`${year}-${month}-${day}`);
 
     if (localStorage.getItem("key")) {
-      if (lastStudy === today) {
-        setCurrentStartTime(
-          currentStartTime -
-            second * 1000 -
-            minute * 1000 * 60 -
-            hour * 1000 * 60 * 60
-        );
-      } else {
-        setHour(0);
-        setMinute(0);
-        setSecond(0);
+      let savedTime =
+        currentStartTime -
+        second * 1000 -
+        minute * 1000 * 60 -
+        hour * 1000 * 60 * 60;
 
-        localStorage.setItem("hour", hour);
-        localStorage.setItem("minute", minute);
-        localStorage.setItem("second", second);
-
-        setCurrentStartTime(null);
-        setCurrentPauseTime(null);
-      }
+      lastStudy === today ? setCurrentStartTime(savedTime) : reset();
     }
   }, []);
 
