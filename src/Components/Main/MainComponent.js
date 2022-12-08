@@ -42,16 +42,9 @@ const MainComponent = () => {
   const [second, setSecond] = useRecoilState(studySecond);
 
   const [currentStartTime, setCurrentStartTime] = useRecoilState(startTime);
-  let currentPauseTime = useRecoilValue(pauseTime);
+  const [currentPauseTime, setCurrentPauseTime] = useRecoilState(pauseTime);
 
-  useEffect(() => {
-    setCurrentStartTime(
-      currentStartTime -
-        second * 1000 -
-        minute * 1000 * 60 -
-        hour * 1000 * 60 * 60
-    );
-  }, []);
+  useEffect(() => {}, []);
 
   useEffect(() => {
     if (start === true && pass === true) {
@@ -91,13 +84,23 @@ const MainComponent = () => {
       const day = String(dateObj.getDate()).padStart(2, "0");
       let today = `${year}-${month}-${day}`;
 
-      if (lastStudy !== today) {
+      if (lastStudy === today) {
+        setCurrentStartTime(
+          currentStartTime -
+            second * 1000 -
+            minute * 1000 * 60 -
+            hour * 1000 * 60 * 60
+        );
+      } else {
         setHour(0);
         setMinute(0);
         setSecond(0);
         localStorage.setItem("hour", hour);
         localStorage.setItem("minute", minute);
         localStorage.setItem("second", second);
+
+        setCurrentStartTime(null);
+        setCurrentPauseTime(null);
       }
     }
   }, []);
