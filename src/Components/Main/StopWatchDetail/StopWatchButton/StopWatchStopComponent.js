@@ -10,7 +10,6 @@ import {
   studyMinute,
   studySecond,
   studyTimePass,
-  startTime,
   pauseTime,
   todayDate,
 } from "../../../../recoil/concentrate";
@@ -36,32 +35,37 @@ const StopWatchStopComponent = () => {
   const minute = useRecoilValue(studyMinute);
   const second = useRecoilValue(studySecond);
   let [timeData, setTimeData] = useRecoilState(calendarData);
-
+  const [currentPauseTime, setCurrentPauseTime] = useRecoilState(pauseTime);
+  const [today, setToday] = useRecoilState(todayDate);
   let time = Number(hour + minute / 60 + second / 3600).toFixed(3);
 
-  const [currentStartTime, setCurrentStartTime] = useRecoilState(startTime);
-  const [currentPauseTime, setCurrentPauseTime] = useRecoilState(pauseTime);
+  const changeCondition = (pass, start, pause) => {
+    setPass(pass);
+    setStart(start);
+    setPause(pause);
+  };
 
-  const [today, setToday] = useRecoilState(todayDate);
+  const changeLocalTime = () => {
+    localStorage.setItem("hour", hour);
+    localStorage.setItem("minute", minute);
+    localStorage.setItem("second", second);
+  };
 
-  const stopOnClickHandler = () => {
-    setPass(false);
-    setStart(false);
-    setPause(false);
-
+  const changeLocalKey = () => {
     const cleanTimeData = timeData.filter((data) => data.day !== today);
     let copy = [...cleanTimeData];
     copy.push({ value: time, day: today });
     setTimeData(copy);
     localStorage.setItem("key", JSON.stringify(copy));
-    localStorage.setItem("hour", hour);
-    localStorage.setItem("minute", minute);
-    localStorage.setItem("second", second);
+  };
+
+  const stopOnClickHandler = () => {
+    changeCondition(false, false, false);
+
+    changeLocalKey();
+    changeLocalTime();
 
     setCurrentPauseTime(Date.now());
-
-    //setCurrentStartTime(null);
-    //setCurrentPauseTime(null);
   };
 
   return <Stop onClick={stopOnClickHandler}>■</Stop>;
