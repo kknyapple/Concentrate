@@ -47,20 +47,16 @@ const MainComponent = () => {
 
   const [today, setToday] = useRecoilState(todayDate);
 
-  const getTodayDate = () => {
-    const dateObj = new Date();
-    const year = dateObj.getFullYear();
-    const month = String(dateObj.getMonth() + 1).padStart(2, "0");
-    const day = String(dateObj.getDate()).padStart(2, "0");
+  const dateObj = new Date();
+  let year = dateObj.getFullYear();
+  let month = String(dateObj.getMonth() + 1).padStart(2, "0");
+  let day = String(dateObj.getDate()).padStart(2, "0");
 
-    let today = `${year}-${month}-${day}`;
+  //let today = `${year}-${month}-${day}`;
 
-    setToday(today);
-  };
+  // console.log(today);
 
-  useEffect(() => {
-    getTodayDate();
-  });
+  useEffect(() => {}, []);
 
   useEffect(() => {
     if (start === true && pass === true) {
@@ -82,10 +78,13 @@ const MainComponent = () => {
   }, [start, pass, second]);
 
   useEffect(() => {
-    if (localStorage.getItem("key")) {
-      let length = JSON.parse(localStorage.getItem("key")).length;
-      let lastStudy = JSON.parse(localStorage.getItem("key"))[length - 1].day;
+    let length = JSON.parse(localStorage.getItem("key")).length;
+    let lastStudy = JSON.parse(localStorage.getItem("key"))[length - 1].day;
+    let today = `${year}-${month}-${day}`;
 
+    setToday(`${year}-${month}-${day}`);
+
+    if (localStorage.getItem("key")) {
       if (lastStudy === today) {
         setCurrentStartTime(
           currentStartTime -
@@ -93,11 +92,11 @@ const MainComponent = () => {
             minute * 1000 * 60 -
             hour * 1000 * 60 * 60
         );
-        console.log(today);
       } else {
         setHour(0);
         setMinute(0);
         setSecond(0);
+
         localStorage.setItem("hour", hour);
         localStorage.setItem("minute", minute);
         localStorage.setItem("second", second);
