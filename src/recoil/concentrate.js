@@ -64,3 +64,18 @@ export const todayDate = atom({
   key: "todayDate",
   default: null,
 });
+
+export const startCTime = atom({
+  key: "startCTime",
+  default: null,
+});
+
+export const pauseCTime = atom({
+  key: "pauseCTime",
+  default: null,
+});
+
+export const stopCTime = atom({
+  key: "stopCTime",
+  default: null,
+});

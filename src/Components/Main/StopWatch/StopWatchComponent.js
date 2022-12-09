@@ -7,6 +7,8 @@ import {
   stopWatchStart,
   studyTimePass,
   pauseTime,
+  startCTime,
+  pauseCTime,
 } from "../../../recoil/concentrate";
 
 const StopWatchBox = styled.div`
@@ -47,6 +49,26 @@ const StopWatchComponent = () => {
   const [currentStartTime, setCurrentStartTime] = useRecoilState(startTime);
   const [currentPauseTime, setCurrentPauseTime] = useRecoilState(pauseTime);
 
+  const [currentStartCTime, setCurrentStartCTime] = useRecoilState(startCTime);
+  const [currentPauseCTime, setCurrentPauseCTime] = useRecoilState(pauseCTime);
+
+  const changeStartTime = () => {
+    if (currentStartTime === null) {
+      setCurrentStartTime(Date.now());
+    } else {
+      setCurrentStartTime(currentStartTime + Date.now() - currentPauseTime);
+    }
+  };
+
+  const changeStartCTime = () => {
+    if (currentStartCTime === null) {
+      setCurrentStartCTime(Date.now());
+      console.log(currentStartCTime);
+    } else {
+      setCurrentStartCTime(currentStartCTime + Date.now() - currentPauseCTime);
+    }
+  };
+
   return (
     <StopWatchBox>
       <StopWatchTitle>집중하기</StopWatchTitle>
@@ -54,15 +76,8 @@ const StopWatchComponent = () => {
         onClick={() => {
           setStart(true);
           setPass(true);
-          if (currentStartTime === null) {
-            setCurrentStartTime(Date.now());
-            console.log(currentStartTime);
-          } else {
-            setCurrentStartTime(
-              currentStartTime + Date.now() - currentPauseTime
-            );
-            //currentStartTime += Date.now() - currentPauseTime
-          }
+          changeStartTime();
+          changeStartCTime();
         }}
       >
         시작

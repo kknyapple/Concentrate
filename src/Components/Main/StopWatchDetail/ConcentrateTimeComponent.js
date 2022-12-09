@@ -3,7 +3,11 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 
-import { pauseClicked } from "../../../recoil/concentrate";
+import {
+  pauseClicked,
+  startCTime,
+  pauseCTime,
+} from "../../../recoil/concentrate";
 
 const ConcentrateTime = styled.div`
   display: flex;
@@ -18,11 +22,33 @@ const Time = styled.p``;
 
 const ConcentrateTimeComponent = () => {
   const [pause, setPause] = useRecoilState(pauseClicked);
+
   const [hour, setHour] = useState(0);
   const [minute, setMinute] = useState(0);
   const [second, setSecond] = useState(0);
 
+  const [currentStartCTime, setCurrentStartCTime] = useRecoilState(startCTime);
+  const [currentPauseCTime, setCurrentPauseCTime] = useRecoilState(pauseCTime);
+
+  const startConcentrateTime = () => {
+    const now = new Date(Date.now() - currentStartCTime);
+
+    setSecond(now.getUTCSeconds());
+    setMinute(now.getUTCMinutes());
+    setHour(now.getUTCHours());
+  };
+
   useEffect(() => {
+    if (pause === false) {
+      let timerId = setTimeout(() => {
+        startConcentrateTime();
+      }, 1000);
+
+      return () => clearTimeout(timerId);
+    }
+  }, [pause, second]);
+
+  /*useEffect(() => {
     if (pause === false) {
       let timerId = setTimeout(() => setSecond(second + 1), 1000);
 
@@ -36,7 +62,7 @@ const ConcentrateTimeComponent = () => {
       }
       return () => clearTimeout(timerId);
     }
-  }, [pause, second]);
+  }, [pause, second]);*/
 
   return (
     <ConcentrateTime>

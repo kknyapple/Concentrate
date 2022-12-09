@@ -2,7 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { useRecoilState, useRecoilValue } from "recoil";
 
-import { pauseClicked, studyTimePass } from "../../../../recoil/concentrate";
+import {
+  pauseClicked,
+  studyTimePass,
+  pauseCTime,
+  startCTime,
+} from "../../../../recoil/concentrate";
 
 const Pause = styled.button`
   border: 0;
@@ -33,14 +38,21 @@ const StopWatchPauseComponent = () => {
   const [pass, setPass] = useRecoilState(studyTimePass);
   const [pause, setPause] = useRecoilState(pauseClicked);
 
+  const [currentStartCTime, setCurrentStartCTime] = useRecoilState(startCTime);
+  const [currentPauseCTime, setCurrentPauseCTime] = useRecoilState(pauseCTime);
+
   const pauseOnClickHandler = () => {
     setPause(true);
     setPass(false);
+
+    setCurrentPauseCTime(Date.now());
   };
 
   const continueOnClickHandler = () => {
     setPause(false);
     setPass(true);
+
+    setCurrentStartCTime(currentStartCTime + Date.now() - currentPauseCTime);
   };
 
   return (
