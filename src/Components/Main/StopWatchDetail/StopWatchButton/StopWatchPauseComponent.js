@@ -46,17 +46,20 @@ const StopWatchPauseComponent = () => {
   const [currentStartCTime, setCurrentStartCTime] = useRecoilState(startCTime);
   const [currentPauseCTime, setCurrentPauseCTime] = useRecoilState(pauseCTime);
 
+  const changeCondition = (pass, pause) => {
+    setPass(pass);
+    setPause(pause);
+  };
+
   const pauseOnClickHandler = () => {
-    setPause(true);
-    setPass(false);
+    changeCondition(false, true);
 
     setCurrentPauseTime(Date.now());
     setCurrentPauseCTime(Date.now());
   };
 
   const continueOnClickHandler = () => {
-    setPause(false);
-    setPass(true);
+    changeCondition(true, false);
 
     setCurrentStartTime(currentStartTime + Date.now() - currentPauseTime);
     setCurrentStartCTime(currentStartCTime + Date.now() - currentPauseCTime);

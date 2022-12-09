@@ -48,22 +48,6 @@ const ConcentrateTimeComponent = () => {
     }
   }, [pause, second]);
 
-  /*useEffect(() => {
-    if (pause === false) {
-      let timerId = setTimeout(() => setSecond(second + 1), 1000);
-
-      if (second > 59) {
-        setSecond(0);
-        setMinute(minute + 1);
-      }
-      if (minute > 59) {
-        setMinute(0);
-        setHour(hour + 1);
-      }
-      return () => clearTimeout(timerId);
-    }
-  }, [pause, second]);*/
-
   return (
     <ConcentrateTime>
       <Title>집중시간</Title>
