@@ -94,13 +94,13 @@ const MainComponent = () => {
   };
 
   useEffect(() => {
-    let length = JSON.parse(localStorage.getItem("key")).length;
-    let lastStudy = JSON.parse(localStorage.getItem("key"))[length - 1].day;
-    let today = `${year}-${month}-${day}`;
-
     setToday(`${year}-${month}-${day}`);
 
     if (localStorage.getItem("key")) {
+      let length = JSON.parse(localStorage.getItem("key")).length;
+      let lastStudy = JSON.parse(localStorage.getItem("key"))[length - 1].day;
+      let today = `${year}-${month}-${day}`;
+
       let savedTime =
         currentStartTime -
         second * 1000 -
