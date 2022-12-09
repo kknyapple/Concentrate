@@ -79,3 +79,18 @@ export const stopCTime = atom({
   key: "stopCTime",
   default: null,
 });
+
+export const startRTime = atom({
+  key: "startRTime",
+  default: null,
+});
+
+export const pauseRTime = atom({
+  key: "pauseRTime",
+  default: null,
+});
+
+export const stopRTime = atom({
+  key: "stopRTime",
+  default: null,
+});

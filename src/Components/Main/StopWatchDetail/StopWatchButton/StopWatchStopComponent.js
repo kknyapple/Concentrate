@@ -14,6 +14,8 @@ import {
   todayDate,
   startCTime,
   pauseCTime,
+  startRTime,
+  pauseRTime,
 } from "../../../../recoil/concentrate";
 
 const Stop = styled.button`
@@ -42,8 +44,12 @@ const StopWatchStopComponent = () => {
   let time = Number(hour + minute / 60 + second / 3600).toFixed(3);
 
   const [currentPauseTime, setCurrentPauseTime] = useRecoilState(pauseTime);
+
   const [currentStartCTime, setCurrentStartCTime] = useRecoilState(startCTime);
   const [currentPauseCTime, setCurrentPauseCTime] = useRecoilState(pauseCTime);
+
+  const [currentStartRTime, setCurrentStartRTime] = useRecoilState(startRTime);
+  const [currentPauseRTime, setCurrentPauseRTime] = useRecoilState(pauseRTime);
 
   const changeCondition = (pass, start, pause) => {
     setPass(pass);
@@ -74,6 +80,8 @@ const StopWatchStopComponent = () => {
     setCurrentPauseTime(Date.now());
     setCurrentPauseCTime(null);
     setCurrentStartCTime(null);
+    setCurrentPauseRTime(null);
+    setCurrentStartRTime(null);
   };
 
   return <Stop onClick={stopOnClickHandler}>■</Stop>;

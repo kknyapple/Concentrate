@@ -3,7 +3,11 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 
-import { pauseClicked } from "../../../recoil/concentrate";
+import {
+  pauseClicked,
+  startRTime,
+  pauseRTime,
+} from "../../../recoil/concentrate";
 
 const RestTime = styled.div`
   display: flex;
@@ -22,17 +26,22 @@ const RestTimeComponent = () => {
   const [minute, setMinute] = useState(0);
   const [second, setSecond] = useState(0);
 
+  const [currentStartRTime, setCurrentStartRTime] = useRecoilState(startRTime);
+  const [currentPauseRTime, setCurrentPauseRTime] = useRecoilState(pauseRTime);
+
+  const startRestTime = () => {
+    const now = new Date(Date.now() - currentStartRTime);
+
+    setSecond(now.getUTCSeconds());
+    setMinute(now.getUTCMinutes());
+    setHour(now.getUTCHours());
+  };
+
   useEffect(() => {
     if (pause === true) {
-      let timerId = setTimeout(() => setSecond(second + 1), 1000);
-      if (second > 59) {
-        setSecond(0);
-        setMinute(minute + 1);
-      }
-      if (minute > 59) {
-        setMinute(0);
-        setHour(hour + 1);
-      }
+      let timerId = setTimeout(() => {
+        startRestTime();
+      }, 1000);
 
       return () => clearTimeout(timerId);
     }
