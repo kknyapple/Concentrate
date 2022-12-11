@@ -27,11 +27,13 @@ const Main = styled.main`
   font-size: 20px;
 `;
 
-const StudyTime = styled.div`
+const TotalTime = styled.div`
   display: flex;
   font-size: 60px;
   margin: 30px;
 `;
+
+const Time = styled.p``;
 
 const MainComponent = () => {
   const start = useRecoilValue(stopWatchStart);
@@ -61,14 +63,14 @@ const MainComponent = () => {
   };
 
   useEffect(() => {
-    if (start === true && pass === true) {
+    if (pass === true) {
       let timerId = setTimeout(() => {
         startTotalTime();
       }, 1000);
 
       return () => clearTimeout(timerId);
     }
-  }, [start, pass, second]);
+  }, [start, pass, second, minute, hour]);
 
   const resetStudyTime = () => {
     setHour(0);
@@ -113,12 +115,14 @@ const MainComponent = () => {
 
   return (
     <Main>
-      <StudyTime>
-        {`${String(hour).padStart(2, "0")}:${String(minute).padStart(
-          2,
-          "0"
-        )}:${String(second).padStart(2, "0")}`}
-      </StudyTime>
+      <TotalTime>
+        <Time>
+          {`${String(hour).padStart(2, "0")}:${String(minute).padStart(
+            2,
+            "0"
+          )}:${String(second).padStart(2, "0")}`}
+        </Time>
+      </TotalTime>
       <MemoComponent />
       {start === true ? <StopWatchDetailComponent /> : <StopWatchComponent />}
       <RecordComponent />
