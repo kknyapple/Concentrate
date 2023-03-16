@@ -7,6 +7,7 @@ import StopWatchStopComponent from "./StopWatchStopComponent";
 const StopWatchButtonBox = styled.div`
   display: flex;
   padding-top: 15px;
+  cursor: pointer;
 `;
 
 const StopWatchButtonComponent = () => {

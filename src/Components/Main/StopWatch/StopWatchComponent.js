@@ -20,7 +20,7 @@ const StopWatchBox = styled.div`
   background-color: #6b728e;
   border-radius: 8px;
   height: 80px;
-  width: 500px;
+  width: 400px;
 `;
 
 const StopWatchTitle = styled.p`
@@ -40,6 +40,7 @@ const StopWatchButton = styled.button`
   height: 50px;
   width: 50px;
   margin-right: 30px;
+  cursor: pointer;
 `;
 
 const StopWatchComponent = () => {

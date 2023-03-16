@@ -17,6 +17,7 @@ const MemoItem = styled.p`
   font-size: 8px;
   height: 25px;
   width: 84px;
+  cursor: pointer;
 `;
 
 const MemoItemComponent = (props) => {

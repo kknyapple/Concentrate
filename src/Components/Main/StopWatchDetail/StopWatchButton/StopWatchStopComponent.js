@@ -29,6 +29,7 @@ const Stop = styled.button`
   font-size: 18px;
   height: 50px;
   width: 50px;
+  cursor: pointer;
 `;
 
 const StopWatchStopComponent = () => {

@@ -24,6 +24,7 @@ const Pause = styled.button`
   font-size: 18px;
   height: 50px;
   width: 50px;
+  cursor: pointer;
 `;
 const Continue = styled.button`
   border: 0;
@@ -36,6 +37,7 @@ const Continue = styled.button`
   font-size: 18px;
   height: 50px;
   width: 50px;
+  cursor: pointer;
 `;
 
 const StopWatchPauseComponent = () => {

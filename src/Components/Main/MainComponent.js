@@ -70,7 +70,7 @@ const MainComponent = () => {
 
       return () => clearTimeout(timerId);
     }
-  }, [start, pass, second, minute, hour]);
+  }, [pass, second]);
 
   const resetStudyTime = () => {
     setHour(0);

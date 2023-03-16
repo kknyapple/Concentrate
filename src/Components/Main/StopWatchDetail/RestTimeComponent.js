@@ -51,7 +51,6 @@ const RestTimeComponent = () => {
     <RestTime>
       <Title>쉬는시간</Title>
       <Time>
-        {" "}
         {`${String(hour).padStart(2, "0")}:${String(minute).padStart(
           2,
           "0"

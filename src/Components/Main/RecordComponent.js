@@ -6,7 +6,7 @@ const RecordBox = styled.div`
   color: black;
   border-radius: 8px;
   background-color: whitesmoke;
-  width: 500px;
+  width: 400px;
   height: 150px;
 `;
 
@@ -17,8 +17,8 @@ const RecordComponent = () => {
       {data && (
         <ResponsiveCalendar
           data={data}
-          from="2022-10-01"
-          to="2022-12-31"
+          from="2023-01-01"
+          to="2023-12-31"
           emptyColor="#eeeeee"
           colors={["#FFC3CA", "#FFA1CA", "#A72948", "#372948"]}
           margin={{ top: 10, right: 10, bottom: 10, left: 10 }}

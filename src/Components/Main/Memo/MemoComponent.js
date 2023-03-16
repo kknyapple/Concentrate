@@ -23,6 +23,7 @@ const AddMemoButton = styled.button`
   font-size: 10px;
   height: 25px;
   width: 25px;
+  cursor: pointer;
 `;
 
 const MemoInputBox = styled.div`
@@ -54,6 +55,7 @@ const MemoInputButton = styled.button`
   margin-left: 5px;
   margin-right: 5px;
   background-color: whitesmoke;
+  cursor: pointer;
 `;
 
 const MemoComponent = () => {
