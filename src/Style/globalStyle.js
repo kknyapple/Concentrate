@@ -8,6 +8,9 @@ body {
     padding: 0;
     font-family: 'IBM Plex Sans KR', sans-serif;
 }
+::-webkit-scrollbar {
+    display: none;
+}
 `;
 
 export default GlobalStyle;
