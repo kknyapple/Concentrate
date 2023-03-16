@@ -12,6 +12,7 @@ import {
   startTime,
   pauseTime,
   todayDate,
+  calendarData,
 } from "../../recoil/concentrate";
 import StopWatchDetailComponent from "./StopWatchDetail/StopWatchDetailComponent";
 import StopWatchComponent from "./StopWatch/StopWatchComponent";
@@ -48,6 +49,8 @@ const MainComponent = () => {
   const [currentPauseTime, setCurrentPauseTime] = useRecoilState(pauseTime);
 
   const [today, setToday] = useRecoilState(todayDate);
+  let time = Number(hour + minute / 60 + second / 3600).toFixed(3);
+  let [timeData, setTimeData] = useRecoilState(calendarData);
 
   const dateObj = new Date();
   let year = dateObj.getFullYear();
@@ -62,11 +65,29 @@ const MainComponent = () => {
     setHour(now.getUTCHours());
   };
 
+  const changeLocalTime = () => {
+    localStorage.setItem("hour", hour);
+    localStorage.setItem("minute", minute);
+    localStorage.setItem("second", second);
+  };
+
+  const changeLocalKey = () => {
+    const cleanTimeData = timeData.filter((data) => data.day !== today);
+    let copy = [...cleanTimeData];
+    copy.push({ value: time, day: today });
+    setTimeData(copy);
+    localStorage.setItem("key", JSON.stringify(copy));
+  };
+
   useEffect(() => {
     if (pass === true) {
       startTotalTime();
+      changeLocalKey();
+      changeLocalTime();
       let timerId = setTimeout(() => {
         startTotalTime();
+        changeLocalKey();
+        changeLocalTime();
       }, 1000);
 
       return () => clearTimeout(timerId);
