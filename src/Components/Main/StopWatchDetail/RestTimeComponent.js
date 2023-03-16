@@ -39,6 +39,7 @@ const RestTimeComponent = () => {
 
   useEffect(() => {
     if (pause === true) {
+      startRestTime();
       let timerId = setTimeout(() => {
         startRestTime();
       }, 1000);

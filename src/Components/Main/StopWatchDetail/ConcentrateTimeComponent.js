@@ -40,6 +40,7 @@ const ConcentrateTimeComponent = () => {
 
   useEffect(() => {
     if (pause === false) {
+      startConcentrateTime();
       let timerId = setTimeout(() => {
         startConcentrateTime();
       }, 1000);

@@ -64,6 +64,7 @@ const MainComponent = () => {
 
   useEffect(() => {
     if (pass === true) {
+      startTotalTime();
       let timerId = setTimeout(() => {
         startTotalTime();
       }, 1000);
