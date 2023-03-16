@@ -85,7 +85,9 @@ const StopWatchStopComponent = () => {
     setCurrentStartRTime(null);
   };
 
-  return <Stop onClick={stopOnClickHandler}>■</Stop>;
+  return (
+    <>{pass ? <Stop onClick={stopOnClickHandler}>■</Stop> : <Stop>■</Stop>}</>
+  );
 };
 
 export default StopWatchStopComponent;

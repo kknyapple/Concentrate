@@ -15,7 +15,7 @@ const StopWatchDetailBox = styled.div`
   height: 200px;
   margin-top: 10px;
   margin-bottom: 20px;
-  width: 500px;
+  width: 400px;
 `;
 
 const StopWatchTime = styled.div`
