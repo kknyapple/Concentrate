@@ -7,24 +7,39 @@ const RecordBox = styled.div`
   border-radius: 8px;
   background-color: whitesmoke;
   width: 400px;
-  height: 150px;
+  height: ${(props) => props.height};
 `;
 
 const RecordComponent = () => {
   let data = JSON.parse(localStorage.getItem("key"));
+  const now = new Date();
+  const year = now.getFullYear();
+
   return (
-    <RecordBox>
+    <RecordBox height={`${(year - 2022 + 1) * 100}px`}>
       {data && (
         <ResponsiveCalendar
           data={data}
-          from="2023-01-01"
-          to="2023-12-31"
+          from={`2022-01-01`}
+          to={`${year}-12-31`}
           emptyColor="#eeeeee"
-          colors={["#FFC3CA", "#FFA1CA", "#A72948", "#372948"]}
+          colors={[
+            "#FFC3CA",
+            "#FFA1CA",
+            "#C72048",
+            "#A72948",
+            "#372948",
+            "#372948",
+          ]}
+          minValue={0}
+          maxValue={12}
           margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
-          yearSpacing={40}
+          yearSpacing={35}
+          yearLegendPosition="after"
+          yearLegendOffset={0}
           monthBorderColor="#ffffff"
-          dayBorderWidth={2}
+          monthBorderWidth={0}
+          dayBorderWidth={1}
           dayBorderColor="#ffffff"
           legends={[
             {
