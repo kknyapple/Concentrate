@@ -16,10 +16,15 @@ const RestTime = styled.div`
   align-items: center;
   padding-left: 40px;
   padding-right: 40px;
+  height: 100px;
 `;
 
-const Title = styled.p``;
-const Time = styled.p``;
+const Title = styled.div`
+  height: 40px;
+`;
+const Time = styled.div`
+  height: 40px;
+`;
 
 const RestTimeComponent = () => {
   const [pause, setPause] = useRecoilState(pauseClicked);

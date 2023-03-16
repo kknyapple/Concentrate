@@ -20,6 +20,7 @@ const StopWatchDetailBox = styled.div`
 
 const StopWatchTime = styled.div`
   display: flex;
+  height: 80px;
   padding-bottom: 15px;
 `;
 

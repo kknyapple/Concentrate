@@ -30,11 +30,15 @@ const Main = styled.main`
 
 const TotalTime = styled.div`
   display: flex;
-  font-size: 60px;
-  margin: 30px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
 `;
 
-const Time = styled.p``;
+const Time = styled.p`
+  font-size: 52px;
+`;
 
 const MainComponent = () => {
   const start = useRecoilValue(stopWatchStart);

@@ -8,7 +8,7 @@ const Header = styled.header`
   justify-content: center;
   margin-top: 40px;
   color: whitesmoke;
-  font-weight: 800;
+  font-weight: 700;
   font-size: 30px;
 `;
 
