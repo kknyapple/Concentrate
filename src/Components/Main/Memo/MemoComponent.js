@@ -10,6 +10,9 @@ const MemoBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 400px;
+  flex-direction: row;
+  flex-wrap: wrap;
 `;
 
 const AddMemoButton = styled.button`
@@ -21,9 +24,10 @@ const AddMemoButton = styled.button`
   margin-right: 10px;
   border-radius: 50%;
   font-size: 10px;
-  height: 25px;
-  width: 25px;
+  height: 30px;
+  width: 30px;
   cursor: pointer;
+  margin-bottom: 8px;
 `;
 
 const MemoInputBox = styled.div`
@@ -33,13 +37,14 @@ const MemoInputBox = styled.div`
 `;
 
 const MemoInput = styled.input`
-  height: 25px;
+  height: 24px;
   width: 80px;
   border: 0;
   border-radius: 8px;
   outline: none;
   padding-left: 10px;
   background-color: whitesmoke;
+  margin-bottom: 8px;
 `;
 
 const MemoInputButton = styled.button`
@@ -47,7 +52,7 @@ const MemoInputButton = styled.button`
   justify-content: center;
   align-items: center;
   font-size: 10px;
-  height: 25px;
+  height: 26px;
   width: 35px;
   border: 0;
   outline: 0;
@@ -55,6 +60,7 @@ const MemoInputButton = styled.button`
   margin-left: 5px;
   margin-right: 5px;
   background-color: whitesmoke;
+  margin-bottom: 8px;
   cursor: pointer;
 `;
 

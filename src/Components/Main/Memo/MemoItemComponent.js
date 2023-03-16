@@ -5,7 +5,7 @@ import { useRecoilValue, useRecoilState } from "recoil";
 
 import { studyMemo } from "../../../recoil/concentrate";
 
-const MemoItem = styled.p`
+const MemoItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,8 +15,9 @@ const MemoItem = styled.p`
   margin-right: 10px;
   border-radius: 8px;
   font-size: 8px;
-  height: 25px;
+  height: 26px;
   width: 84px;
+  margin-bottom: 8px;
   cursor: pointer;
 `;
 

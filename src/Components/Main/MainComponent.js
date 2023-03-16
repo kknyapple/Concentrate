@@ -33,12 +33,11 @@ const TotalTime = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 120px;
-`;
-
-const Time = styled.p`
+  height: 100px;
   font-size: 52px;
 `;
+
+const Time = styled.p``;
 
 const MainComponent = () => {
   const start = useRecoilValue(stopWatchStart);
@@ -142,12 +141,10 @@ const MainComponent = () => {
   return (
     <Main>
       <TotalTime>
-        <Time>
-          {`${String(hour).padStart(2, "0")}:${String(minute).padStart(
-            2,
-            "0"
-          )}:${String(second).padStart(2, "0")}`}
-        </Time>
+        {`${String(hour).padStart(2, "0")}:${String(minute).padStart(
+          2,
+          "0"
+        )}:${String(second).padStart(2, "0")}`}
       </TotalTime>
       <MemoComponent />
       {start === true ? <StopWatchDetailComponent /> : <StopWatchComponent />}
