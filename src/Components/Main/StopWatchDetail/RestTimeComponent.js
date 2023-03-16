@@ -8,6 +8,7 @@ import {
   startRTime,
   pauseRTime,
 } from "../../../recoil/concentrate";
+import useSetTime from "../../../Hooks/useSetTime";
 
 const RestTime = styled.div`
   display: flex;
@@ -22,31 +23,11 @@ const Time = styled.p``;
 
 const RestTimeComponent = () => {
   const [pause, setPause] = useRecoilState(pauseClicked);
-  const [hour, setHour] = useState(0);
-  const [minute, setMinute] = useState(0);
-  const [second, setSecond] = useState(0);
 
   const [currentStartRTime, setCurrentStartRTime] = useRecoilState(startRTime);
   const [currentPauseRTime, setCurrentPauseRTime] = useRecoilState(pauseRTime);
 
-  const startRestTime = () => {
-    const now = new Date(Date.now() - currentStartRTime);
-
-    setSecond(now.getUTCSeconds());
-    setMinute(now.getUTCMinutes());
-    setHour(now.getUTCHours());
-  };
-
-  useEffect(() => {
-    if (pause === true) {
-      startRestTime();
-      let timerId = setTimeout(() => {
-        startRestTime();
-      }, 1000);
-
-      return () => clearTimeout(timerId);
-    }
-  }, [pause, second]);
+  const [hour, minute, second] = useSetTime(pause, currentStartRTime);
 
   return (
     <RestTime>
