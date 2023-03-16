@@ -11,8 +11,8 @@ const MemoItem = styled.div`
   justify-content: center;
   background-color: #50577a;
   color: whitesmoke;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 8px;
+  margin-right: 8px;
   border-radius: 8px;
   font-size: 8px;
   height: 26px;
