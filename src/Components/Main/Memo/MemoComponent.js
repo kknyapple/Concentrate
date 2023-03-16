@@ -48,10 +48,10 @@ const MemoInputButton = styled.button`
   align-items: center;
   font-size: 10px;
   height: 25px;
-  width: 25px;
+  width: 35px;
   border: 0;
   outline: 0;
-  border-radius: 50%;
+  border-radius: 8px;
   margin-left: 5px;
   margin-right: 5px;
   background-color: whitesmoke;
