@@ -76,6 +76,10 @@ const MemoComponent = () => {
       {add === true ? (
         <MemoInputBox>
           <MemoInput
+            type="text"
+            id="memo"
+            minLength="1"
+            maxLength="5"
             onChange={(e) => {
               setContent({ id: newID(), title: e.target.value });
             }}
@@ -100,7 +104,7 @@ const MemoComponent = () => {
           setAdd(!add);
         }}
       >
-        +
+        {add ? "x" : "+"}
       </AddMemoButton>
     </MemoBox>
   );
