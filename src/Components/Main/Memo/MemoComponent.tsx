@@ -89,8 +89,8 @@ const MemoComponent = () => {
           <MemoInput
             type="text"
             id="memo"
-            minLength="1"
-            maxLength="5"
+            minLength={1}
+            maxLength={5}
             onChange={(e) => {
               setContent({ id: newID(), title: e.target.value });
             }}
