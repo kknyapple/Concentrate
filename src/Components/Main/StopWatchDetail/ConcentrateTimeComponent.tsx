@@ -4,12 +4,12 @@ import { useRecoilState } from "recoil";
 
 import {
   pauseClicked,
-  startRTime,
-  pauseRTime,
+  startCTime,
+  pauseCTime,
 } from "../../../recoil/concentrate";
 import useStopWatch from "../../../Hooks/useStopWatch";
 
-const RestTime = styled.div`
+const ConcentrateTime = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,25 +25,25 @@ const Time = styled.div`
   height: 40px;
 `;
 
-const RestTimeComponent = () => {
+const ConcentrateTimeComponent = () => {
   const [pause, setPause] = useRecoilState(pauseClicked);
 
-  const [currentStartRTime, setCurrentStartRTime] = useRecoilState(startRTime);
-  const [currentPauseRTime, setCurrentPauseRTime] = useRecoilState(pauseRTime);
+  const [currentStartCTime, setCurrentStartCTime] =
+    useRecoilState<number>(startCTime);
 
-  const [hour, minute, second] = useStopWatch(pause, currentStartRTime);
+  const [hour, minute, second] = useStopWatch(!pause, currentStartCTime);
 
   return (
-    <RestTime>
-      <Title>쉬는시간</Title>
+    <ConcentrateTime>
+      <Title>집중시간</Title>
       <Time>
         {`${String(hour).padStart(2, "0")}:${String(minute).padStart(
           2,
           "0"
         )}:${String(second).padStart(2, "0")}`}
       </Time>
-    </RestTime>
+    </ConcentrateTime>
   );
 };
 
-export default RestTimeComponent;
+export default ConcentrateTimeComponent;

@@ -33,9 +33,9 @@ const Stop = styled.button`
 `;
 
 const StopWatchStopComponent = () => {
-  const [start, setStart] = useRecoilState(stopWatchStart);
-  const [pass, setPass] = useRecoilState(studyTimePass);
-  const [pause, setPause] = useRecoilState(pauseClicked);
+  const [start, setStart] = useRecoilState<boolean>(stopWatchStart);
+  const [pass, setPass] = useRecoilState<boolean>(studyTimePass);
+  const [pause, setPause] = useRecoilState<boolean>(pauseClicked);
   const hour = useRecoilValue(studyHour);
   const minute = useRecoilValue(studyMinute);
   const second = useRecoilValue(studySecond);
@@ -44,30 +44,36 @@ const StopWatchStopComponent = () => {
   const [today, setToday] = useRecoilState(todayDate);
   let time = Number(hour + minute / 60 + second / 3600).toFixed(3);
 
-  const [currentPauseTime, setCurrentPauseTime] = useRecoilState(pauseTime);
+  const [currentPauseTime, setCurrentPauseTime] =
+    useRecoilState<number>(pauseTime);
 
-  const [currentStartCTime, setCurrentStartCTime] = useRecoilState(startCTime);
-  const [currentPauseCTime, setCurrentPauseCTime] = useRecoilState(pauseCTime);
+  const [currentStartCTime, setCurrentStartCTime] =
+    useRecoilState<number>(startCTime);
+  const [currentPauseCTime, setCurrentPauseCTime] =
+    useRecoilState<number>(pauseCTime);
 
-  const [currentStartRTime, setCurrentStartRTime] = useRecoilState(startRTime);
-  const [currentPauseRTime, setCurrentPauseRTime] = useRecoilState(pauseRTime);
+  const [currentStartRTime, setCurrentStartRTime] =
+    useRecoilState<number>(startRTime);
+  const [currentPauseRTime, setCurrentPauseRTime] =
+    useRecoilState<number>(pauseRTime);
 
-  const changeCondition = (pass, start, pause) => {
+  const changeCondition = (pass: boolean, start: boolean, pause: boolean) => {
     setPass(pass);
     setStart(start);
     setPause(pause);
   };
 
   const changeLocalTime = () => {
-    localStorage.setItem("hour", hour);
-    localStorage.setItem("minute", minute);
-    localStorage.setItem("second", second);
+    localStorage.setItem("hour", String(hour));
+    localStorage.setItem("minute", String(minute));
+    localStorage.setItem("second", String(second));
   };
 
   const changeLocalKey = () => {
     const cleanTimeData = timeData.filter((data) => data.day !== today);
     let copy = [...cleanTimeData];
-    copy.push({ value: time, day: today });
+    const todayString = today ?? "";
+    copy.push({ value: time, day: todayString });
     setTimeData(copy);
     localStorage.setItem("key", JSON.stringify(copy));
   };
@@ -79,10 +85,10 @@ const StopWatchStopComponent = () => {
     changeLocalTime();
 
     setCurrentPauseTime(Date.now());
-    setCurrentPauseCTime(null);
-    setCurrentStartCTime(null);
-    setCurrentPauseRTime(null);
-    setCurrentStartRTime(null);
+    setCurrentPauseCTime(0);
+    setCurrentStartCTime(0);
+    setCurrentPauseRTime(0);
+    setCurrentStartRTime(0);
   };
 
   return (

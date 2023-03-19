@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-const useStopWatch = (condition, currentStartTime) => {
+const useStopWatch = (
+  condition: boolean,
+  currentStartTime: number
+): [number, number, number] => {
   const [hour, setHour] = useState(0);
   const [minute, setMinute] = useState(0);
   const [second, setSecond] = useState(0);

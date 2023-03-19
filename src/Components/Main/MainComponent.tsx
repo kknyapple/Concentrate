@@ -44,16 +44,19 @@ const MainComponent = () => {
   const pass = useRecoilValue(studyTimePass);
   //const timeoutId = useRecoilState(timeoutId);
 
-  const [hour, setHour] = useRecoilState(studyHour);
-  const [minute, setMinute] = useRecoilState(studyMinute);
-  const [second, setSecond] = useRecoilState(studySecond);
+  const [hour, setHour] = useRecoilState<number>(studyHour);
+  const [minute, setMinute] = useRecoilState<number>(studyMinute);
+  const [second, setSecond] = useRecoilState<number>(studySecond);
 
-  const [currentStartTime, setCurrentStartTime] = useRecoilState(startTime);
-  const [currentPauseTime, setCurrentPauseTime] = useRecoilState(pauseTime);
+  const [currentStartTime, setCurrentStartTime] =
+    useRecoilState<number>(startTime);
+  const [currentPauseTime, setCurrentPauseTime] =
+    useRecoilState<number>(pauseTime);
 
-  const [today, setToday] = useRecoilState(todayDate);
+  const [today, setToday] = useRecoilState<string | null>(todayDate);
   let time = Number(hour + minute / 60 + second / 3600).toFixed(3);
-  let [timeData, setTimeData] = useRecoilState(calendarData);
+  let [timeData, setTimeData] =
+    useRecoilState<Array<{ value: string; day: string }>>(calendarData);
 
   const dateObj = new Date();
   let year = dateObj.getFullYear();
@@ -61,7 +64,7 @@ const MainComponent = () => {
   let day = String(dateObj.getDate()).padStart(2, "0");
 
   const startTotalTime = () => {
-    const now = new Date(Date.now() - currentStartTime);
+    const now = new Date(Date.now() - (currentStartTime || 0));
 
     setSecond(now.getUTCSeconds());
     setMinute(now.getUTCMinutes());
@@ -69,15 +72,16 @@ const MainComponent = () => {
   };
 
   const changeLocalTime = () => {
-    localStorage.setItem("hour", hour);
-    localStorage.setItem("minute", minute);
-    localStorage.setItem("second", second);
+    localStorage.setItem("hour", String(hour));
+    localStorage.setItem("minute", String(minute));
+    localStorage.setItem("second", String(second));
   };
 
   const changeLocalKey = () => {
     const cleanTimeData = timeData.filter((data) => data.day !== today);
     let copy = [...cleanTimeData];
-    copy.push({ value: time, day: today });
+    const todayString = today ?? "";
+    copy.push({ value: time, day: todayString });
     setTimeData(copy);
     localStorage.setItem("key", JSON.stringify(copy));
   };
@@ -104,14 +108,14 @@ const MainComponent = () => {
   };
 
   const resetLocalTime = () => {
-    localStorage.setItem("hour", hour);
-    localStorage.setItem("minute", minute);
-    localStorage.setItem("second", second);
+    localStorage.setItem("hour", String(hour));
+    localStorage.setItem("minute", String(minute));
+    localStorage.setItem("second", String(second));
   };
 
   const resetCurrentTime = () => {
-    setCurrentStartTime(null);
-    setCurrentPauseTime(null);
+    setCurrentStartTime(0);
+    setCurrentPauseTime(0);
   };
 
   const reset = () => {
@@ -124,8 +128,10 @@ const MainComponent = () => {
     setToday(`${year}-${month}-${day}`);
 
     if (localStorage.getItem("key")) {
-      let length = JSON.parse(localStorage.getItem("key")).length;
-      let lastStudy = JSON.parse(localStorage.getItem("key"))[length - 1].day;
+      let length = JSON.parse(localStorage.getItem("key") as string).length;
+      let lastStudy = JSON.parse(localStorage.getItem("key") as string)[
+        length - 1
+      ].day;
       let today = `${year}-${month}-${day}`;
 
       let savedTime =

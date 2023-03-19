@@ -53,7 +53,7 @@ const StopWatchPauseComponent = () => {
   const [currentStartRTime, setCurrentStartRTime] = useRecoilState(startRTime);
   const [currentPauseRTime, setCurrentPauseRTime] = useRecoilState(pauseRTime);
 
-  const changeCondition = (pass, pause) => {
+  const changeCondition = (pass: boolean, pause: boolean) => {
     setPass(pass);
     setPause(pause);
   };
