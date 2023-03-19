@@ -11,7 +11,7 @@ const RecordBox = styled.div<{ height: string }>`
 `;
 
 const RecordComponent = () => {
-  let data = JSON.parse(localStorage.getItem("key"));
+  let data = JSON.parse(localStorage.getItem("key") as string);
   const now = new Date();
   const year = now.getFullYear();
 
