@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 
-const useSetTime = (condition, currentStartTime) => {
+const useStopWatch = (condition, currentStartTime) => {
   const [hour, setHour] = useState(0);
   const [minute, setMinute] = useState(0);
   const [second, setSecond] = useState(0);
 
-  const startConcentrateTime = () => {
+  const startTime = () => {
     const now = new Date(Date.now() - currentStartTime);
 
     setSecond(now.getUTCSeconds());
@@ -15,9 +15,9 @@ const useSetTime = (condition, currentStartTime) => {
 
   useEffect(() => {
     if (condition === true) {
-      startConcentrateTime();
+      startTime();
       let timerId = setTimeout(() => {
-        startConcentrateTime();
+        startTime();
       }, 1000);
 
       return () => clearTimeout(timerId);
@@ -27,4 +27,4 @@ const useSetTime = (condition, currentStartTime) => {
   return [hour, minute, second];
 };
 
-export default useSetTime;
+export default useStopWatch;

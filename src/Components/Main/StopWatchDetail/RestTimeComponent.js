@@ -1,5 +1,4 @@
 import React from "react";
-import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 
@@ -8,7 +7,7 @@ import {
   startRTime,
   pauseRTime,
 } from "../../../recoil/concentrate";
-import useSetTime from "../../../Hooks/useSetTime";
+import useStopWatch from "../../../Hooks/useStopWatch";
 
 const RestTime = styled.div`
   display: flex;
@@ -32,7 +31,7 @@ const RestTimeComponent = () => {
   const [currentStartRTime, setCurrentStartRTime] = useRecoilState(startRTime);
   const [currentPauseRTime, setCurrentPauseRTime] = useRecoilState(pauseRTime);
 
-  const [hour, minute, second] = useSetTime(pause, currentStartRTime);
+  const [hour, minute, second] = useStopWatch(pause, currentStartRTime);
 
   return (
     <RestTime>

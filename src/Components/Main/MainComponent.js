@@ -16,7 +16,7 @@ import {
 } from "../../recoil/concentrate";
 import StopWatchDetailComponent from "./StopWatchDetail/StopWatchDetailComponent";
 import StopWatchComponent from "./StopWatch/StopWatchComponent";
-import RecordComponent from "./RecordComponent";
+import RecordComponent from "./Record/RecordComponent";
 import MemoComponent from "./Memo/MemoComponent";
 
 const Main = styled.main`

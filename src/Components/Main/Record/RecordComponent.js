@@ -28,11 +28,12 @@ const RecordComponent = () => {
             "#FFA1CA",
             "#C72048",
             "#A72948",
+            "#A72948",
             "#372948",
             "#372948",
           ]}
           minValue={0}
-          maxValue={12}
+          maxValue={10}
           margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
           yearSpacing={35}
           yearLegendPosition="after"
