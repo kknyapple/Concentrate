@@ -1,7 +1,6 @@
 import React from "react";
-import { useState } from "react";
 import styled from "styled-components";
-import { useRecoilValue, useRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 
 import { studyMemo } from "../../../recoil/concentrate";
 
@@ -21,9 +20,13 @@ const MemoItem = styled.div`
   cursor: pointer;
 `;
 
-const MemoItemComponent = (props) => {
-  const { memo } = props;
-  const [memoList, setMemoList] = useRecoilState(studyMemo);
+interface Memo {
+  id: string;
+  title: string;
+}
+
+const MemoItemComponent = ({ memo }: { memo: Memo }) => {
+  const [memoList, setMemoList] = useRecoilState<Memo[]>(studyMemo);
 
   return (
     <React.Fragment>

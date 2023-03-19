@@ -64,9 +64,14 @@ const MemoInputButton = styled.button`
   cursor: pointer;
 `;
 
+interface Memo {
+  id: string;
+  title: string;
+}
+
 const MemoComponent = () => {
   const [memoList, setMemoList] = useRecoilState(studyMemo);
-  const [content, setContent] = useState(null);
+  const [content, setContent] = useState<Memo | null>(null);
   const [add, setAdd] = useState(false);
 
   let newID = function () {
