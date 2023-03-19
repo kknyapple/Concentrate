@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { ResponsiveCalendar } from "@nivo/calendar";
 
-const RecordBox = styled.div`
+const RecordBox = styled.div<{ height: string }>`
   color: black;
   border-radius: 8px;
   background-color: whitesmoke;
