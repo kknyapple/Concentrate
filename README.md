@@ -9,18 +9,21 @@
 - 간단한 메모 작성
 - 총 공부 시간 기록
 
-[3. Issue](#issue)
-- 새로고침 후에도 총 시간 #1
+[3. Issues](#issues)
+- 새로고침 후에도 총 시간 저장 #1
 - 스톱워치 시간이 느리게 가는 현상 #7
-- useSetTime custom hook #12
 
-## ✨프로젝트 소개
+## 프로젝트 소개
 
 > 공부 시간 측정을 위한 스톱워치
 
 하루 단위로 총 공부 시간을 측정해줍니다. 캘린더에 날짜와 함께 공부 시간 정도에 따른 색깔과 공부 시간을 표시해 줍니다.
+  
+  <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"> <img src="https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"/> <img src="https://img.shields.io/badge/styled components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white"/> <img src="https://user-images.githubusercontent.com/72698829/226164770-4da7ea6c-995a-49fe-94af-497195fdd645.png"/>
 
-## 📄사용 예제
+
+
+## 사용 예제
 
 ### 1️. 공부 시간 측정
 
@@ -42,7 +45,7 @@
 ![시간기록](https://user-images.githubusercontent.com/72698829/225727490-b5ae8a48-78fc-48b9-ac17-d5b52389d762.gif)
 시간 측정 화면에서 정지 버튼을 누르면 자동으로 시간이 기록됩니다. 시간 정도에 따른 색깔과 소수 3째자리까지 표시된 시간을 캘린더에 표시해 줍니다.
 
-## Issue
+## Issues
 
 ### 1. 새로고침 후 총 시간 누적하기 (11/29)
 
@@ -318,3 +321,7 @@
 ### 13. 연도가 바뀌면 동적으로 차트 변화(3/16)
 
 - height에 props로 값 전달
+
+### 14. typescript로 변경(3/19)
+
+- 타입 명시
