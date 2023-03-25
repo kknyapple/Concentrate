@@ -12,7 +12,7 @@ const StopWatchDetailBox = styled.div`
   align-items: center;
   background-color: #6b728e;
   border-radius: 8px;
-  height: 200px;
+  height: 140px;
   margin-top: 10px;
   margin-bottom: 10px;
   width: 400px;
@@ -20,8 +20,7 @@ const StopWatchDetailBox = styled.div`
 
 const StopWatchTime = styled.div`
   display: flex;
-  height: 80px;
-  padding-bottom: 15px;
+  height: 140px;
 `;
 
 const StopWatchDetailComponent = () => {

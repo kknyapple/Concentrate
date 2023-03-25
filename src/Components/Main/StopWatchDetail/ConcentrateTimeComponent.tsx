@@ -12,15 +12,22 @@ const ConcentrateTime = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   padding-left: 40px;
   padding-right: 40px;
-  height: 100px;
+  height: 140px;
 `;
 
 const Title = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 40px;
 `;
 const Time = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 40px;
 `;
 
