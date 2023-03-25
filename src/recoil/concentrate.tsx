@@ -80,17 +80,7 @@ export const concentrateTimeState = atom({
   default: { start: 0, pause: 0 },
 });
 
-export const startRTime = atom<number>({
-  key: "startRTime",
-  default: 0,
-});
-
-export const pauseRTime = atom<number>({
-  key: "pauseRTime",
-  default: 0,
-});
-
-export const stopRTime = atom<number>({
-  key: "stopRTime",
-  default: 0,
+export const resetTimeState = atom({
+  key: "resetTimeState",
+  default: { start: 0, pause: 0 },
 });
