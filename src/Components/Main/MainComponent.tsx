@@ -145,7 +145,8 @@ const MainComponent = () => {
         )}:${String(second).padStart(2, "0")}`}
       </TotalTime>
       <MemoComponent />
-      {start === true ? <StopWatchDetailComponent /> : <StopWatchComponent />}
+      <StopWatchComponent />
+      {start === true ? <StopWatchDetailComponent /> : null}
       <RecordComponent />
     </Main>
   );

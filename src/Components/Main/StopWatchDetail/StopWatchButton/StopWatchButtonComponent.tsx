@@ -8,6 +8,9 @@ const StopWatchButtonBox = styled.div`
   display: flex;
   cursor: pointer;
   height: 50px;
+
+  margin-left: 10px;
+  margin-right: 20px;
 `;
 
 const StopWatchButtonComponent = () => {

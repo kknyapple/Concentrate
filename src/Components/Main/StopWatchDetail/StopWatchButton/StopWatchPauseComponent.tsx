@@ -86,9 +86,9 @@ const StopWatchPauseComponent = () => {
   return (
     <React.Fragment>
       {pause == false ? (
-        <Pause onClick={pauseOnClickHandler}>●</Pause>
+        <Pause onClick={pauseOnClickHandler}>쉬기</Pause>
       ) : (
-        <Continue onClick={continueOnClickHandler}>▶</Continue>
+        <Continue onClick={continueOnClickHandler}>계속</Continue>
       )}
     </React.Fragment>
   );

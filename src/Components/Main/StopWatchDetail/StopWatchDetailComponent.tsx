@@ -31,7 +31,6 @@ const StopWatchDetailComponent = () => {
         <RestTimeComponent />
         <ConcentrateTimeComponent />
       </StopWatchTime>
-      <StopWatchButtonComponent />
     </StopWatchDetailBox>
   );
 };

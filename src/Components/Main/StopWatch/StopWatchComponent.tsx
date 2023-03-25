@@ -8,6 +8,7 @@ import {
   concentrateTimeState,
   timeState,
 } from "../../../recoil/concentrate";
+import StopWatchButtonComponent from "../StopWatchDetail/StopWatchButton/StopWatchButtonComponent";
 
 const StopWatchBox = styled.div`
   display: flex;
@@ -32,12 +33,11 @@ const StopWatchButton = styled.button`
   background-color: #474e68;
   color: whitesmoke;
   margin-left: 10px;
-  margin-right: 10px;
+  margin-right: 30px;
   border-radius: 50%;
   font-size: 18px;
   height: 50px;
-  width: 50px;
-  margin-right: 30px;
+  // width: 50px;
   cursor: pointer;
 `;
 
@@ -74,16 +74,20 @@ const StopWatchComponent = () => {
   return (
     <StopWatchBox>
       <StopWatchTitle>집중하기</StopWatchTitle>
-      <StopWatchButton
-        onClick={() => {
-          setStart(true);
-          setPass(true);
-          changeStartTime();
-          changeStartCTime();
-        }}
-      >
-        시작
-      </StopWatchButton>
+      {start === true ? (
+        <StopWatchButtonComponent />
+      ) : (
+        <StopWatchButton
+          onClick={() => {
+            setStart(true);
+            setPass(true);
+            changeStartTime();
+            changeStartCTime();
+          }}
+        >
+          시작
+        </StopWatchButton>
+      )}
     </StopWatchBox>
   );
 };

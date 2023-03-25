@@ -80,7 +80,13 @@ const StopWatchStopComponent = () => {
   };
 
   return (
-    <>{pass ? <Stop onClick={stopOnClickHandler}>■</Stop> : <Stop>■</Stop>}</>
+    <React.Fragment>
+      {pass ? (
+        <Stop onClick={stopOnClickHandler}>기록</Stop>
+      ) : (
+        <Stop>기록</Stop>
+      )}
+    </React.Fragment>
   );
 };
 
