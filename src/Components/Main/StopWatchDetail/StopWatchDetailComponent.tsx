@@ -14,7 +14,7 @@ const StopWatchDetailBox = styled.div`
   border-radius: 8px;
   height: 200px;
   margin-top: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   width: 400px;
 `;
 

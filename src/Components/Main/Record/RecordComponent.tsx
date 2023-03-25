@@ -8,6 +8,7 @@ const RecordBox = styled.div<{ height: string }>`
   background-color: whitesmoke;
   width: 400px;
   height: ${(props) => props.height};
+  margin-top: 10px;
 `;
 
 const RecordComponent = () => {
