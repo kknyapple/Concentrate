@@ -9,10 +9,9 @@ import {
   studyHour,
   studyMinute,
   studySecond,
-  startTime,
-  pauseTime,
   todayDate,
   calendarData,
+  timeState,
 } from "../../recoil/concentrate";
 import StopWatchDetailComponent from "./StopWatchDetail/StopWatchDetailComponent";
 import StopWatchComponent from "./StopWatch/StopWatchComponent";
@@ -42,19 +41,15 @@ const Time = styled.p``;
 const MainComponent = () => {
   const start = useRecoilValue(stopWatchStart);
   const pass = useRecoilValue(studyTimePass);
-  //const timeoutId = useRecoilState(timeoutId);
 
   const [hour, setHour] = useRecoilState<number>(studyHour);
   const [minute, setMinute] = useRecoilState<number>(studyMinute);
   const [second, setSecond] = useRecoilState<number>(studySecond);
 
-  const [currentStartTime, setCurrentStartTime] =
-    useRecoilState<number>(startTime);
-  const [currentPauseTime, setCurrentPauseTime] =
-    useRecoilState<number>(pauseTime);
+  const [time, setTime] = useRecoilState(timeState);
 
   const [today, setToday] = useRecoilState<string | null>(todayDate);
-  let time = Number(hour + minute / 60 + second / 3600).toFixed(3);
+  let convertTime = Number(hour + minute / 60 + second / 3600).toFixed(3);
   let [timeData, setTimeData] =
     useRecoilState<Array<{ value: string; day: string }>>(calendarData);
 
@@ -64,7 +59,7 @@ const MainComponent = () => {
   let day = String(dateObj.getDate()).padStart(2, "0");
 
   const startTotalTime = () => {
-    const now = new Date(Date.now() - (currentStartTime || 0));
+    const now = new Date(Date.now() - (time.start || 0));
 
     setSecond(now.getUTCSeconds());
     setMinute(now.getUTCMinutes());
@@ -81,7 +76,7 @@ const MainComponent = () => {
     const cleanTimeData = timeData.filter((data) => data.day !== today);
     let copy = [...cleanTimeData];
     const todayString = today ?? "";
-    copy.push({ value: time, day: todayString });
+    copy.push({ value: convertTime, day: todayString });
     setTimeData(copy);
     localStorage.setItem("key", JSON.stringify(copy));
   };
@@ -114,8 +109,7 @@ const MainComponent = () => {
   };
 
   const resetCurrentTime = () => {
-    setCurrentStartTime(0);
-    setCurrentPauseTime(0);
+    setTime({ start: 0, pause: 0 });
   };
 
   const reset = () => {
@@ -133,14 +127,12 @@ const MainComponent = () => {
         length - 1
       ].day;
       let today = `${year}-${month}-${day}`;
-
       let savedTime =
-        currentStartTime -
-        second * 1000 -
-        minute * 1000 * 60 -
-        hour * 1000 * 60 * 60;
+        time.start - second * 1000 - minute * 1000 * 60 - hour * 1000 * 60 * 60;
 
-      lastStudy === today ? setCurrentStartTime(savedTime) : reset();
+      lastStudy === today
+        ? setTime({ start: savedTime, pause: time.pause })
+        : reset();
     }
   }, []);
 

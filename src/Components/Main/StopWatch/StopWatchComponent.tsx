@@ -3,11 +3,10 @@ import styled from "styled-components";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import {
-  startTime,
   stopWatchStart,
   studyTimePass,
-  pauseTime,
   concentrateTimeState,
+  timeState,
 } from "../../../recoil/concentrate";
 
 const StopWatchBox = styled.div`
@@ -46,17 +45,18 @@ const StopWatchComponent = () => {
   const [start, setStart] = useRecoilState(stopWatchStart);
   const [pass, setPass] = useRecoilState(studyTimePass);
 
-  const [currentStartTime, setCurrentStartTime] = useRecoilState(startTime);
-  const [currentPauseTime, setCurrentPauseTime] = useRecoilState(pauseTime);
-
+  const [time, setTime] = useRecoilState(timeState);
   const [concentrateTime, setConcentrateTime] =
     useRecoilState(concentrateTimeState);
 
   const changeStartTime = () => {
-    if (currentStartTime === null) {
-      setCurrentStartTime(Date.now());
+    if (time.start === null) {
+      setTime({ start: Date.now(), pause: time.pause });
     } else {
-      setCurrentStartTime(currentStartTime + Date.now() - currentPauseTime);
+      setTime({
+        start: time.start + Date.now() - time.pause,
+        pause: time.pause,
+      });
     }
   };
 

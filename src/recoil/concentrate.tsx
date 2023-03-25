@@ -55,19 +55,9 @@ export const calendarData = atom<CalendarEntry[]>({
   default: JSON.parse(localStorage.getItem("key") as string) ?? [],
 });
 
-export const startTime = atom<number>({
-  key: "startTime",
-  default: 0,
-});
-
-export const pauseTime = atom<number>({
-  key: "pauseTime",
-  default: 0,
-});
-
-export const stopTime = atom<number>({
-  key: "stopTime",
-  default: 0,
+export const timeState = atom({
+  key: "timeState",
+  default: { start: 0, pause: 0 },
 });
 
 export const todayDate = atom<string | null>({
