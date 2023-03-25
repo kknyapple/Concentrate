@@ -5,12 +5,11 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import {
   pauseClicked,
   studyTimePass,
-  pauseCTime,
-  startCTime,
   pauseTime,
   startTime,
   startRTime,
   pauseRTime,
+  concentrateTimeState,
 } from "../../../../recoil/concentrate";
 
 const Pause = styled.button`
@@ -47,8 +46,8 @@ const StopWatchPauseComponent = () => {
   const [currentStartTime, setCurrentStartTime] = useRecoilState(startTime);
   const [currentPauseTime, setCurrentPauseTime] = useRecoilState(pauseTime);
 
-  const [currentStartCTime, setCurrentStartCTime] = useRecoilState(startCTime);
-  const [currentPauseCTime, setCurrentPauseCTime] = useRecoilState(pauseCTime);
+  const [concentrateTime, setConcentrateTime] =
+    useRecoilState(concentrateTimeState);
 
   const [currentStartRTime, setCurrentStartRTime] = useRecoilState(startRTime);
   const [currentPauseRTime, setCurrentPauseRTime] = useRecoilState(pauseRTime);
@@ -71,7 +70,8 @@ const StopWatchPauseComponent = () => {
     changeCondition(false, true);
 
     setCurrentPauseTime(Date.now());
-    setCurrentPauseCTime(Date.now());
+
+    setConcentrateTime({ start: concentrateTime.start, pause: Date.now() });
 
     changeStartRTime();
   };
@@ -80,7 +80,10 @@ const StopWatchPauseComponent = () => {
     changeCondition(true, false);
 
     setCurrentStartTime(currentStartTime + Date.now() - currentPauseTime);
-    setCurrentStartCTime(currentStartCTime + Date.now() - currentPauseCTime);
+    setConcentrateTime({
+      start: concentrateTime.start + Date.now() - concentrateTime.pause,
+      pause: concentrateTime.pause,
+    });
 
     setCurrentPauseRTime(Date.now());
   };

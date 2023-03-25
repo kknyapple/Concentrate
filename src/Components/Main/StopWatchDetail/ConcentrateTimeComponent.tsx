@@ -4,8 +4,7 @@ import { useRecoilState } from "recoil";
 
 import {
   pauseClicked,
-  startCTime,
-  pauseCTime,
+  concentrateTimeState,
 } from "../../../recoil/concentrate";
 import useStopWatch from "../../../Hooks/useStopWatch";
 
@@ -28,10 +27,10 @@ const Time = styled.div`
 const ConcentrateTimeComponent = () => {
   const [pause, setPause] = useRecoilState(pauseClicked);
 
-  const [currentStartCTime, setCurrentStartCTime] =
-    useRecoilState<number>(startCTime);
+  const [concentrateTime, setConcentrateTime] =
+    useRecoilState(concentrateTimeState);
 
-  const [hour, minute, second] = useStopWatch(!pause, currentStartCTime);
+  const [hour, minute, second] = useStopWatch(!pause, concentrateTime.start);
 
   return (
     <ConcentrateTime>

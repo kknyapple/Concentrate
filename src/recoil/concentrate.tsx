@@ -75,19 +75,9 @@ export const todayDate = atom<string | null>({
   default: null,
 });
 
-export const startCTime = atom<number>({
-  key: "startCTime",
-  default: 0,
-});
-
-export const pauseCTime = atom<number>({
-  key: "pauseCTime",
-  default: 0,
-});
-
-export const stopCTime = atom<number>({
-  key: "stopCTime",
-  default: 0,
+export const concentrateTimeState = atom({
+  key: "concentrateTimeState",
+  default: { start: 0, pause: 0 },
 });
 
 export const startRTime = atom<number>({

@@ -7,8 +7,7 @@ import {
   stopWatchStart,
   studyTimePass,
   pauseTime,
-  startCTime,
-  pauseCTime,
+  concentrateTimeState,
 } from "../../../recoil/concentrate";
 
 const StopWatchBox = styled.div`
@@ -50,8 +49,8 @@ const StopWatchComponent = () => {
   const [currentStartTime, setCurrentStartTime] = useRecoilState(startTime);
   const [currentPauseTime, setCurrentPauseTime] = useRecoilState(pauseTime);
 
-  const [currentStartCTime, setCurrentStartCTime] = useRecoilState(startCTime);
-  const [currentPauseCTime, setCurrentPauseCTime] = useRecoilState(pauseCTime);
+  const [concentrateTime, setConcentrateTime] =
+    useRecoilState(concentrateTimeState);
 
   const changeStartTime = () => {
     if (currentStartTime === null) {
@@ -62,11 +61,13 @@ const StopWatchComponent = () => {
   };
 
   const changeStartCTime = () => {
-    if (currentStartCTime === null) {
-      setCurrentStartCTime(Date.now());
-      console.log(currentStartCTime);
+    if (concentrateTime.start === null) {
+      setConcentrateTime({ start: Date.now(), pause: concentrateTime.pause });
     } else {
-      setCurrentStartCTime(currentStartCTime + Date.now() - currentPauseCTime);
+      setConcentrateTime({
+        start: concentrateTime.start + Date.now() - concentrateTime.pause,
+        pause: concentrateTime.pause,
+      });
     }
   };
 

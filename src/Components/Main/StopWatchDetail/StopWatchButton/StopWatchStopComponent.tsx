@@ -12,10 +12,9 @@ import {
   studyTimePass,
   pauseTime,
   todayDate,
-  startCTime,
-  pauseCTime,
   startRTime,
   pauseRTime,
+  concentrateTimeState,
 } from "../../../../recoil/concentrate";
 
 const Stop = styled.button`
@@ -47,15 +46,13 @@ const StopWatchStopComponent = () => {
   const [currentPauseTime, setCurrentPauseTime] =
     useRecoilState<number>(pauseTime);
 
-  const [currentStartCTime, setCurrentStartCTime] =
-    useRecoilState<number>(startCTime);
-  const [currentPauseCTime, setCurrentPauseCTime] =
-    useRecoilState<number>(pauseCTime);
-
   const [currentStartRTime, setCurrentStartRTime] =
     useRecoilState<number>(startRTime);
   const [currentPauseRTime, setCurrentPauseRTime] =
     useRecoilState<number>(pauseRTime);
+
+  const [concentrateTime, setConcentrateTime] =
+    useRecoilState(concentrateTimeState);
 
   const changeCondition = (pass: boolean, start: boolean, pause: boolean) => {
     setPass(pass);
@@ -85,8 +82,7 @@ const StopWatchStopComponent = () => {
     changeLocalTime();
 
     setCurrentPauseTime(Date.now());
-    setCurrentPauseCTime(0);
-    setCurrentStartCTime(0);
+    setConcentrateTime({ start: 0, pause: 0 });
     setCurrentPauseRTime(0);
     setCurrentStartRTime(0);
   };
