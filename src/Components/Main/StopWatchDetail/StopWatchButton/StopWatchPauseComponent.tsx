@@ -98,8 +98,8 @@ const StopWatchPauseComponent = () => {
       {pause == false ? (
         <Pause onClick={pauseOnClickHandler}>
           <svg
-            width="14"
-            height="20"
+            width="10"
+            height="15"
             viewBox="0 0 14 20"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -113,8 +113,8 @@ const StopWatchPauseComponent = () => {
       ) : (
         <Continue onClick={continueOnClickHandler}>
           <svg
-            width="19"
-            height="20"
+            width="14"
+            height="15"
             viewBox="0 0 19 20"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
