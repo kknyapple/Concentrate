@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { useRecoilValue, useRecoilState } from "recoil";
 
 import {
-  stopWatchStart,
   studyTimePass,
   studyHour,
   studyMinute,
@@ -32,7 +31,7 @@ const TotalTimeComponent = () => {
   const [today, setToday] = useRecoilState<string | null>(todayDate);
 
   let convertTime = Number(hour + minute / 60 + second / 3600).toFixed(3);
-  let [timeData, setTimeData] =
+  const [timeData, setTimeData] =
     useRecoilState<Array<{ value: string; day: string }>>(calendarData);
 
   const dateObj = new Date();
@@ -40,7 +39,7 @@ const TotalTimeComponent = () => {
   let month = String(dateObj.getMonth() + 1).padStart(2, "0");
   let day = String(dateObj.getDate()).padStart(2, "0");
 
-  const startTotalTime = () => {
+  const updateStudyTime = () => {
     const now = new Date(Date.now() - (time.start || 0));
 
     const s = now.getUTCSeconds();
@@ -51,19 +50,24 @@ const TotalTimeComponent = () => {
     setMinute(m);
     setHour(h);
 
-    changeLocalTime(h, m, s);
+    saveStudyTimeToLocal(h, m, s);
   };
 
-  const changeLocalTime = (hour: number, minute: number, second: number) => {
+  const saveStudyTimeToLocal = (
+    hour: number,
+    minute: number,
+    second: number
+  ) => {
     localStorage.setItem("hour", String(hour));
     localStorage.setItem("minute", String(minute));
     localStorage.setItem("second", String(second));
   };
 
-  const changeLocalKey = () => {
+  const saveStudyDataToLocal = () => {
     const cleanTimeData = timeData.filter((data) => data.day !== today);
     let copy = [...cleanTimeData];
     const todayString = today ?? "";
+
     copy.push({ value: convertTime, day: todayString });
     setTimeData(copy);
     localStorage.setItem("key", JSON.stringify(copy));
@@ -71,11 +75,11 @@ const TotalTimeComponent = () => {
 
   useEffect(() => {
     if (pass) {
-      startTotalTime();
-      changeLocalKey();
+      updateStudyTime();
+      saveStudyDataToLocal();
       let timerId = setInterval(() => {
-        startTotalTime();
-        changeLocalKey();
+        updateStudyTime();
+        saveStudyDataToLocal();
       }, 1000);
 
       return () => clearInterval(timerId);
