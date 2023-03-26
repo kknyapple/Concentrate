@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { useRecoilState } from "recoil";
 
 import {
-  pauseClicked,
   concentrateTimeState,
+  studyTimePass,
 } from "../../../recoil/concentrate";
 import useStopWatch from "../../../Hooks/useStopWatch";
 
@@ -23,21 +23,23 @@ const Title = styled.div`
   align-items: center;
   justify-content: center;
   height: 40px;
+  font-size: 18px;
 `;
 const Time = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   height: 40px;
+  font-size: 18px;
 `;
 
 const ConcentrateTimeComponent = () => {
-  const [pause, setPause] = useRecoilState(pauseClicked);
+  const [pass, setPass] = useRecoilState(studyTimePass);
 
   const [concentrateTime, setConcentrateTime] =
     useRecoilState(concentrateTimeState);
 
-  const [hour, minute, second] = useStopWatch(!pause, concentrateTime.start);
+  const [hour, minute, second] = useStopWatch(pass, concentrateTime.start);
 
   return (
     <ConcentrateTime>

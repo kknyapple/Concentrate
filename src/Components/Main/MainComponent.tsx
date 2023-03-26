@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
-import { stopWatchStart } from "../../recoil/concentrate";
+import { stopWatchStart, subjectDataState } from "../../recoil/concentrate";
 import StopWatchDetailComponent from "./StopWatchDetail/StopWatchDetailComponent";
 import StopWatchComponent from "./StopWatch/StopWatchComponent";
 import RecordComponent from "./Record/RecordComponent";
@@ -19,14 +19,20 @@ const Main = styled.main`
 `;
 
 const MainComponent = () => {
-  const start = useRecoilValue(stopWatchStart);
-
+  const [subjectData, setSubjectData] = useRecoilState(subjectDataState);
   return (
     <Main>
       <TotalTimeComponent />
       <MemoComponent />
-      <StopWatchComponent />
-      {start === true ? <StopWatchDetailComponent /> : null}
+      {subjectData.map((subject) => {
+        return (
+          <StopWatchComponent
+            key={subject.name}
+            subject={subject}
+            setSubjectData={setSubjectData}
+          />
+        );
+      })}
       <RecordComponent />
     </Main>
   );

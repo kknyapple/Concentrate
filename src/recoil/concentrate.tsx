@@ -55,6 +55,18 @@ export const calendarData = atom<CalendarEntry[]>({
   default: JSON.parse(localStorage.getItem("key") as string) ?? [],
 });
 
+export const subjectDataState = atom({
+  key: "subjectDataState",
+  default: JSON.parse(localStorage.getItem("subject") as string) ?? [
+    { name: "집중하기", savedTime: 0 },
+  ],
+});
+
+export const selectedState = atom({
+  key: "selectedState",
+  default: "",
+});
+
 export const timeState = atom({
   key: "timeState",
   default: { start: 0, pause: 0 },
