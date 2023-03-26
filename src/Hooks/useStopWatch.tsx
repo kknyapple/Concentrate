@@ -19,13 +19,13 @@ const useStopWatch = (
   useEffect(() => {
     if (condition === true) {
       startTime();
-      let timerId = setTimeout(() => {
+      let timerId = setInterval(() => {
         startTime();
       }, 1000);
 
-      return () => clearTimeout(timerId);
+      return () => clearInterval(timerId);
     }
-  }, [condition, second]);
+  }, [condition]);
 
   return [hour, minute, second];
 };

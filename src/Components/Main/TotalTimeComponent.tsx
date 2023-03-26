@@ -68,15 +68,15 @@ const TotalTimeComponent = () => {
       startTotalTime();
       changeLocalKey();
       changeLocalTime();
-      let timerId = setTimeout(() => {
+      let timerId = setInterval(() => {
         startTotalTime();
         changeLocalKey();
         changeLocalTime();
       }, 1000);
 
-      return () => clearTimeout(timerId);
+      return () => clearInterval(timerId);
     }
-  }, [pass, second]);
+  }, [pass]);
 
   const resetStudyTime = () => {
     setHour(0);
