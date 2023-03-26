@@ -43,12 +43,18 @@ const TotalTimeComponent = () => {
   const startTotalTime = () => {
     const now = new Date(Date.now() - (time.start || 0));
 
-    setSecond(now.getUTCSeconds());
-    setMinute(now.getUTCMinutes());
-    setHour(now.getUTCHours());
+    const s = now.getUTCSeconds();
+    const m = now.getUTCMinutes();
+    const h = now.getUTCHours();
+
+    setSecond(s);
+    setMinute(m);
+    setHour(h);
+
+    changeLocalTime(h, m, s);
   };
 
-  const changeLocalTime = () => {
+  const changeLocalTime = (hour: number, minute: number, second: number) => {
     localStorage.setItem("hour", String(hour));
     localStorage.setItem("minute", String(minute));
     localStorage.setItem("second", String(second));
@@ -64,14 +70,12 @@ const TotalTimeComponent = () => {
   };
 
   useEffect(() => {
-    if (pass === true) {
+    if (pass) {
       startTotalTime();
       changeLocalKey();
-      changeLocalTime();
       let timerId = setInterval(() => {
         startTotalTime();
         changeLocalKey();
-        changeLocalTime();
       }, 1000);
 
       return () => clearInterval(timerId);
