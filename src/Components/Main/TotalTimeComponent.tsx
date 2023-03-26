@@ -12,6 +12,12 @@ import {
   calendarData,
   timeState,
 } from "../../recoil/concentrate";
+import {
+  filterTimeData,
+  saveStudyDataToLocal,
+  updateStudyData,
+} from "utils/saveStudyDataToLocal";
+import saveStudyTimeToLocal from "utils/saveStudyTimeToLocal";
 
 const TotalTime = styled.div`
   display: flex;
@@ -28,7 +34,7 @@ const TotalTimeComponent = () => {
   const [minute, setMinute] = useRecoilState<number>(studyMinute);
   const [second, setSecond] = useRecoilState<number>(studySecond);
   const [time, setTime] = useRecoilState(timeState);
-  const [today, setToday] = useRecoilState<string | null>(todayDate);
+  const [today, setToday] = useRecoilState<string>(todayDate);
 
   let convertTime = Number(hour + minute / 60 + second / 3600).toFixed(3);
   const [timeData, setTimeData] =
@@ -53,33 +59,27 @@ const TotalTimeComponent = () => {
     saveStudyTimeToLocal(h, m, s);
   };
 
-  const saveStudyTimeToLocal = (
-    hour: number,
-    minute: number,
-    second: number
-  ) => {
-    localStorage.setItem("hour", String(hour));
-    localStorage.setItem("minute", String(minute));
-    localStorage.setItem("second", String(second));
-  };
+  interface StudyData {
+    value: string;
+    day: string;
+  }
 
-  const saveStudyDataToLocal = () => {
-    const cleanTimeData = timeData.filter((data) => data.day !== today);
-    let copy = [...cleanTimeData];
-    const todayString = today ?? "";
-
-    copy.push({ value: convertTime, day: todayString });
-    setTimeData(copy);
-    localStorage.setItem("key", JSON.stringify(copy));
-  };
+  let cleanTimeData: StudyData[] = filterTimeData(timeData, today);
+  let updatedStudyData: StudyData[] = updateStudyData(
+    cleanTimeData,
+    convertTime,
+    today
+  );
 
   useEffect(() => {
     if (pass) {
       updateStudyTime();
-      saveStudyDataToLocal();
+      saveStudyDataToLocal(updatedStudyData);
+      setTimeData(updatedStudyData);
       let timerId = setInterval(() => {
         updateStudyTime();
-        saveStudyDataToLocal();
+        saveStudyDataToLocal(updatedStudyData);
+        setTimeData(updatedStudyData);
       }, 1000);
 
       return () => clearInterval(timerId);

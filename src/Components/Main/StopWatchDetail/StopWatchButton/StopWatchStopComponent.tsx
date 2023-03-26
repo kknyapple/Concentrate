@@ -15,6 +15,12 @@ import {
   resetTimeState,
   timeState,
 } from "../../../../recoil/concentrate";
+import saveStudyTimeToLocal from "utils/saveStudyTimeToLocal";
+import {
+  filterTimeData,
+  saveStudyDataToLocal,
+  updateStudyData,
+} from "utils/saveStudyDataToLocal";
 
 const Stop = styled.button`
   border: 0;
@@ -77,26 +83,23 @@ const StopWatchStopComponent = () => {
     setPause(pause);
   };
 
-  const changeLocalTime = () => {
-    localStorage.setItem("hour", String(hour));
-    localStorage.setItem("minute", String(minute));
-    localStorage.setItem("second", String(second));
-  };
+  interface StudyData {
+    value: string;
+    day: string;
+  }
 
-  const changeLocalKey = () => {
-    const cleanTimeData = timeData.filter((data) => data.day !== today);
-    let copy = [...cleanTimeData];
-    const todayString = today ?? "";
-    copy.push({ value: convertTime, day: todayString });
-    setTimeData(copy);
-    localStorage.setItem("key", JSON.stringify(copy));
-  };
+  let cleanTimeData: StudyData[] = filterTimeData(timeData, today);
+  let updatedStudyData: StudyData[] = updateStudyData(
+    cleanTimeData,
+    convertTime,
+    today
+  );
 
   const stopOnClickHandler = () => {
     changeCondition(false, false, false);
 
-    changeLocalKey();
-    changeLocalTime();
+    saveStudyDataToLocal(updatedStudyData);
+    saveStudyTimeToLocal(hour, minute, second);
 
     setTime({ start: time.start, pause: Date.now() });
     setConcentrateTime({ start: 0, pause: 0 });

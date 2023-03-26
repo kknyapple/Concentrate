@@ -60,9 +60,9 @@ export const timeState = atom({
   default: { start: 0, pause: 0 },
 });
 
-export const todayDate = atom<string | null>({
+export const todayDate = atom<string>({
   key: "todayDate",
-  default: null,
+  default: "",
 });
 
 export const concentrateTimeState = atom({
