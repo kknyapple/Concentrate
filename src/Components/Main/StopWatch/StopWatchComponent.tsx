@@ -10,6 +10,8 @@ import {
   pauseClicked,
   selectedState,
   subjectDataState,
+  todayDate,
+  restTimeState,
 } from "../../../recoil/concentrate";
 import StopWatchButtonComponent from "../StopWatchDetail/StopWatchButton/StopWatchButtonComponent";
 import useStopWatch from "Hooks/useStopWatch";
@@ -91,30 +93,100 @@ const StopWatchComponent = (props) => {
 
   const [start, setStart] = useRecoilState(stopWatchStart);
   const [pass, setPass] = useRecoilState(studyTimePass);
+  const [pause, setPause] = useRecoilState(pauseClicked);
 
   const [time, setTime] = useRecoilState(timeState);
   const [concentrateTime, setConcentrateTime] =
     useRecoilState(concentrateTimeState);
+  const [restTime, setRestTime] = useRecoilState(restTimeState);
 
   const [hour, minute, second] = useStopWatch(
     pass && selected === subject.name,
     concentrateTime.start - subject.savedTime
   );
 
+  const [currentTime, setCurrentTime] = useState(subject.savedTime);
+  const [first, setFirst] = useState(subject.savedTime);
+
   useEffect(() => {
-    if (subject.name === selected) {
-      const cleanSubject = subjectData.filter(
-        (item) => item.name !== subject.name
-      );
-      setSubjectData([
-        {
-          name: subject.name,
-          savedTime: second * 1000 + minute * 1000 * 60 + hour * 1000 * 60 * 60,
-        },
-        ...cleanSubject,
-      ]);
-    }
+    setCurrentTime(
+      Date.now() - concentrateTime.start + 1000 + subject.savedTime
+    ); // 왜 +1을 해야할까?
+    setFirst(subject.savedTime);
   }, [start]);
+
+  useEffect(() => {
+    if (subject.name === selected && start) {
+      setCurrentTime(Date.now() - concentrateTime.start + first + 1000); // 왜 +1을 해야할까?
+
+      const index = subjectData.findIndex((item) => item.name === subject.name);
+      const updatedSubject = {
+        ...subjectData[index],
+        savedTime: currentTime,
+      };
+      const newSubjectData = [
+        ...subjectData.slice(0, index),
+        updatedSubject,
+        ...subjectData.slice(index + 1),
+      ];
+      setSubjectData(newSubjectData);
+      localStorage.setItem("subject", JSON.stringify(newSubjectData));
+      console.log(currentTime);
+    }
+  }, [second]);
+
+  /* useEffect(() => {
+    let intervalId = null;
+
+    if (subject.name === selected && start) {
+      intervalId = setInterval(() => {
+        let cleanSubject = subjectData.filter(
+          (item) => item.name !== subject.name
+        );
+        setSubjectData([
+          {
+            name: subject.name,
+            savedTime: currentTime,
+          },
+          ...cleanSubject,
+        ]);
+        // console.log(currentTime);
+      }, 1000);
+    }
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [start]);*/
+
+  /* const [today, setToday] = useRecoilState<string>(todayDate);
+  const dateObj = new Date();
+  let year = dateObj.getFullYear();
+  let month = String(dateObj.getMonth() + 1).padStart(2, "0");
+  let day = String(dateObj.getDate()).padStart(2, "0");
+
+  useEffect(() => {
+    setToday(`${year}-${month}-${day}`);
+
+    if (localStorage.getItem("subject")) {
+      let length = JSON.parse(localStorage.getItem("key") as string).length;
+      let lastStudy = JSON.parse(localStorage.getItem("key") as string)[
+        length - 1
+      ].day;
+      let today = `${year}-${month}-${day}`;
+      // let savedTime = time.start - second * 1000 - minute * 1000 * 60 - hour * 1000 * 60 * 60;
+      if (lastStudy === today) {
+        setSubjectData([
+          {
+            name: subject.name,
+            savedTime: subject.savedTime,
+          },
+        ]);
+      }
+
+      // ? setTime({ start: savedTime, pause: time.pause }) : reset();
+    }
+  }, []); */
 
   const changeStartTime = () => {
     if (time.start === null) {
@@ -144,10 +216,16 @@ const StopWatchComponent = (props) => {
         <StopWatchTitleBox>
           <StopWatchTitle>{subject.name}</StopWatchTitle>
           <StopWatchTime>
-            {`${String(hour).padStart(2, "0")}:${String(minute).padStart(
-              2,
-              "0"
-            )}:${String(second).padStart(2, "0")}`}
+            {`${String(
+              // hour
+              parseInt(subject.savedTime / 1000 / 3600)
+            ).padStart(2, "0")}:${String(
+              // minute
+              parseInt(((subject.savedTime / 1000) % 3600) / 60)
+            ).padStart(2, "0")}:${String(
+              parseInt((subject.savedTime / 1000) % 60)
+              //second
+            ).padStart(2, "0")}`}
           </StopWatchTime>
         </StopWatchTitleBox>
 
