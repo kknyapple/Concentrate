@@ -131,7 +131,7 @@ const StopWatchComponent = (props) => {
       ];
       setSubjectData(newSubjectData);
       localStorage.setItem("subject", JSON.stringify(newSubjectData));
-      console.log(currentTime);
+      // console.log(currentTime);
     }
   }, [second]);
 
@@ -159,7 +159,22 @@ const StopWatchComponent = (props) => {
     };
   }, [start]);*/
 
-  /* const [today, setToday] = useRecoilState<string>(todayDate);
+  const reset = () => {
+    const index = subjectData.findIndex((item) => item.name === subject.name);
+    const updatedSubject = {
+      ...subjectData[index],
+      savedTime: 0,
+    };
+    const newSubjectData = [
+      ...subjectData.slice(0, index),
+      updatedSubject,
+      ...subjectData.slice(index + 1),
+    ];
+    setSubjectData(newSubjectData);
+    localStorage.setItem("subject", JSON.stringify(newSubjectData));
+  };
+
+  const [today, setToday] = useRecoilState<string>(todayDate);
   const dateObj = new Date();
   let year = dateObj.getFullYear();
   let month = String(dateObj.getMonth() + 1).padStart(2, "0");
@@ -174,19 +189,11 @@ const StopWatchComponent = (props) => {
         length - 1
       ].day;
       let today = `${year}-${month}-${day}`;
-      // let savedTime = time.start - second * 1000 - minute * 1000 * 60 - hour * 1000 * 60 * 60;
-      if (lastStudy === today) {
-        setSubjectData([
-          {
-            name: subject.name,
-            savedTime: subject.savedTime,
-          },
-        ]);
+      if (lastStudy !== today) {
+        reset();
       }
-
-      // ? setTime({ start: savedTime, pause: time.pause }) : reset();
     }
-  }, []); */
+  }, []);
 
   const changeStartTime = () => {
     if (time.start === null) {
