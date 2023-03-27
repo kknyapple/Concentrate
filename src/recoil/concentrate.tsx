@@ -82,7 +82,7 @@ export const concentrateTimeState = atom({
   default: { start: 0, pause: 0 },
 });
 
-export const resetTimeState = atom({
-  key: "resetTimeState",
+export const restTimeState = atom({
+  key: "restTimeState",
   default: { start: 0, pause: 0 },
 });

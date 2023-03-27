@@ -12,7 +12,7 @@ import {
   studyTimePass,
   todayDate,
   concentrateTimeState,
-  resetTimeState,
+  restTimeState,
   timeState,
 } from "../../../../recoil/concentrate";
 import saveStudyTimeToLocal from "utils/saveStudyTimeToLocal";
@@ -75,7 +75,7 @@ const StopWatchStopComponent = () => {
   const [time, setTime] = useRecoilState(timeState);
   const [concentrateTime, setConcentrateTime] =
     useRecoilState(concentrateTimeState);
-  const [resetTime, setResetTime] = useRecoilState(resetTimeState);
+  const [resetTime, setResetTime] = useRecoilState(restTimeState);
 
   const changeCondition = (pass: boolean, start: boolean, pause: boolean) => {
     setPass(pass);

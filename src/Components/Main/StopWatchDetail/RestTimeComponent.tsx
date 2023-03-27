@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 
-import { pauseClicked, resetTimeState } from "../../../recoil/concentrate";
+import { pauseClicked, restTimeState } from "../../../recoil/concentrate";
 import useStopWatch from "../../../Hooks/useStopWatch";
 
 const RestTime = styled.div`
@@ -33,7 +33,7 @@ const Time = styled.div`
 
 const RestTimeComponent = () => {
   const [pause, setPause] = useRecoilState(pauseClicked);
-  const [resetTime, setResetTime] = useRecoilState(resetTimeState);
+  const [resetTime, setResetTime] = useRecoilState(restTimeState);
   const [hour, minute, second] = useStopWatch(pause, resetTime.start);
 
   return (

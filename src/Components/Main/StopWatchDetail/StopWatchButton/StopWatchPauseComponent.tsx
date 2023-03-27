@@ -6,7 +6,7 @@ import {
   pauseClicked,
   studyTimePass,
   concentrateTimeState,
-  resetTimeState,
+  restTimeState,
   timeState,
 } from "../../../../recoil/concentrate";
 
@@ -54,7 +54,7 @@ const StopWatchPauseComponent = () => {
   const [time, setTime] = useRecoilState(timeState);
   const [concentrateTime, setConcentrateTime] =
     useRecoilState(concentrateTimeState);
-  const [resetTime, setResetTime] = useRecoilState(resetTimeState);
+  const [resetTime, setResetTime] = useRecoilState(restTimeState);
 
   const changeCondition = (pass: boolean, pause: boolean) => {
     setPass(pass);
