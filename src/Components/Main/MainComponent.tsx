@@ -23,7 +23,6 @@ const AddSubject = styled.div`
   color: whitesmoke;
   font-size: 14px;
   width: 400px;
-  cursor: pointer;
   margin-top: 10px;
   margin-bottom: 10px;
 `;
@@ -34,13 +33,15 @@ const Input = styled.div`
 `;
 
 const ShowMemoButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   border: 0;
   outline: 0;
   background-color: transparent;
   color: whitesmoke;
   border-radius: 50%;
-  font-size: 12px;
   height: 25px;
   width: 25px;
   cursor: pointer;
@@ -89,6 +90,17 @@ const MainComponent = () => {
             maxLength={10}
             placeholder="과목을 추가해주세요"
             value={content.name}
+            onKeyDown={(e) => {
+              if (e.keyCode === 13) {
+                if (content.name !== "") {
+                  let copy = [...subjectData];
+                  copy.push(content);
+                  localStorage.setItem("subject", JSON.stringify(copy));
+                  setSubjectData(copy);
+                  setContent({ name: "", savedTime: 0 });
+                }
+              }
+            }}
             onChange={(e) => {
               if (!start) {
                 setContent({ name: e.target.value, savedTime: 0 });
@@ -107,7 +119,18 @@ const MainComponent = () => {
               }
             }}
           >
-            +
+            <svg
+              width="11"
+              height="11"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+                fill="#F5F5F5"
+              />
+            </svg>
           </ShowMemoButton>
         </Input>
       </AddSubject>
