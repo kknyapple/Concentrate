@@ -14,7 +14,7 @@ import {
   concentrateTimeState,
   restTimeState,
   timeState,
-} from "../../../../recoil/concentrate";
+} from "../../../../../recoil/concentrate";
 import saveStudyTimeToLocal from "utils/saveStudyTimeToLocal";
 import {
   filterTimeData,

@@ -13,9 +13,9 @@ import {
   todayDate,
   restTimeState,
 } from "../../../recoil/concentrate";
-import StopWatchButtonComponent from "../StopWatchDetail/StopWatchButton/StopWatchButtonComponent";
+import StopWatchButtonComponent from "./StopWatchDetail/StopWatchButton/StopWatchButtonComponent";
 import useStopWatch from "Hooks/useStopWatch";
-import StopWatchDetailComponent from "../StopWatchDetail/StopWatchDetailComponent";
+import StopWatchDetailComponent from "./StopWatchDetail/StopWatchDetailComponent";
 
 const StopWatchBox = styled.div`
   position: relative;

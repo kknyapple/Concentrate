@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 
-import { pauseClicked, restTimeState } from "../../../recoil/concentrate";
-import useStopWatch from "../../../Hooks/useStopWatch";
+import { pauseClicked, restTimeState } from "../../../../recoil/concentrate";
+import useStopWatch from "../../../../Hooks/useStopWatch";
 
 const RestTime = styled.div`
   display: flex;

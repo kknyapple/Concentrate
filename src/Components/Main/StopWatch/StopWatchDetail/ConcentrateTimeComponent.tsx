@@ -5,8 +5,8 @@ import { useRecoilState } from "recoil";
 import {
   concentrateTimeState,
   studyTimePass,
-} from "../../../recoil/concentrate";
-import useStopWatch from "../../../Hooks/useStopWatch";
+} from "../../../../recoil/concentrate";
+import useStopWatch from "../../../../Hooks/useStopWatch";
 
 const ConcentrateTime = styled.div`
   display: flex;

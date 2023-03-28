@@ -9,7 +9,7 @@ import {
   restTimeState,
   timeState,
   stopWatchStart,
-} from "../../../../recoil/concentrate";
+} from "../../../../../recoil/concentrate";
 
 const Pause = styled.button`
   border: 0;
