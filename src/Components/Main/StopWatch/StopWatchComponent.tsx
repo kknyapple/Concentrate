@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useRecoilState } from "recoil";
+import { SetterOrUpdater, useRecoilState } from "recoil";
 
 import { stopWatchStart, selectedState } from "../../../recoil/concentrate";
 import StopWatchDetailComponent from "./StopWatchDetail/StopWatchDetailComponent";
@@ -39,10 +39,17 @@ const StopWatchTitleBox = styled.div`
   height: 80px;
 `;
 
-const StopWatchComponent = (props) => {
-  let subject = props.subject;
-  let setSubjectData = props.setSubjectData;
+interface Subject {
+  name: string;
+  savedTime: number;
+}
 
+interface Props {
+  subject: Subject;
+  setSubjectData: SetterOrUpdater<any>;
+}
+
+const StopWatchComponent: React.FC<Props> = ({ subject, setSubjectData }) => {
   const [selected, setSelect] = useRecoilState(selectedState);
   const [start, setStart] = useRecoilState(stopWatchStart);
 

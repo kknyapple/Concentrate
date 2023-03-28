@@ -16,6 +16,11 @@ const Main = styled.main`
   color: whitesmoke;
 `;
 
+interface Subject {
+  name: string;
+  savedTime: number;
+}
+
 const MainComponent = () => {
   const [subjectData, setSubjectData] = useRecoilState(subjectDataState);
 
@@ -23,7 +28,7 @@ const MainComponent = () => {
     <Main>
       <TotalTimeComponent />
       <AddSubjectComponent />
-      {subjectData.map((subject) => {
+      {subjectData.map((subject: Subject) => {
         return (
           <StopWatchComponent
             key={subject.name}

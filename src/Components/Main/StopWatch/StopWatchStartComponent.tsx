@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useRecoilState } from "recoil";
+import { SetterOrUpdater, useRecoilState } from "recoil";
 
 import {
   concentrateTimeState,
@@ -40,10 +40,20 @@ const IneffectiveButton = styled.button`
   cursor: pointer;
 `;
 
-const StopWatchStartComponents = (props) => {
-  let subject = props.subject;
-  let setSubjectData = props.setSubjectData;
+interface Subject {
+  name: string;
+  savedTime: number;
+}
 
+interface Props {
+  subject: Subject;
+  setSubjectData: SetterOrUpdater<any>;
+}
+
+const StopWatchStartComponents: React.FC<Props> = ({
+  subject,
+  setSubjectData,
+}) => {
   const [selected, setSelect] = useRecoilState(selectedState);
   const [start, setStart] = useRecoilState(stopWatchStart);
   const [pass, setPass] = useRecoilState(studyTimePass);

@@ -58,6 +58,11 @@ const MemoInput = styled.input`
   font-size: 11px;
 `;
 
+interface Subject {
+  name: string;
+  savedTime: number;
+}
+
 const AddSubjectComponent = () => {
   const [start, setStart] = useRecoilState(stopWatchStart);
   const [subjectData, setSubjectData] = useRecoilState(subjectDataState);
@@ -75,7 +80,9 @@ const AddSubjectComponent = () => {
           value={content.name}
           onKeyDown={(e) => {
             if (e.keyCode === 13) {
-              if (subjectData.some((item) => item.name === content.name)) {
+              if (
+                subjectData.some((item: Subject) => item.name === content.name)
+              ) {
                 alert("동일한 과목 명은 추가가 불가합니다.");
                 return;
               }

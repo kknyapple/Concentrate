@@ -20,6 +20,11 @@ const DeleteButton = styled.div`
   color: #f5f5f5;
 `;
 
+interface Subject {
+  name: string;
+  savedTime: number;
+}
+
 const DeleteSubjectComponent = (props) => {
   let subject = props.subject;
   let setSubjectData = props.setSubjectData;
@@ -38,11 +43,11 @@ const DeleteSubjectComponent = (props) => {
                   `'${subject.name}' 을(를) 삭제하시겠습니까? 총 시간은 유지됩니다.`
                 )
               ) {
-                const cleanMemo = subjectData.filter(
-                  (item) => item.name !== subject.name
+                const cleanedSubject = subjectData.filter(
+                  (item: Subject) => item.name !== subject.name
                 );
-                localStorage.setItem("subject", JSON.stringify(cleanMemo));
-                setSubjectData(cleanMemo);
+                localStorage.setItem("subject", JSON.stringify(cleanedSubject));
+                setSubjectData(cleanedSubject);
               }
             }}
           >

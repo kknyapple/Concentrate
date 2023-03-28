@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { SetterOrUpdater, useRecoilState, useRecoilValue } from "recoil";
 
 import {
   stopWatchStart,
@@ -23,10 +23,20 @@ const StopWatchTime = styled.p`
   font-size: 14px;
 `;
 
-const StopWatchTimeComponent = (props) => {
-  let subject = props.subject;
-  let setSubjectData = props.setSubjectData;
+interface Subject {
+  name: string;
+  savedTime: number;
+}
 
+interface Props {
+  subject: Subject;
+  setSubjectData: SetterOrUpdater<any>;
+}
+
+const StopWatchTimeComponent: React.FC<Props> = ({
+  subject,
+  setSubjectData,
+}) => {
   const subjectData = useRecoilValue(subjectDataState);
   const [selected, setSelect] = useRecoilState(selectedState);
   const [start, setStart] = useRecoilState(stopWatchStart);
@@ -57,7 +67,9 @@ const StopWatchTimeComponent = (props) => {
     if (subject.name === selected && start) {
       setCurrentTime(Date.now() - concentrateTime.start + first + 1000); // 왜 +1을 해야할까?
 
-      const index = subjectData.findIndex((item) => item.name === subject.name);
+      const index = subjectData.findIndex(
+        (item: Subject) => item.name === subject.name
+      );
       const updatedSubject = {
         ...subjectData[index],
         savedTime: currentTime,
@@ -74,7 +86,9 @@ const StopWatchTimeComponent = (props) => {
   }, [second]);
 
   const reset = () => {
-    const index = subjectData.findIndex((item) => item.name === subject.name);
+    const index = subjectData.findIndex(
+      (item: Subject) => item.name === subject.name
+    );
     const updatedSubject = {
       ...subjectData[index],
       savedTime: 0,
@@ -104,20 +118,18 @@ const StopWatchTimeComponent = (props) => {
   }, []);
 
   return (
-    <>
-      <StopWatchTime>
-        {`${String(
-          // hour
-          parseInt(subject.savedTime / 1000 / 3600)
-        ).padStart(2, "0")}:${String(
-          // minute
-          parseInt(((subject.savedTime / 1000) % 3600) / 60)
-        ).padStart(2, "0")}:${String(
-          parseInt((subject.savedTime / 1000) % 60)
-          //second
-        ).padStart(2, "0")}`}
-      </StopWatchTime>
-    </>
+    <StopWatchTime>
+      {`${String(
+        // hour
+        parseInt(subject.savedTime / 1000 / 3600)
+      ).padStart(2, "0")}:${String(
+        // minute
+        parseInt(((subject.savedTime / 1000) % 3600) / 60)
+      ).padStart(2, "0")}:${String(
+        parseInt((subject.savedTime / 1000) % 60)
+        // second
+      ).padStart(2, "0")}`}
+    </StopWatchTime>
   );
 };
 
