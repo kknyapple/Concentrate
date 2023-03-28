@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { SetterOrUpdater, useRecoilState, useRecoilValue } from "recoil";
 
 import { stopWatchStart, subjectDataState } from "../../../recoil/concentrate";
 
@@ -25,10 +25,15 @@ interface Subject {
   savedTime: number;
 }
 
-const DeleteSubjectComponent = (props) => {
-  let subject = props.subject;
-  let setSubjectData = props.setSubjectData;
+interface Props {
+  subject: Subject;
+  setSubjectData: SetterOrUpdater<any>;
+}
 
+const DeleteSubjectComponent: React.FC<Props> = ({
+  subject,
+  setSubjectData,
+}) => {
   const subjectData = useRecoilValue(subjectDataState);
   const [start, setStart] = useRecoilState(stopWatchStart);
 
