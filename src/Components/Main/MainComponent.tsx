@@ -1,12 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import { stopWatchStart, subjectDataState } from "../../recoil/concentrate";
-import StopWatchDetailComponent from "./StopWatchDetail/StopWatchDetailComponent";
 import StopWatchComponent from "./StopWatch/StopWatchComponent";
 import RecordComponent from "./Record/RecordComponent";
-import MemoComponent from "./Memo/MemoComponent";
 import TotalTimeComponent from "./TotalTimeComponent";
 
 const Main = styled.main`
@@ -24,33 +22,96 @@ const AddSubject = styled.div`
   align-items: center;
   color: whitesmoke;
   font-size: 14px;
-  // height: 80px;
   width: 400px;
   cursor: pointer;
   margin-top: 10px;
   margin-bottom: 10px;
 `;
 
-const AddMemoButton = styled.button`
+const Input = styled.div`
+  position: relative;
+  display: inline-block;
+`;
+
+const ShowMemoButton = styled.button`
+  position: absolute;
   border: 0;
   outline: 0;
-  background-color: #474e68;
+  background-color: transparent;
   color: whitesmoke;
-  margin-left: 10px;
-  margin-right: 10px;
   border-radius: 50%;
-  font-size: 10px;
+  font-size: 12px;
   height: 25px;
   width: 25px;
   cursor: pointer;
+
+  top: 0;
+  right: 0;
+  bottom: 0;
+`;
+
+const MemoInput = styled.input`
+  height: 22px;
+  width: 100px;
+  border: 0;
+  ::placeholder {
+    color: #9c9c9c;
+  }
+  padding-right: 30px;
+  //border-radius: 8px;
+
+  outline: none;
+  border-bottom: #9c9c9c 0.8px solid;
+  &:focus {
+    border-bottom-color: whitesmoke;
+  }
+
+  padding-left: 5px;
+  background-color: transparent;
+  color: whitesmoke;
+  font-size: 11px;
 `;
 
 const MainComponent = () => {
+  const [start, setStart] = useRecoilState(stopWatchStart);
   const [subjectData, setSubjectData] = useRecoilState(subjectDataState);
+  const [content, setContent] = useState({ name: "", savedTime: 0 });
+
   return (
     <Main>
       <TotalTimeComponent />
-      <MemoComponent />
+      <AddSubject>
+        <Input>
+          <MemoInput
+            type="text"
+            id="subject"
+            minLength={1}
+            maxLength={10}
+            placeholder="과목을 추가해주세요"
+            value={content.name}
+            onChange={(e) => {
+              if (!start) {
+                setContent({ name: e.target.value, savedTime: 0 });
+              }
+            }}
+          />
+
+          <ShowMemoButton
+            onClick={() => {
+              if (content.name !== "") {
+                let copy = [...subjectData];
+                copy.push(content);
+                localStorage.setItem("subject", JSON.stringify(copy));
+                setSubjectData(copy);
+                setContent({ name: "", savedTime: 0 });
+              }
+            }}
+          >
+            +
+          </ShowMemoButton>
+        </Input>
+      </AddSubject>
+
       {subjectData.map((subject) => {
         return (
           <StopWatchComponent
@@ -60,9 +121,7 @@ const MainComponent = () => {
           />
         );
       })}
-      <AddSubject>
-        <AddMemoButton>+</AddMemoButton>과목 추가하기
-      </AddSubject>
+
       <RecordComponent />
     </Main>
   );
