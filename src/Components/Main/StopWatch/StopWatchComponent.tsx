@@ -34,6 +34,7 @@ const StopWatchTitle = styled.p`
   display: flex;
   margin: 0px;
   margin-left: 30px;
+  margin-right: 30px;
   margin-top: 1px;
   margin-bottom: 1px;
   font-size: 18px;
@@ -43,6 +44,7 @@ const StopWatchTime = styled.p`
   display: flex;
   margin: 0px;
   margin-left: 30px;
+  margin-right: 30px;
   margin-top: 1px;
   margin-bottom: 1px;
   font-size: 14px;
