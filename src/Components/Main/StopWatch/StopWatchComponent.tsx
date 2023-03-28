@@ -18,6 +18,7 @@ import useStopWatch from "Hooks/useStopWatch";
 import StopWatchDetailComponent from "../StopWatchDetail/StopWatchDetailComponent";
 
 const StopWatchBox = styled.div`
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -82,6 +83,21 @@ const StopWatchTitleBox = styled.div`
   justify-content: center;
   align-items: flex-start;
   height: 80px;
+`;
+const DeleteButtonBox = styled.div`
+  position: absolute;
+  right: 8px;
+  top: 4px;
+`;
+
+const DeleteButton = styled.div`
+  opacity: 0;
+  ${DeleteButtonBox}:hover & {
+    opacity: 1;
+  }
+  cursor: pointer;
+  font-size: 16px;
+  color: #f5f5f5;
 `;
 
 const StopWatchComponent = (props) => {
@@ -253,6 +269,38 @@ const StopWatchComponent = (props) => {
             시작
           </StopWatchButton>
         )}
+        {!start ? (
+          <DeleteButtonBox>
+            <DeleteButton
+              onClick={() => {
+                if (
+                  window.confirm(
+                    `'${subject.name}' 을(를) 삭제하시겠습니까? 총 시간은 유지됩니다.`
+                  )
+                ) {
+                  const cleanMemo = subjectData.filter(
+                    (item) => item.name !== subject.name
+                  );
+                  localStorage.setItem("subject", JSON.stringify(cleanMemo));
+                  setSubjectData(cleanMemo);
+                }
+              }}
+            >
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z"
+                  fill="#F5F5F5"
+                />
+              </svg>
+            </DeleteButton>
+          </DeleteButtonBox>
+        ) : null}
       </StopWatchBox>
       {start === true && selected === subject.name ? (
         <StopWatchDetailComponent />
