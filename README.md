@@ -14,6 +14,9 @@
 > 공부 시간 측정을 위한 스톱워치
 
 하루 단위로 총 공부 시간과 과목 공부 시간을 측정해줍니다. 캘린더에 날짜와 함께 총 공부 시간 정도에 따른 색깔과 시간을 표시해 줍니다.
+
+  <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"> <img src="https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"/> <img src="https://img.shields.io/badge/styled components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white"/> <img src="https://user-images.githubusercontent.com/72698829/226164770-4da7ea6c-995a-49fe-94af-497195fdd645.png"/>
+
   
 ![image](https://user-images.githubusercontent.com/72698829/228338239-c75e417a-6ac0-43f9-b8c7-d8434b3608a9.png)
 
