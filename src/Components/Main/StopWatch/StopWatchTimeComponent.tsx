@@ -86,18 +86,13 @@ const StopWatchTimeComponent: React.FC<Props> = ({
   }, [second]);
 
   const reset = () => {
-    const index = subjectData.findIndex(
-      (item: Subject) => item.name === subject.name
-    );
-    const updatedSubject = {
-      ...subjectData[index],
-      savedTime: 0,
-    };
-    const newSubjectData = [
-      ...subjectData.slice(0, index),
-      updatedSubject,
-      ...subjectData.slice(index + 1),
-    ];
+    const newSubjectData = subjectData.map((item: Subject) => {
+      return {
+        name: item.name,
+        savedTime: 0,
+      };
+    });
+
     setSubjectData(newSubjectData);
     localStorage.setItem("subject", JSON.stringify(newSubjectData));
   };
