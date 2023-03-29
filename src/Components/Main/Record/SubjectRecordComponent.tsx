@@ -2,6 +2,7 @@ import React from "react";
 import { useRecoilState } from "recoil";
 import { subjectDataState } from "recoil/concentrate";
 import styled from "styled-components";
+import { Subject } from "types/types";
 
 import ChartComponent from "./ChartComponent";
 import MessageButtonComponent from "./MessageButtonComponent";
@@ -41,8 +42,8 @@ const SubjectRecordComponent = () => {
   const text =
     "총 공부 시간을 기준으로 과목 시간 비율이 계산됩니다. (새로고침으로 반영)";
   const [subjectData, setSubjectData] = useRecoilState(subjectDataState);
-  let nameArray = subjectData.map((item) => item.name);
-  let savedTimeArray = subjectData.map((item) => item.savedTime);
+  let nameArray = subjectData.map((item: Subject) => item.name);
+  let savedTimeArray = subjectData.map((item: Subject) => item.savedTime);
 
   if (savedTimeArray.every((element) => element === 0)) {
     savedTimeArray = savedTimeArray.map((element) =>

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { SetterOrUpdater, useRecoilState, useRecoilValue } from "recoil";
 
 import { stopWatchStart, subjectDataState } from "../../../recoil/concentrate";
+import { Props, Subject } from "types/types";
 
 const DeleteButtonBox = styled.div`
   position: absolute;
@@ -19,16 +20,6 @@ const DeleteButton = styled.div`
   font-size: 16px;
   color: #f5f5f5;
 `;
-
-interface Subject {
-  name: string;
-  savedTime: number;
-}
-
-interface Props {
-  subject: Subject;
-  setSubjectData: SetterOrUpdater<any>;
-}
 
 const DeleteSubjectComponent: React.FC<Props> = ({
   subject,

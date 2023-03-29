@@ -7,6 +7,7 @@ import StopWatchDetailComponent from "./StopWatchDetail/StopWatchDetailComponent
 import StopWatchTimeComponent from "./StopWatchTimeComponent";
 import DeleteSubjectComponent from "./DeleteSubjectComponent";
 import StopWatchStartComponent from "./StopWatchStartComponent";
+import { Props } from "types/types";
 
 const StopWatchBox = styled.div`
   position: relative;
@@ -38,16 +39,6 @@ const StopWatchTitleBox = styled.div`
   align-items: flex-start;
   height: 80px;
 `;
-
-interface Subject {
-  name: string;
-  savedTime: number;
-}
-
-interface Props {
-  subject: Subject;
-  setSubjectData: SetterOrUpdater<any>;
-}
 
 const StopWatchComponent: React.FC<Props> = ({ subject, setSubjectData }) => {
   const [selected, setSelect] = useRecoilState(selectedState);

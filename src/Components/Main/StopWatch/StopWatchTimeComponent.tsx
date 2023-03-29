@@ -12,6 +12,7 @@ import {
   todayDate,
 } from "../../../recoil/concentrate";
 import useStopWatch from "Hooks/useStopWatch";
+import { Props, Subject } from "types/types";
 
 const StopWatchTime = styled.p`
   display: flex;
@@ -22,16 +23,6 @@ const StopWatchTime = styled.p`
   margin-bottom: 1px;
   font-size: 14px;
 `;
-
-interface Subject {
-  name: string;
-  savedTime: number;
-}
-
-interface Props {
-  subject: Subject;
-  setSubjectData: SetterOrUpdater<any>;
-}
 
 const StopWatchTimeComponent: React.FC<Props> = ({
   subject,

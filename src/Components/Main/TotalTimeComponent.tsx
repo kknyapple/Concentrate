@@ -18,6 +18,7 @@ import {
   updateStudyData,
 } from "utils/saveStudyDataToLocal";
 import saveStudyTimeToLocal from "utils/saveStudyTimeToLocal";
+import { StudyData } from "types/types";
 
 const TotalTime = styled.div`
   display: flex;
@@ -58,11 +59,6 @@ const TotalTimeComponent = () => {
 
     saveStudyTimeToLocal(h, m, s);
   };
-
-  interface StudyData {
-    value: string;
-    day: string;
-  }
 
   let cleanTimeData: StudyData[] = filterTimeData(timeData, today);
   let updatedStudyData: StudyData[] = updateStudyData(

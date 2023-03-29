@@ -10,6 +10,7 @@ import {
   timeState,
 } from "recoil/concentrate";
 import StopWatchButtonComponent from "./StopWatchDetail/StopWatchButton/StopWatchButtonComponent";
+import { Props } from "types/types";
 
 const StopWatchButton = styled.button`
   border: 0;
@@ -39,16 +40,6 @@ const IneffectiveButton = styled.button`
   width: 50px;
   cursor: pointer;
 `;
-
-interface Subject {
-  name: string;
-  savedTime: number;
-}
-
-interface Props {
-  subject: Subject;
-  setSubjectData: SetterOrUpdater<any>;
-}
 
 const StopWatchStartComponents: React.FC<Props> = ({
   subject,
