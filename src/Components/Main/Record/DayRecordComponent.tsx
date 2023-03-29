@@ -2,22 +2,59 @@ import React from "react";
 import styled from "styled-components";
 
 import ChartComponent from "./ChartComponent";
+import MessageButtonComponent from "./MessageButtonComponent";
+
+const Title = styled.h1`
+  width: 350px;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 10px;
+  margin-bottom: 0px;
+  font-size: 18px;
+  font-weight: 500;
+`;
 
 const Div = styled.div`
-  // margin-top: 10px;
-  // margin-bottom: 10px;
+  width: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 350px;
+  height: 350px;
+`;
+
+const ChartBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #6b728e68;
+  border-radius: 8px;
   width: 400px;
 `;
 
 const DayRecordComponent = () => {
+  let text =
+    "24시간을 기준으로 총 공부 시간 비율이 계산됩니다. (새로고침으로 반영)";
+  let studyTimeToNumber = 0;
+  if (localStorage.getItem("key")) {
+    let length = JSON.parse(localStorage.getItem("key") as string).length;
+    let studyTime = JSON.parse(localStorage.getItem("key") as string)[
+      length - 1
+    ].value;
+    studyTimeToNumber = Number(studyTime);
+  }
+
   const chartData = {
-    labels: ["공업수학", "반도체공학", "일반수학", "그 외"],
+    labels: ["공부시간", "그 외"],
     datasets: [
       {
         label: "시간",
-        data: [1.333, 3.324, 1.354, 0.322],
+        data: [studyTimeToNumber, 24 - studyTimeToNumber],
         borderColor: "transparent",
-        backgroundColor: ["#F2789F", "#F999B7", "#F9C5D5", "#FEE3EC"],
+        backgroundColor: ["#EA5455", "#9c9c9c"],
         borderWidth: 3,
         fill: false,
         tension: 0.3,
@@ -37,12 +74,15 @@ const DayRecordComponent = () => {
   };
 
   return (
-    <>
-      <Div>총 공부 시간</Div>
+    <ChartBox>
+      <Title>
+        총 공부 시간
+        <MessageButtonComponent text={text} />
+      </Title>
       <Div>
         <ChartComponent chartData={chartData} chartOption={chartOption} />
       </Div>
-    </>
+    </ChartBox>
   );
 };
 

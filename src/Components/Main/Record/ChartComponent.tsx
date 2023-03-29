@@ -1,4 +1,6 @@
 import React, { useRef, useEffect } from "react";
+import styled from "styled-components";
+
 import {
   Chart,
   registerables,
@@ -8,6 +10,14 @@ import {
   LinearScale,
   Title,
 } from "chart.js";
+
+const Canvas = styled.canvas`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  width: 400px;
+`;
 
 const ChartComponent = (props) => {
   const chartData = props.chartData;
@@ -30,7 +40,7 @@ const ChartComponent = (props) => {
     drawChart();
   }, []);
 
-  return <canvas ref={canvasDom}></canvas>;
+  return <Canvas ref={canvasDom}></Canvas>;
 };
 
 export default ChartComponent;
