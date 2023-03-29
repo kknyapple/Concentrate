@@ -15,4 +15,4 @@ interface Props {
   setSubjectData: SetterOrUpdater<any>;
 }
 
-export { StudyData, Subject, Props };
+export type { StudyData, Subject, Props };
