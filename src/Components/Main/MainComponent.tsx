@@ -9,6 +9,7 @@ import TotalTimeComponent from "./TotalTimeComponent";
 import AddSubjectComponent from "./AddSubjectComponent";
 import DayRecordComponent from "./Record/DayRecordComponent";
 import SubjectRecordComponent from "./Record/SubjectRecordComponent";
+import { Subject } from "types/types";
 
 const Main = styled.main`
   display: flex;
@@ -17,16 +18,6 @@ const Main = styled.main`
   justify-content: center;
   color: whitesmoke;
 `;
-const Div = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  width: 400px;
-`;
-interface Subject {
-  name: string;
-  savedTime: number;
-}
 
 const MainComponent = () => {
   const [subjectData, setSubjectData] = useRecoilState(subjectDataState);
