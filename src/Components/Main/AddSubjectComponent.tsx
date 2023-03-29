@@ -20,7 +20,7 @@ const Input = styled.div`
   display: inline-block;
 `;
 
-const ShowMemoButton = styled.button`
+const AddSubjectButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -102,7 +102,7 @@ const AddSubjectComponent = () => {
           }}
         />
 
-        <ShowMemoButton
+        <AddSubjectButton
           onClick={() => {
             if (content.name !== "") {
               let copy = [...subjectData];
@@ -125,7 +125,7 @@ const AddSubjectComponent = () => {
               fill="#F5F5F5"
             />
           </svg>
-        </ShowMemoButton>
+        </AddSubjectButton>
       </Input>
     </AddSubject>
   );
