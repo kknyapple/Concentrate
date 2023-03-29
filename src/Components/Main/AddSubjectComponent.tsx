@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { stopWatchStart, subjectDataState } from "recoil/concentrate";
+import { Subject } from "types/types";
 
 const AddSubject = styled.div`
   display: flex;
@@ -57,11 +58,6 @@ const MemoInput = styled.input`
   color: whitesmoke;
   font-size: 11px;
 `;
-
-interface Subject {
-  name: string;
-  savedTime: number;
-}
 
 const AddSubjectComponent = () => {
   const [start, setStart] = useRecoilState(stopWatchStart);
