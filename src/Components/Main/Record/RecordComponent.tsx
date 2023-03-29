@@ -9,10 +9,15 @@ const RecordBox = styled.div<{ height: string }>`
   width: 400px;
   height: ${(props) => props.height};
   margin-top: 10px;
+  margin-bottom: 10px;
 `;
 
 const RecordComponent = () => {
-  let data = JSON.parse(localStorage.getItem("key") as string);
+  let data = [{ value: "0", day: "2023-03-29" }];
+  if (localStorage.getItem("key")) {
+    data = JSON.parse(localStorage.getItem("key") as string);
+  }
+
   const now = new Date();
   const year = now.getFullYear();
 

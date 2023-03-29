@@ -105,7 +105,7 @@ const StopWatchTimeComponent: React.FC<Props> = ({
   useEffect(() => {
     setToday(`${year}-${month}-${day}`);
 
-    if (localStorage.getItem("subject")) {
+    if (localStorage.getItem("key")) {
       let length = JSON.parse(localStorage.getItem("key") as string).length;
       let lastStudy = JSON.parse(localStorage.getItem("key") as string)[
         length - 1
