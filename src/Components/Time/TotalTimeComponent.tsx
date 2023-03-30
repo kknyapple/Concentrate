@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
 import styled from "styled-components";
 import { useRecoilValue, useRecoilState } from "recoil";
 
-import { studyTimePass, todayDate, timeState } from "../../recoil/frontend";
+import {
+  studyTimePass,
+  todayDate,
+  timeState,
+  stopWatchStart,
+} from "../../recoil/frontend";
 import {
   filterTimeData,
   saveStudyDataToLocal,
@@ -34,15 +39,11 @@ const TotalTimeComponent = () => {
   const [second, setSecond] = useRecoilState<number>(studySecond);
   const [time, setTime] = useRecoilState(timeState);
   const [today, setToday] = useRecoilState<string>(todayDate);
+  const [start, setStart] = useRecoilState<boolean>(stopWatchStart);
 
   let convertTime = Number(hour + minute / 60 + second / 3600).toFixed(3);
   const [timeData, setTimeData] =
     useRecoilState<Array<{ value: string; day: string }>>(calendarData);
-
-  const dateObj = new Date();
-  let year = dateObj.getFullYear();
-  let month = String(dateObj.getMonth() + 1).padStart(2, "0");
-  let day = String(dateObj.getDate()).padStart(2, "0");
 
   const updateStudyTime = () => {
     const now = new Date(Date.now() - (time.start || 0));
@@ -102,23 +103,61 @@ const TotalTimeComponent = () => {
     resetCurrentTime();
   };
 
+  const setCurrentDate = () => {
+    const dateObj = new Date();
+    const currentHour = dateObj.getHours();
+    const year = dateObj.getFullYear();
+    const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+    const day = String(dateObj.getDate()).padStart(2, "0");
+
+    if (currentHour < 6) {
+      dateObj.setDate(dateObj.getDate() - 1);
+      return `${dateObj.getFullYear()}-${String(
+        dateObj.getMonth() + 1
+      ).padStart(2, "0")}-${String(dateObj.getDate()).padStart(2, "0")}`;
+    }
+
+    return `${year}-${month}-${day}`;
+  };
+
   useEffect(() => {
-    setToday(`${year}-${month}-${day}`);
+    setToday(setCurrentDate());
 
     if (localStorage.getItem("key")) {
       let length = JSON.parse(localStorage.getItem("key") as string).length;
       let lastStudy = JSON.parse(localStorage.getItem("key") as string)[
         length - 1
       ].day;
-      let today = `${year}-${month}-${day}`;
+      let today = setCurrentDate();
       let savedTime =
         time.start - second * 1000 - minute * 1000 * 60 - hour * 1000 * 60 * 60;
 
-      lastStudy === today
-        ? setTime({ start: savedTime, pause: time.pause })
-        : reset();
+      if (lastStudy !== today) {
+        reset();
+      } else {
+        setTime({ start: savedTime, pause: time.pause });
+      }
     }
+
+    /* const checkAndUpdateDate = () => {
+      const currentDate = setCurrentDate();
+      const lastStudy = JSON.parse(localStorage.getItem("key") as string)[
+        JSON.parse(localStorage.getItem("key") as string).length - 1
+      ].day;
+      if (currentDate !== lastStudy) {
+        alert("새로운 날이 시작되었습니다. 타이머를 정지하고 새로고침을 해주세요.");
+        reset();
+      }
+    };
+
+    const checkInterval = setInterval(() => {
+      checkAndUpdateDate();
+    }, 1000 * 60 * 5);
+
+    return () => clearInterval(checkInterval); */
   }, []);
+
+  window.addEventListener("beforeunload", setCurrentDate);
 
   return (
     <TotalTime>

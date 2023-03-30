@@ -87,20 +87,37 @@ const StopWatchTimeComponent: React.FC<Props> = ({
     localStorage.setItem("subject", JSON.stringify(newSubjectData));
   };
 
+  const setCurrentDate = () => {
+    const dateObj = new Date();
+    const currentHour = dateObj.getHours();
+    const year = dateObj.getFullYear();
+    const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+    const day = String(dateObj.getDate()).padStart(2, "0");
+
+    if (currentHour < 6) {
+      dateObj.setDate(dateObj.getDate() - 1);
+    }
+
+    return `${year}-${month}-${day}`;
+  };
+
   useEffect(() => {
-    setToday(`${year}-${month}-${day}`);
+    setToday(setCurrentDate());
 
     if (localStorage.getItem("key")) {
       let length = JSON.parse(localStorage.getItem("key") as string).length;
       let lastStudy = JSON.parse(localStorage.getItem("key") as string)[
         length - 1
       ].day;
-      let today = `${year}-${month}-${day}`;
+      let today = setCurrentDate();
+
       if (lastStudy !== today) {
         reset();
       }
     }
   }, []);
+
+  window.addEventListener("beforeunload", setCurrentDate);
 
   return (
     <StopWatchTime>
