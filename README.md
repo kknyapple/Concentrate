@@ -1,9 +1,11 @@
 # Concentrate-StopWatch
 
 ## 목차
+
 [1. 프로젝트 소개](#프로젝트-소개)
 
 [2. 사용 예제](#사용-예제)
+
 - 과목 별 공부 시간 측정
 - 집중 시간, 쉬는 시간 측정
 - 과목 추가 및 삭제
@@ -17,9 +19,11 @@
 
 매일 총 공부 시간을 기록헤주고, 하루 단위로 공부 시간 비율을 계산하여 차트로 보여줍니다.
 
-  <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"> <img src="https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"/> <img src="https://img.shields.io/badge/styled components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white"/> <img src="https://user-images.githubusercontent.com/72698829/226164770-4da7ea6c-995a-49fe-94af-497195fdd645.png"/>
+Link: https://kknyapple.github.io/Concentrate-StopWatch/
 
- <img src="https://user-images.githubusercontent.com/72698829/228579850-c57a4ca4-df7e-4d01-821c-1c1c7a8eda55.png" width=30%/> <img src="https://user-images.githubusercontent.com/72698829/228582914-b11f9840-461d-4f9f-9439-3df27f21c13b.png" width=30%/> 
+<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"> <img src="https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"/> <img src="https://img.shields.io/badge/styled components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white"/> <img src="https://user-images.githubusercontent.com/72698829/226164770-4da7ea6c-995a-49fe-94af-497195fdd645.png"/>
+
+<img src="https://user-images.githubusercontent.com/72698829/228579850-c57a4ca4-df7e-4d01-821c-1c1c7a8eda55.png" width=30%/> <img src="https://user-images.githubusercontent.com/72698829/228582914-b11f9840-461d-4f9f-9439-3df27f21c13b.png" width=30%/>
 
 ## 사용 예제
 
