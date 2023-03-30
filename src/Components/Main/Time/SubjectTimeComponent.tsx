@@ -41,39 +41,31 @@ const StopWatchTimeComponent: React.FC<Props> = ({
   const [first, setFirst] = useState(subject.savedTime);
 
   const [today, setToday] = useRecoilState<string>(todayDate);
-  const dateObj = new Date();
-  let year = dateObj.getFullYear();
-  let month = String(dateObj.getMonth() + 1).padStart(2, "0");
-  let day = String(dateObj.getDate()).padStart(2, "0");
 
   useEffect(() => {
-    setCurrentTime(
-      Date.now() - concentrateTime.start + 1000 + subject.savedTime
-    ); // 왜 +1을 해야할까?
-    setFirst(subject.savedTime);
-  }, [start]);
+    if (subject.name === selected && pass && start) {
+      let timerId = setInterval(() => {
+        const newCurrentTime = Date.now() - concentrateTime.start + first;
+        setCurrentTime(newCurrentTime);
+        const index = subjectData.findIndex(
+          (item: Subject) => item.name === subject.name
+        );
+        const updatedSubject = {
+          ...subjectData[index],
+          savedTime: newCurrentTime,
+        };
+        const newSubjectData = [
+          ...subjectData.slice(0, index),
+          updatedSubject,
+          ...subjectData.slice(index + 1),
+        ];
+        setSubjectData(newSubjectData);
+        localStorage.setItem("subject", JSON.stringify(newSubjectData));
+      }, 1000);
 
-  useEffect(() => {
-    if (subject.name === selected && start) {
-      setCurrentTime(Date.now() - concentrateTime.start + first + 1000); // 왜 +1을 해야할까?
-
-      const index = subjectData.findIndex(
-        (item: Subject) => item.name === subject.name
-      );
-      const updatedSubject = {
-        ...subjectData[index],
-        savedTime: currentTime,
-      };
-      const newSubjectData = [
-        ...subjectData.slice(0, index),
-        updatedSubject,
-        ...subjectData.slice(index + 1),
-      ];
-      setSubjectData(newSubjectData);
-      localStorage.setItem("subject", JSON.stringify(newSubjectData));
-      // console.log(currentTime);
+      return () => clearInterval(timerId);
     }
-  }, [second]);
+  }, [pass]);
 
   const reset = () => {
     const newSubjectData = subjectData.map((item: Subject) => {
