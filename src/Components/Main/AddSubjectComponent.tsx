@@ -5,7 +5,7 @@ import { stopWatchStart } from "recoil/frontend";
 import { Subject } from "types/types";
 import { subjectDataState } from "recoil/localStorage";
 
-const AddSubject = styled.div`
+const AddSubjectBox = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -17,7 +17,7 @@ const AddSubject = styled.div`
   margin-bottom: 10px;
 `;
 
-const Input = styled.div`
+const InputBox = styled.div`
   position: relative;
   display: inline-block;
 `;
@@ -41,7 +41,7 @@ const AddSubjectButton = styled.button`
   bottom: 0;
 `;
 
-const MemoInput = styled.input`
+const SubjectInput = styled.input`
   height: 22px;
   width: 100px;
   border: 0;
@@ -65,51 +65,45 @@ const AddSubjectComponent = () => {
   const [subjectData, setSubjectData] = useRecoilState(subjectDataState);
   const [content, setContent] = useState({ name: "", savedTime: 0 });
 
+  const addSubject = () => {
+    if (content.name === "") return;
+    if (subjectData.some((item: Subject) => item.name === content.name)) {
+      alert("이미 존재하는 과목입니다.");
+      return;
+    }
+    const newSubjectData = [...subjectData, content];
+    localStorage.setItem("subject", JSON.stringify(newSubjectData));
+    setSubjectData(newSubjectData);
+    setContent({ name: "", savedTime: 0 });
+  };
+
+  const keyDownHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.keyCode === 13) {
+      addSubject();
+    }
+  };
+
+  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!start) {
+      setContent({ name: e.target.value, savedTime: 0 });
+    }
+  };
+
   return (
-    <AddSubject>
-      <Input>
-        <MemoInput
+    <AddSubjectBox>
+      <InputBox>
+        <SubjectInput
           type="text"
           id="subject"
           minLength={1}
           maxLength={10}
           placeholder="과목을 추가해주세요"
           value={content.name}
-          onKeyDown={(e) => {
-            if (e.keyCode === 13) {
-              if (
-                subjectData.some((item: Subject) => item.name === content.name)
-              ) {
-                alert("동일한 과목 명은 추가가 불가합니다.");
-                return;
-              }
-              if (content.name !== "") {
-                let copy = [...subjectData];
-                copy.push(content);
-                localStorage.setItem("subject", JSON.stringify(copy));
-                setSubjectData(copy);
-                setContent({ name: "", savedTime: 0 });
-              }
-            }
-          }}
-          onChange={(e) => {
-            if (!start) {
-              setContent({ name: e.target.value, savedTime: 0 });
-            }
-          }}
+          onKeyDown={keyDownHandler}
+          onChange={changeHandler}
         />
 
-        <AddSubjectButton
-          onClick={() => {
-            if (content.name !== "") {
-              let copy = [...subjectData];
-              copy.push(content);
-              localStorage.setItem("subject", JSON.stringify(copy));
-              setSubjectData(copy);
-              setContent({ name: "", savedTime: 0 });
-            }
-          }}
-        >
+        <AddSubjectButton onClick={addSubject}>
           <svg
             width="11"
             height="11"
@@ -123,8 +117,8 @@ const AddSubjectComponent = () => {
             />
           </svg>
         </AddSubjectButton>
-      </Input>
-    </AddSubject>
+      </InputBox>
+    </AddSubjectBox>
   );
 };
 

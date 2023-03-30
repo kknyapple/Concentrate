@@ -29,25 +29,25 @@ const DeleteSubjectComponent: React.FC<Props> = ({
   const subjectData = useRecoilValue(subjectDataState);
   const [start, setStart] = useRecoilState(stopWatchStart);
 
+  const onClinkHandler = () => {
+    if (
+      window.confirm(
+        `'${subject.name}' 을(를) 삭제하시겠습니까? 총 시간은 유지됩니다.`
+      )
+    ) {
+      const cleanedSubject = subjectData.filter(
+        (item: Subject) => item.name !== subject.name
+      );
+      localStorage.setItem("subject", JSON.stringify(cleanedSubject));
+      setSubjectData(cleanedSubject);
+    }
+  };
+
   return (
     <>
       {!start ? (
         <DeleteButtonBox>
-          <DeleteButton
-            onClick={() => {
-              if (
-                window.confirm(
-                  `'${subject.name}' 을(를) 삭제하시겠습니까? 총 시간은 유지됩니다.`
-                )
-              ) {
-                const cleanedSubject = subjectData.filter(
-                  (item: Subject) => item.name !== subject.name
-                );
-                localStorage.setItem("subject", JSON.stringify(cleanedSubject));
-                setSubjectData(cleanedSubject);
-              }
-            }}
-          >
+          <DeleteButton onClick={onClinkHandler}>
             <svg
               width="12"
               height="12"
