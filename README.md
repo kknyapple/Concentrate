@@ -15,7 +15,7 @@
 
 하루 단위로 총 공부 시간과 과목 공부 시간을 측정해줍니다.
 
-매일 총 공부 시간을 기록헤주고, 하루 단위로 공부 시간 비율을 계산하여 차트로 보여줍니다.
+매일 총 공부 시간을 기록헤주고, 하루 단위로 공부 시간 비율을 계산하여 차트로 보여줍니다. (오전 6시 초기화)
 
   <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"> <img src="https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"/> <img src="https://img.shields.io/badge/styled components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white"/> <img src="https://user-images.githubusercontent.com/72698829/226164770-4da7ea6c-995a-49fe-94af-497195fdd645.png"/>
 
