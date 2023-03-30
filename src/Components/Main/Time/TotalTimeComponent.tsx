@@ -8,7 +8,7 @@ import {
   todayDate,
   timeState,
   stopWatchStart,
-} from "../../recoil/frontend";
+} from "../../../recoil/frontend";
 import {
   filterTimeData,
   saveStudyDataToLocal,

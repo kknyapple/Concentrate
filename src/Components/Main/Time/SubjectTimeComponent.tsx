@@ -8,7 +8,7 @@ import {
   concentrateTimeState,
   selectedState,
   todayDate,
-} from "../../recoil/frontend";
+} from "../../../recoil/frontend";
 import useStopWatch from "Hooks/useStopWatch";
 import { Props, Subject } from "types/types";
 import { subjectDataState } from "recoil/localStorage";

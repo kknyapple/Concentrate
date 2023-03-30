@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 
-import { pauseClicked, restTimeState } from "../../recoil/frontend";
-import useStopWatch from "../../Hooks/useStopWatch";
+import { concentrateTimeState, studyTimePass } from "../../../recoil/frontend";
+import useStopWatch from "../../../Hooks/useStopWatch";
 
-const RestTime = styled.div`
+const ConcentrateTime = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,7 +22,6 @@ const Title = styled.div`
   height: 40px;
   font-size: 18px;
 `;
-
 const Time = styled.div`
   display: flex;
   align-items: center;
@@ -31,22 +30,25 @@ const Time = styled.div`
   font-size: 18px;
 `;
 
-const RestTimeComponent = () => {
-  const [pause, setPause] = useRecoilState(pauseClicked);
-  const [resetTime, setResetTime] = useRecoilState(restTimeState);
-  const [hour, minute, second] = useStopWatch(pause, resetTime.start);
+const ConcentrateTimeComponent = () => {
+  const [pass, setPass] = useRecoilState(studyTimePass);
+
+  const [concentrateTime, setConcentrateTime] =
+    useRecoilState(concentrateTimeState);
+
+  const [hour, minute, second] = useStopWatch(pass, concentrateTime.start);
 
   return (
-    <RestTime>
-      <Title>쉬는시간</Title>
+    <ConcentrateTime>
+      <Title>집중시간</Title>
       <Time>
         {`${String(hour).padStart(2, "0")}:${String(minute).padStart(
           2,
           "0"
         )}:${String(second).padStart(2, "0")}`}
       </Time>
-    </RestTime>
+    </ConcentrateTime>
   );
 };
 
-export default RestTimeComponent;
+export default ConcentrateTimeComponent;

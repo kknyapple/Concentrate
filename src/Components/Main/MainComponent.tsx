@@ -4,7 +4,7 @@ import { useRecoilState } from "recoil";
 
 import StopWatchComponent from "./StopWatch/StopWatchComponent";
 import RecordComponent from "./Record/RecordComponent";
-import TotalTimeComponent from "../Time/TotalTimeComponent";
+import TotalTimeComponent from "./Time/TotalTimeComponent";
 import AddSubjectComponent from "./AddSubjectComponent";
 import DayRecordComponent from "./Record/DayRecordComponent";
 import SubjectRecordComponent from "./Record/SubjectRecordComponent";

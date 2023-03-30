@@ -4,7 +4,7 @@ import { useRecoilState } from "recoil";
 
 import { stopWatchStart, selectedState } from "../../../recoil/frontend";
 import StopWatchDetailComponent from "./StopWatchDetail/StopWatchDetailComponent";
-import StopWatchTimeComponent from "../../Time/SubjectTimeComponent";
+import StopWatchTimeComponent from "../Time/SubjectTimeComponent";
 import DeleteSubjectComponent from "./DeleteSubjectComponent";
 import StopWatchStartComponent from "../Button/StartComponent";
 import { Props } from "types/types";
