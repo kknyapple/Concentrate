@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { SetterOrUpdater, useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import {
   stopWatchStart,
   studyTimePass,
   concentrateTimeState,
-  timeState,
   selectedState,
-  subjectDataState,
   todayDate,
-} from "../../../recoil/concentrate";
+} from "../../recoil/frontend";
 import useStopWatch from "Hooks/useStopWatch";
 import { Props, Subject } from "types/types";
+import { subjectDataState } from "recoil/localStorage";
 
 const StopWatchTime = styled.p`
   display: flex;

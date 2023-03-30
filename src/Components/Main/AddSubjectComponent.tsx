@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
-import { stopWatchStart, subjectDataState } from "recoil/concentrate";
+import { stopWatchStart } from "recoil/frontend";
 import { Subject } from "types/types";
+import { subjectDataState } from "recoil/localStorage";
 
 const AddSubject = styled.div`
   display: flex;

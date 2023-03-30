@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
-
-import { studyMemo } from "../../../recoil/concentrate";
+import { studyMemo } from "recoil/localStorage";
 
 const MemoItem = styled.div`
   display: flex;

@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import StopWatchPauseComponent from "./StopWatchPauseComponent";
-import StopWatchStopComponent from "./StopWatchStopComponent";
+import StopWatchPauseComponent from "../../Button/PauseComponent";
+import StopWatchStopComponent from "../../Button/StopComponent";
 
 const StopWatchButtonBox = styled.div`
   display: flex;

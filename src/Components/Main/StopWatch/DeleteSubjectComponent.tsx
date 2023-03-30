@@ -2,8 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { SetterOrUpdater, useRecoilState, useRecoilValue } from "recoil";
 
-import { stopWatchStart, subjectDataState } from "../../../recoil/concentrate";
+import { stopWatchStart } from "../../../recoil/frontend";
 import { Props, Subject } from "types/types";
+import { subjectDataState } from "recoil/localStorage";
 
 const DeleteButtonBox = styled.div`
   position: absolute;

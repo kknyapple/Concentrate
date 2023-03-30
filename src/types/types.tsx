@@ -10,9 +10,14 @@ interface Subject {
   savedTime: number;
 }
 
-interface Props {
+interface SubjectProps {
   subject: Subject;
   setSubjectData: SetterOrUpdater<any>;
 }
 
-export type { StudyData, Subject, Props };
+interface Memo {
+  id: string;
+  title: string;
+}
+
+export type { StudyData, Subject, SubjectProps as Props, Memo };

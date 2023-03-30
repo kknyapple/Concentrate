@@ -2,14 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 
-import { subjectDataState } from "../../recoil/concentrate";
 import StopWatchComponent from "./StopWatch/StopWatchComponent";
 import RecordComponent from "./Record/RecordComponent";
-import TotalTimeComponent from "./TotalTimeComponent";
+import TotalTimeComponent from "../Time/TotalTimeComponent";
 import AddSubjectComponent from "./AddSubjectComponent";
 import DayRecordComponent from "./Record/DayRecordComponent";
 import SubjectRecordComponent from "./Record/SubjectRecordComponent";
 import { Subject } from "types/types";
+import { subjectDataState } from "recoil/localStorage";
 
 const Main = styled.main`
   display: flex;

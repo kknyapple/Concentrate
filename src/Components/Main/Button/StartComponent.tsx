@@ -8,8 +8,8 @@ import {
   stopWatchStart,
   studyTimePass,
   timeState,
-} from "recoil/concentrate";
-import StopWatchButtonComponent from "./StopWatchDetail/StopWatchButton/StopWatchButtonComponent";
+} from "recoil/frontend";
+import StopWatchButtonComponent from "../StopWatch/StopWatchDetail/StopWatchButtonComponent";
 import { Props } from "types/types";
 
 const StopWatchButton = styled.button`

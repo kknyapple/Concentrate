@@ -3,24 +3,26 @@ import styled from "styled-components";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import {
-  calendarData,
   pauseClicked,
   stopWatchStart,
-  studyHour,
-  studyMinute,
-  studySecond,
   studyTimePass,
   todayDate,
   concentrateTimeState,
   restTimeState,
   timeState,
-} from "../../../../../recoil/concentrate";
+} from "../../../recoil/frontend";
 import saveStudyTimeToLocal from "utils/saveStudyTimeToLocal";
 import {
   filterTimeData,
   saveStudyDataToLocal,
   updateStudyData,
 } from "utils/saveStudyDataToLocal";
+import {
+  calendarData,
+  studyHour,
+  studyMinute,
+  studySecond,
+} from "recoil/localStorage";
 
 const Stop = styled.button`
   border: 0;

@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { SetterOrUpdater, useRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 
-import { stopWatchStart, selectedState } from "../../../recoil/concentrate";
+import { stopWatchStart, selectedState } from "../../../recoil/frontend";
 import StopWatchDetailComponent from "./StopWatchDetail/StopWatchDetailComponent";
-import StopWatchTimeComponent from "./StopWatchTimeComponent";
+import StopWatchTimeComponent from "../../Time/StopWatchTimeComponent";
 import DeleteSubjectComponent from "./DeleteSubjectComponent";
-import StopWatchStartComponent from "./StopWatchStartComponent";
+import StopWatchStartComponent from "../Button/StartComponent";
 import { Props } from "types/types";
 
 const StopWatchBox = styled.div`

@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import RestTimeComponent from "./RestTimeComponent";
-import ConcentrateTimeComponent from "./ConcentrateTimeComponent";
+import RestTimeComponent from "../../../Time/RestTimeComponent";
+import ConcentrateTimeComponent from "../../../Time/ConcentrateTimeComponent";
 
 const StopWatchDetailBox = styled.div`
   display: flex;

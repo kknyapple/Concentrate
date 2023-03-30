@@ -1,6 +1,6 @@
 import React from "react";
 import { useRecoilState } from "recoil";
-import { subjectDataState } from "recoil/concentrate";
+import { subjectDataState } from "recoil/localStorage";
 import styled from "styled-components";
 import { Subject } from "types/types";
 

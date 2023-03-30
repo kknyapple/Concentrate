@@ -1,10 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
-import { useRecoilValue, useRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 
-import { studyMemo } from "../../../recoil/concentrate";
 import MemoItemComponent from "./MemoItemComponent";
+import { studyMemo } from "recoil/localStorage";
 
 const MemoBox = styled.div`
   display: flex;

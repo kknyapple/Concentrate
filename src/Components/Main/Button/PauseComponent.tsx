@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 
 import {
   pauseClicked,
@@ -9,7 +9,7 @@ import {
   restTimeState,
   timeState,
   stopWatchStart,
-} from "../../../../../recoil/concentrate";
+} from "../../../recoil/frontend";
 
 const Pause = styled.button`
   border: 0;

@@ -3,15 +3,7 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import { useRecoilValue, useRecoilState } from "recoil";
 
-import {
-  studyTimePass,
-  studyHour,
-  studyMinute,
-  studySecond,
-  todayDate,
-  calendarData,
-  timeState,
-} from "../../recoil/concentrate";
+import { studyTimePass, todayDate, timeState } from "../../recoil/frontend";
 import {
   filterTimeData,
   saveStudyDataToLocal,
@@ -19,6 +11,12 @@ import {
 } from "utils/saveStudyDataToLocal";
 import saveStudyTimeToLocal from "utils/saveStudyTimeToLocal";
 import { StudyData } from "types/types";
+import {
+  calendarData,
+  studyHour,
+  studyMinute,
+  studySecond,
+} from "recoil/localStorage";
 
 const TotalTime = styled.div`
   display: flex;
