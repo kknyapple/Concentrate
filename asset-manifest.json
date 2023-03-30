@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/Concentrate-StopWatch/static/js/main.8477d4e5.js",
+    "main.js": "/Concentrate-StopWatch/static/js/main.a9763970.js",
     "index.html": "/Concentrate-StopWatch/index.html",
-    "main.8477d4e5.js.map": "/Concentrate-StopWatch/static/js/main.8477d4e5.js.map"
+    "main.a9763970.js.map": "/Concentrate-StopWatch/static/js/main.a9763970.js.map"
   },
   "entrypoints": [
-    "static/js/main.8477d4e5.js"
+    "static/js/main.a9763970.js"
   ]
 }
