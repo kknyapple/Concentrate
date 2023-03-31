@@ -69,6 +69,7 @@ const StopWatchTimeComponent: React.FC<Props> = ({
   }, [pass]);
 
   const reset = () => {
+    setFirst(0);
     const newSubjectData = subjectData.map((item: Subject) => {
       return {
         name: item.name,
