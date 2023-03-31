@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
 
 import RestTimeComponent from "../../Time/RestTimeComponent";
@@ -22,7 +22,7 @@ const StopWatchTime = styled.div`
   height: 140px;
 `;
 
-const StopWatchDetailComponent = () => {
+const StopWatchDetailComponent = memo(() => {
   return (
     <StopWatchDetailBox>
       <StopWatchTime>
@@ -31,6 +31,6 @@ const StopWatchDetailComponent = () => {
       </StopWatchTime>
     </StopWatchDetailBox>
   );
-};
+});
 
 export default StopWatchDetailComponent;

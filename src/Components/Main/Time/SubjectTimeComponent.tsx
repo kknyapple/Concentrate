@@ -27,7 +27,8 @@ const StopWatchTimeComponent: React.FC<Props> = ({
   subject,
   setSubjectData,
 }) => {
-  const subjectData = useRecoilValue(subjectDataState);
+  // const subjectData = useRecoilValue(subjectDataState);
+  let subjectData = JSON.parse(localStorage.getItem("subject") as string);
   const [selected, setSelect] = useRecoilState(selectedState);
   const [start, setStart] = useRecoilState(stopWatchStart);
   const [pass, setPass] = useRecoilState(studyTimePass);

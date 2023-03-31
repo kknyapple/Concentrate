@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
 import { SetterOrUpdater, useRecoilState } from "recoil";
 
@@ -41,60 +41,60 @@ const IneffectiveButton = styled.button`
   cursor: pointer;
 `;
 
-const StopWatchStartComponents: React.FC<Props> = ({
-  subject,
-  setSubjectData,
-}) => {
-  const [selected, setSelect] = useRecoilState(selectedState);
-  const [start, setStart] = useRecoilState(stopWatchStart);
-  const [pass, setPass] = useRecoilState(studyTimePass);
-  const [time, setTime] = useRecoilState(timeState);
-  const [concentrateTime, setConcentrateTime] =
-    useRecoilState(concentrateTimeState);
+const StopWatchStartComponents: React.FC<Props> = memo(
+  ({ subject, setSubjectData }) => {
+    const [selected, setSelect] = useRecoilState(selectedState);
+    const [start, setStart] = useRecoilState(stopWatchStart);
+    const [pass, setPass] = useRecoilState(studyTimePass);
+    const [time, setTime] = useRecoilState(timeState);
+    const [concentrateTime, setConcentrateTime] =
+      useRecoilState(concentrateTimeState);
 
-  const changeStartTime = () => {
-    if (time.start === null) {
-      setTime({ start: Date.now(), pause: time.pause });
-    } else {
-      setTime({
-        start: time.start + Date.now() - time.pause,
-        pause: time.pause,
-      });
-    }
-  };
+    const changeStartTime = () => {
+      if (time.start === null) {
+        setTime({ start: Date.now(), pause: time.pause });
+      } else {
+        setTime({
+          start: time.start + Date.now() - time.pause,
+          pause: time.pause,
+        });
+      }
+    };
 
-  const changeStartCTime = () => {
-    if (concentrateTime.start === null) {
-      setConcentrateTime({ start: Date.now(), pause: concentrateTime.pause });
-    } else {
-      setConcentrateTime({
-        start: concentrateTime.start + Date.now() - concentrateTime.pause,
-        pause: concentrateTime.pause,
-      });
-    }
-  };
+    const changeStartCTime = () => {
+      if (concentrateTime.start === null) {
+        setConcentrateTime({ start: Date.now(), pause: concentrateTime.pause });
+      } else {
+        setConcentrateTime({
+          start: concentrateTime.start + Date.now() - concentrateTime.pause,
+          pause: concentrateTime.pause,
+        });
+      }
+    };
 
-  return (
-    <>
-      {start === true && selected === subject.name ? (
-        <StopWatchButtonComponent />
-      ) : start === true && selected !== subject.name ? (
-        <IneffectiveButton>시작</IneffectiveButton>
-      ) : (
-        <StopWatchButton
-          onClick={() => {
-            setSelect(subject.name);
-            setStart(true);
-            setPass(true);
-            changeStartTime();
-            changeStartCTime();
-          }}
-        >
-          시작
-        </StopWatchButton>
-      )}
-    </>
-  );
-};
+    return (
+      <>
+        {start === true && selected === subject.name ? (
+          <StopWatchButtonComponent />
+        ) : start === true && selected !== subject.name ? (
+          <IneffectiveButton>시작</IneffectiveButton>
+        ) : (
+          <StopWatchButton
+            onClick={() => {
+              setSelect(subject.name);
+              setStart(true);
+              setPass(true);
+              changeStartTime();
+              changeStartCTime();
+            }}
+          >
+            시작
+          </StopWatchButton>
+        )}
+      </>
+    );
+  },
+  (prevProps, nextProps) => prevProps.subject.name === nextProps.subject.name
+);
 
 export default StopWatchStartComponents;

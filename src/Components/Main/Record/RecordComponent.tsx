@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
 import { ResponsiveCalendar } from "@nivo/calendar";
 
@@ -12,7 +12,7 @@ const RecordBox = styled.div<{ height: string }>`
   margin-bottom: 10px;
 `;
 
-const RecordComponent = () => {
+const RecordComponent = memo(() => {
   let data = [{ value: "0", day: "2023-03-29" }];
   if (localStorage.getItem("key")) {
     data = JSON.parse(localStorage.getItem("key") as string);
@@ -64,6 +64,5 @@ const RecordComponent = () => {
       )}
     </RecordBox>
   );
-};
-
+});
 export default RecordComponent;

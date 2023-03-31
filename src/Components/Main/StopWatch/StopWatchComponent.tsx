@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 
@@ -40,34 +40,36 @@ const StopWatchTitleBox = styled.div`
   height: 80px;
 `;
 
-const StopWatchComponent: React.FC<Props> = ({ subject, setSubjectData }) => {
-  const [selected, setSelect] = useRecoilState(selectedState);
-  const [start, setStart] = useRecoilState(stopWatchStart);
+const StopWatchComponent: React.FC<Props> = memo(
+  ({ subject, setSubjectData }) => {
+    const [selected, setSelect] = useRecoilState(selectedState);
+    const [start, setStart] = useRecoilState(stopWatchStart);
 
-  return (
-    <>
-      <StopWatchBox>
-        <StopWatchTitleBox>
-          <StopWatchTitle>{subject.name}</StopWatchTitle>
-          <StopWatchTimeComponent
+    return (
+      <>
+        <StopWatchBox>
+          <StopWatchTitleBox>
+            <StopWatchTitle>{subject.name}</StopWatchTitle>
+            <StopWatchTimeComponent
+              subject={subject}
+              setSubjectData={setSubjectData}
+            />
+          </StopWatchTitleBox>
+          <StopWatchStartComponent
             subject={subject}
             setSubjectData={setSubjectData}
           />
-        </StopWatchTitleBox>
-        <StopWatchStartComponent
-          subject={subject}
-          setSubjectData={setSubjectData}
-        />
-        <DeleteSubjectComponent
-          subject={subject}
-          setSubjectData={setSubjectData}
-        />
-      </StopWatchBox>
-      {start === true && selected === subject.name ? (
-        <StopWatchDetailComponent />
-      ) : null}
-    </>
-  );
-};
+          <DeleteSubjectComponent
+            subject={subject}
+            setSubjectData={setSubjectData}
+          />
+        </StopWatchBox>
+        {start === true && selected === subject.name ? (
+          <StopWatchDetailComponent />
+        ) : null}
+      </>
+    );
+  }
+);
 
 export default StopWatchComponent;

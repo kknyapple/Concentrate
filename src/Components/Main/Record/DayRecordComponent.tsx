@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
 
 import ChartComponent from "./ChartComponent";
@@ -35,7 +35,7 @@ const ChartBox = styled.div`
   width: 400px;
 `;
 
-const DayRecordComponent = () => {
+const DayRecordComponent = memo(() => {
   let text =
     "24시간을 기준으로 총 공부 시간 비율이 계산됩니다. (새로고침으로 반영)";
   let studyTimeToNumber = 0;
@@ -84,6 +84,6 @@ const DayRecordComponent = () => {
       </Div>
     </ChartBox>
   );
-};
+});
 
 export default DayRecordComponent;

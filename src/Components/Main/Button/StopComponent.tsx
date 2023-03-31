@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
 import { useRecoilState, useRecoilValue } from "recoil";
 
@@ -66,9 +66,11 @@ const StopWatchStopComponent = () => {
   const [start, setStart] = useRecoilState<boolean>(stopWatchStart);
   const [pass, setPass] = useRecoilState<boolean>(studyTimePass);
   const [pause, setPause] = useRecoilState<boolean>(pauseClicked);
-  const hour = useRecoilValue(studyHour);
-  const minute = useRecoilValue(studyMinute);
-  const second = useRecoilValue(studySecond);
+
+  let hour = Number(localStorage.getItem("hour")) ?? 0;
+  let minute = Number(localStorage.getItem("minute")) ?? 0;
+  let second = Number(localStorage.getItem("second")) ?? 0;
+
   let [timeData, setTimeData] = useRecoilState(calendarData);
 
   const [today, setToday] = useRecoilState(todayDate);

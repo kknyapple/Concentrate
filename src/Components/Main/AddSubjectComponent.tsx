@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import styled from "styled-components";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { stopWatchStart } from "recoil/frontend";
 import { Subject } from "types/types";
 import { subjectDataState } from "recoil/localStorage";
@@ -60,10 +60,12 @@ const SubjectInput = styled.input`
   font-size: 11px;
 `;
 
-const AddSubjectComponent = () => {
+const AddSubjectComponent = memo(() => {
   const [start, setStart] = useRecoilState(stopWatchStart);
-  const [subjectData, setSubjectData] = useRecoilState(subjectDataState);
+  const setSubjectData = useSetRecoilState(subjectDataState);
   const [content, setContent] = useState({ name: "", savedTime: 0 });
+
+  let subjectData = JSON.parse(localStorage.getItem("subject") as string);
 
   const addSubject = () => {
     if (content.name === "") return;
@@ -120,6 +122,6 @@ const AddSubjectComponent = () => {
       </InputBox>
     </AddSubjectBox>
   );
-};
+});
 
 export default AddSubjectComponent;
