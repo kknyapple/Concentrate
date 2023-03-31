@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { useRecoilState } from "recoil";
 import { subjectDataState } from "recoil/localStorage";
 import styled from "styled-components";
@@ -38,10 +38,11 @@ const ChartBox = styled.div`
   width: 400px;
 `;
 
-const SubjectRecordComponent = () => {
+const SubjectRecordComponent = memo(() => {
   const text =
     "총 공부 시간을 기준으로 과목 시간 비율이 계산됩니다. (새로고침으로 반영)";
-  const [subjectData, setSubjectData] = useRecoilState(subjectDataState);
+  //const [subjectData, setSubjectData] = useRecoilState(subjectDataState);
+  let subjectData = JSON.parse(localStorage.getItem("subject") as string);
   let nameArray = subjectData.map((item: Subject) => item.name);
   let savedTimeArray = subjectData.map((item: Subject) => item.savedTime);
 
@@ -95,6 +96,6 @@ const SubjectRecordComponent = () => {
       </Div>
     </ChartBox>
   );
-};
+});
 
 export default SubjectRecordComponent;
