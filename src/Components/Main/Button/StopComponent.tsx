@@ -67,9 +67,9 @@ const StopWatchStopComponent = () => {
   const [pass, setPass] = useRecoilState<boolean>(studyTimePass);
   const [pause, setPause] = useRecoilState<boolean>(pauseClicked);
 
-  let hour = Number(localStorage.getItem("hour")) ?? 0;
-  let minute = Number(localStorage.getItem("minute")) ?? 0;
-  let second = Number(localStorage.getItem("second")) ?? 0;
+  const hour = useRecoilValue(studyHour);
+  const minute = useRecoilValue(studyMinute);
+  const second = useRecoilValue(studySecond);
 
   let [timeData, setTimeData] = useRecoilState(calendarData);
 
