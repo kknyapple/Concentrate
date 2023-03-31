@@ -23,6 +23,7 @@ import {
   studyMinute,
   studySecond,
 } from "recoil/localStorage";
+import { StudyData } from "types/types";
 
 const Stop = styled.button`
   border: 0;
@@ -67,9 +68,9 @@ const StopWatchStopComponent = () => {
   const [pass, setPass] = useRecoilState<boolean>(studyTimePass);
   const [pause, setPause] = useRecoilState<boolean>(pauseClicked);
 
-  let hour = Number(localStorage.getItem("hour")) ?? 0;
-  let minute = Number(localStorage.getItem("minute")) ?? 0;
-  let second = Number(localStorage.getItem("second")) ?? 0;
+  const hour = useRecoilValue(studyHour);
+  const minute = useRecoilValue(studyMinute);
+  const second = useRecoilValue(studySecond);
 
   let [timeData, setTimeData] = useRecoilState(calendarData);
 
@@ -87,11 +88,6 @@ const StopWatchStopComponent = () => {
     setPause(pause);
   };
 
-  interface StudyData {
-    value: string;
-    day: string;
-  }
-
   let cleanTimeData: StudyData[] = filterTimeData(timeData, today);
   let updatedStudyData: StudyData[] = updateStudyData(
     cleanTimeData,
@@ -99,7 +95,7 @@ const StopWatchStopComponent = () => {
     today
   );
 
-  const stopOnClickHandler = () => {
+  const stopStudy = () => {
     changeCondition(false, false, false);
 
     saveStudyDataToLocal(updatedStudyData);
@@ -113,7 +109,7 @@ const StopWatchStopComponent = () => {
   return (
     <React.Fragment>
       {pass ? (
-        <Stop onClick={stopOnClickHandler}>
+        <Stop onClick={stopStudy}>
           <svg
             width="15"
             height="15"

@@ -12,6 +12,7 @@ import {
 import useStopWatch from "Hooks/useStopWatch";
 import { Props, Subject } from "types/types";
 import { subjectDataState } from "recoil/localStorage";
+import setCurrentDate from "utils/setCurrentData";
 
 const StopWatchTime = styled.p`
   display: flex;
@@ -27,7 +28,7 @@ const StopWatchTimeComponent: React.FC<Props> = ({
   subject,
   setSubjectData,
 }) => {
-  // const subjectData = useRecoilValue(subjectDataState);
+  //const subjectData = useRecoilValue(subjectDataState);
   let subjectData = JSON.parse(localStorage.getItem("subject") as string);
   const [selected, setSelect] = useRecoilState(selectedState);
   const [start, setStart] = useRecoilState(stopWatchStart);
@@ -38,16 +39,15 @@ const StopWatchTimeComponent: React.FC<Props> = ({
     pass && selected === subject.name,
     concentrateTime.start - subject.savedTime
   );
-  const [currentTime, setCurrentTime] = useState(subject.savedTime);
   const [first, setFirst] = useState(subject.savedTime);
 
   const [today, setToday] = useRecoilState<string>(todayDate);
+  let currentData = setCurrentDate();
 
   useEffect(() => {
     if (subject.name === selected && pass && start) {
       let timerId = setInterval(() => {
         const newCurrentTime = Date.now() - concentrateTime.start + first;
-        setCurrentTime(newCurrentTime);
         const index = subjectData.findIndex(
           (item: Subject) => item.name === subject.name
         );
@@ -69,6 +69,7 @@ const StopWatchTimeComponent: React.FC<Props> = ({
   }, [pass]);
 
   const reset = () => {
+    setFirst(0);
     const newSubjectData = subjectData.map((item: Subject) => {
       return {
         name: item.name,
@@ -80,32 +81,15 @@ const StopWatchTimeComponent: React.FC<Props> = ({
     localStorage.setItem("subject", JSON.stringify(newSubjectData));
   };
 
-  const setCurrentDate = () => {
-    const dateObj = new Date();
-    const currentHour = dateObj.getHours();
-    const year = dateObj.getFullYear();
-    const month = String(dateObj.getMonth() + 1).padStart(2, "0");
-    const day = String(dateObj.getDate()).padStart(2, "0");
-
-    if (currentHour < 6) {
-      dateObj.setDate(dateObj.getDate() - 1);
-      return `${dateObj.getFullYear()}-${String(
-        dateObj.getMonth() + 1
-      ).padStart(2, "0")}-${String(dateObj.getDate()).padStart(2, "0")}`;
-    }
-
-    return `${year}-${month}-${day}`;
-  };
-
   useEffect(() => {
-    setToday(setCurrentDate());
+    setToday(currentData);
 
     if (localStorage.getItem("key")) {
       let length = JSON.parse(localStorage.getItem("key") as string).length;
       let lastStudy = JSON.parse(localStorage.getItem("key") as string)[
         length - 1
       ].day;
-      let today = setCurrentDate();
+      let today = currentData;
 
       if (lastStudy !== today) {
         reset();

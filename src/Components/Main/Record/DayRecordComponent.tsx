@@ -36,16 +36,11 @@ const ChartBox = styled.div`
 `;
 
 const DayRecordComponent = memo(() => {
-  let text =
+  const text =
     "24시간을 기준으로 총 공부 시간 비율이 계산됩니다. (새로고침으로 반영)";
-  let studyTimeToNumber = 0;
-  if (localStorage.getItem("key")) {
-    let length = JSON.parse(localStorage.getItem("key") as string).length;
-    let studyTime = JSON.parse(localStorage.getItem("key") as string)[
-      length - 1
-    ].value;
-    studyTimeToNumber = Number(studyTime);
-  }
+  const storedData = JSON.parse(localStorage.getItem("key") || "[]");
+  const latestData = storedData[storedData.length - 1] || { value: "0" };
+  const studyTimeToNumber = Number(latestData.value);
 
   const chartData = {
     labels: ["공부시간", "그 외"],

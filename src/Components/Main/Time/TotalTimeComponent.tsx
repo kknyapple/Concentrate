@@ -22,6 +22,7 @@ import {
   studyMinute,
   studySecond,
 } from "recoil/localStorage";
+import setCurrentDate from "utils/setCurrentData";
 
 const TotalTime = styled.div`
   display: flex;
@@ -40,6 +41,7 @@ const TotalTimeComponent = () => {
   const [time, setTime] = useRecoilState(timeState);
   const [today, setToday] = useRecoilState<string>(todayDate);
   const [start, setStart] = useRecoilState<boolean>(stopWatchStart);
+  let currentData = setCurrentDate();
 
   let convertTime = Number(hour + minute / 60 + second / 3600).toFixed(3);
   const [timeData, setTimeData] =
@@ -103,32 +105,15 @@ const TotalTimeComponent = () => {
     resetCurrentTime();
   };
 
-  const setCurrentDate = () => {
-    const dateObj = new Date();
-    const currentHour = dateObj.getHours();
-    const year = dateObj.getFullYear();
-    const month = String(dateObj.getMonth() + 1).padStart(2, "0");
-    const day = String(dateObj.getDate()).padStart(2, "0");
-
-    if (currentHour < 6) {
-      dateObj.setDate(dateObj.getDate() - 1);
-      return `${dateObj.getFullYear()}-${String(
-        dateObj.getMonth() + 1
-      ).padStart(2, "0")}-${String(dateObj.getDate()).padStart(2, "0")}`;
-    }
-
-    return `${year}-${month}-${day}`;
-  };
-
   useEffect(() => {
-    setToday(setCurrentDate());
+    setToday(currentData);
 
     if (localStorage.getItem("key")) {
       let length = JSON.parse(localStorage.getItem("key") as string).length;
       let lastStudy = JSON.parse(localStorage.getItem("key") as string)[
         length - 1
       ].day;
-      let today = setCurrentDate();
+      let today = currentData;
       let savedTime =
         time.start - second * 1000 - minute * 1000 * 60 - hour * 1000 * 60 * 60;
 

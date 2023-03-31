@@ -72,6 +72,14 @@ const StopWatchStartComponents: React.FC<Props> = memo(
       }
     };
 
+    const startStudy = () => {
+      setSelect(subject.name);
+      setStart(true);
+      setPass(true);
+      changeStartTime();
+      changeStartCTime();
+    };
+
     return (
       <>
         {start === true && selected === subject.name ? (
@@ -79,17 +87,7 @@ const StopWatchStartComponents: React.FC<Props> = memo(
         ) : start === true && selected !== subject.name ? (
           <IneffectiveButton>시작</IneffectiveButton>
         ) : (
-          <StopWatchButton
-            onClick={() => {
-              setSelect(subject.name);
-              setStart(true);
-              setPass(true);
-              changeStartTime();
-              changeStartCTime();
-            }}
-          >
-            시작
-          </StopWatchButton>
+          <StopWatchButton onClick={startStudy}>시작</StopWatchButton>
         )}
       </>
     );
