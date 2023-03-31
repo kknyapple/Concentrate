@@ -39,6 +39,15 @@ const ChartBox = styled.div`
 `;
 
 const SubjectRecordComponent = memo(() => {
+  const data = [
+    {
+      name: "집중하기",
+      savedTime: 0,
+    },
+  ];
+
+  localStorage.setItem("subject", JSON.stringify(data));
+
   const text =
     "총 공부 시간을 기준으로 과목 시간 비율이 계산됩니다. (새로고침으로 반영)";
   //const [subjectData, setSubjectData] = useRecoilState(subjectDataState);
