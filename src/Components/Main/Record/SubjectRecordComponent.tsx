@@ -46,7 +46,9 @@ const SubjectRecordComponent = memo(() => {
     },
   ];
 
-  localStorage.setItem("subject", JSON.stringify(data));
+  if (!localStorage.getItem("subject")) {
+    localStorage.setItem("subject", JSON.stringify(data));
+  }
 
   const text =
     "총 공부 시간을 기준으로 과목 시간 비율이 계산됩니다. (새로고침으로 반영)";
