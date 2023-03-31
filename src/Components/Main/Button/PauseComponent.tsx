@@ -75,7 +75,7 @@ const StopWatchPauseComponent = () => {
     }
   };
 
-  const pauseOnClickHandler = () => {
+  const pauseStudy = () => {
     changeCondition(false, true, true);
 
     setTime({ start: time.start, pause: Date.now() });
@@ -85,7 +85,7 @@ const StopWatchPauseComponent = () => {
     changeStartRTime();
   };
 
-  const continueOnClickHandler = () => {
+  const continueStudy = () => {
     changeCondition(true, true, false);
 
     setTime({ start: time.start + Date.now() - time.pause, pause: time.pause });
@@ -99,7 +99,7 @@ const StopWatchPauseComponent = () => {
   return (
     <React.Fragment>
       {pause == false ? (
-        <Pause onClick={pauseOnClickHandler}>
+        <Pause onClick={pauseStudy}>
           <svg
             width="10"
             height="15"
@@ -114,7 +114,7 @@ const StopWatchPauseComponent = () => {
           </svg>
         </Pause>
       ) : (
-        <Continue onClick={continueOnClickHandler}>
+        <Continue onClick={continueStudy}>
           <svg
             width="14"
             height="15"
